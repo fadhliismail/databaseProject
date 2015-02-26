@@ -71,7 +71,7 @@
         $GroupNo = $_POST['GroupNo'];
       }
 
-      $GroupNo = 4;
+      $GroupNo = 4; /*this cannot be a fixed number. it has to get data from session.*/
 
       //query statements
       $queryStudent  = "SELECT FirstName, LastName, Email FROM `student` WHERE GroupNo = ?";
@@ -122,10 +122,10 @@
         echo '</table></div>';
       }
 
-            //close statement
+      //close statement
       $stmtAssessment->close();
 
-             //close db connection
+      //close db connection
       $conn->close();
 
       ?>

@@ -102,8 +102,9 @@
 		$GroupNo = $_POST['GroupNo'];
 	}
 
-	$Report_To_Assess = 4;
-	  //query statements
+	$Report_To_Assess = 4; /*this cannot be a fixed number. it has to get data from session.*/
+
+	//query statements
 	$queryStudent  = "SELECT score.AssessmentNo, score.CriteriaNo, score.Comment, score.Score_Criteria
 	FROM score
 	INNER JOIN assessment
