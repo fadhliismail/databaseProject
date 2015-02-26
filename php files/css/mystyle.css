@@ -1,0 +1,75 @@
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+.container .text-muted {
+  margin: 5px 0 10px 0;
+  font-style: italic;
+}
+
+.footer > .container {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+code {
+  font-size: 80%;
+}
+
+.h1 {
+  font-family: "Arial", Sans-Serif;
+  font-weight: bold;
+  font-size: 3em;
+  text-align: center;
+  color: #795286;
+}
+
+/* Custom table
+-------------------------------------------*/
+/* table #members, #review, #assessment {
+  border-collapse: collapse;
+  border-spacing: 30px;
+  padding: 15px;
+  } */
+
+  table, td, th {
+    border: 1px solid #ccc;
+  }
+
+  table th {
+    background: #eee;
+  }
+
+  td #assessment {
+    white-space: nowrap !important;
+  }
+
+  .table-nonfluid {
+   width: auto !important;
+ }
+
+/* Sticky footer styles
+-------------------------------------------------- */
+
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  font-family: "Arial", Sans-Serif;
+  margin-bottom: 60px;
+}
+.footer {
+  -webkit-backface-visibility: hidden;
+  bottom: 0;
+  width: 100%;
+  position: fixed;
+  /* Set the fixed height of the footer here */
+  height: 30px;
+  background-color: #ddd;
+}
+
+
+
