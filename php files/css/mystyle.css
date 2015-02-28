@@ -24,6 +24,11 @@ code {
   color: #795286;
 }
 
+.grade {
+    background: #dddddd;
+    width: 100px;
+    border-radius: 25px;
+}
 /* Custom table
 -------------------------------------------*/
 /* table #members, #review, #assessment {

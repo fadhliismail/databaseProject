@@ -31,10 +31,11 @@
       <ul class="nav navbar-nav">
         <li role="presentation" class="active"><a href="#">Home</a></li>
         <li role="presentation"><a href="profile.php">Profile</a></li>
-        <li role="presentation"><a href="#submission.php">Submission</a></li>
+        <li role="presentation"><a href="submission.php">Submission</a></li>
         <li role="presentation"><a href="mygroup_assessment.php">My Assessment</a></li>
         <li role="presentation"><a href="#review.php">Review</a></li>
         <li role="presentation"><a href="#discussion.php">Discussion</a></li>
+        <li role="presentation"><a href="help.php">Help</a></li>
            <!-- <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
@@ -130,7 +131,9 @@
 
       ?>
 
-    </div>
+      <div class="page-title">Ranking</div>
+      Your group is ranked _____ amongst _____.
+    </div><!-- end of container -->
 
     <!-- footer -->
     <footer class="footer">
@@ -139,7 +142,7 @@
       </div>
     </footer>
 
-<!-- Bootstrap core JavaScript
+  <!-- Bootstrap core JavaScript
   ================================================== -->
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
