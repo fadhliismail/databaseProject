@@ -36,111 +36,99 @@
         <li role="presentation"><a href="#review.php">Review</a></li>
         <li role="presentation"><a href="#discussion.php">Discussion</a></li>
         <li role="presentation"><a href="help.php">Help</a></li>
-           <!-- <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li class="divider"></li>
-                <li class="dropdown-header">Nav header</li>
-                <li><a href="#">Separated link</a></li>
-                <li><a href="#">One more separated link</a></li>
-              </ul>
-            </li> -->
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#logout">Log Out</a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </nav>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#logout">Log Out</a></li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>
 
-    <!-- content page -->
-    <div class="container">
+<!-- content page -->
+<div class="container">
 
-      <?php
+  <?php
 
         //report any error
-      error_reporting(E_ALL); ini_set('display_errors', 1); mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+  error_reporting(E_ALL); ini_set('display_errors', 1); mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
         //connect to database
-      include 'db_connect.php';
+  include 'db_connect.php';
 
         //check value is set or not
-      if (isset($_POST['GroupNo'])) {
-        $GroupNo = $_POST['GroupNo'];
-      }
+  if (isset($_POST['GroupNo'])) {
+    $GroupNo = $_POST['GroupNo'];
+  }
 
-      $GroupNo = 4; /*this cannot be a fixed number. it has to get data from session.*/
+  $GroupNo = 4; /*this cannot be a fixed number. it has to get data from session.*/
 
       //query statements
-      $queryStudent  = "SELECT FirstName, LastName, Email FROM `student` WHERE GroupNo = ?";
-      $queryAssessment = "SELECT `AssessmentNo`, `Report_to_Assess`FROM `assessment` WHERE `GroupNo` = ?";
+  $queryStudent  = "SELECT FirstName, LastName, Email FROM `student` WHERE GroupNo = ?";
+  $queryAssessment = "SELECT `AssessmentNo`, `Report_to_Assess`FROM `assessment` WHERE `GroupNo` = ?";
 
-      if ($stmtStudent = $conn->prepare($queryStudent)) {
-        $stmtStudent->bind_param('i', $GroupNo);
-        $stmtStudent->execute();
-        $stmtStudent->store_result();
-        $stmtStudent->bind_result($FirstName, $LastName, $Email);
+  if ($stmtStudent = $conn->prepare($queryStudent)) {
+    $stmtStudent->bind_param('i', $GroupNo);
+    $stmtStudent->execute();
+    $stmtStudent->store_result();
+    $stmtStudent->bind_result($FirstName, $LastName, $Email);
 
-        echo '<div class="table-responsive"><table class ="table table-nonfluid"><tr><th>Name</th><th>Email Address</th></tr>';
-        echo '<div class="page-header"><h1>Group '.$GroupNo.'</h1></div>';
-        echo '<p><b>Team Members:</b></p>';
+    echo '<div class="table-responsive"><table class ="table table-nonfluid"><tr><th>Name</th><th>Email Address</th></tr>';
+    echo '<div class="page-header"><h1>Group '.$GroupNo.'</h1></div>';
+    echo '<p><b>Team Members:</b></p>';
 
-        while ($stmtStudent->fetch()) {
-          echo '<tr>';
-          echo '<td>'.$FirstName.' '.$LastName.'</td>';
-          echo '<td>'.$Email.'</td>';
-          echo '</tr>';
-        }
-        echo '</table></div>';
-      }
+    while ($stmtStudent->fetch()) {
+      echo '<tr>';
+      echo '<td>'.$FirstName.' '.$LastName.'</td>';
+      echo '<td>'.$Email.'</td>';
+      echo '</tr>';
+    }
+    echo '</table></div>';
+  }
 
         //close statement
-      $stmtStudent->close();
+  $stmtStudent->close();
 
 
-      echo '<br>Peer assessment. Reports to be reviewed:<br>';
+  echo '<br>Peer assessment. Reports to be reviewed:<br>';
 
-      if ($stmtAssessment = $conn->prepare($queryAssessment)) {
-        $stmtAssessment->bind_param('i', $GroupNo);
-        $stmtAssessment->execute();
-        $stmtAssessment->store_result();
-        $stmtAssessment->bind_result($AssessmentNo, $Report_to_Assess);
+  if ($stmtAssessment = $conn->prepare($queryAssessment)) {
+    $stmtAssessment->bind_param('i', $GroupNo);
+    $stmtAssessment->execute();
+    $stmtAssessment->store_result();
+    $stmtAssessment->bind_result($AssessmentNo, $Report_to_Assess);
 
-        echo '<div class="table-responsive"><table class ="table table-nonfluid"><tr><th>AssessmentNo</th><th>ReportNo</th><th>Discussion Thread</th></tr>';
-        echo '<div class="h1">'.$AssessmentNo.'</div>';
+    echo '<div class="table-responsive"><table class ="table table-nonfluid"><tr><th>AssessmentNo</th><th>ReportNo</th><th>Discussion Thread</th></tr>';
+    echo '<div class="h1">'.$AssessmentNo.'</div>';
 
-        while ($stmtAssessment->fetch()) {
+    while ($stmtAssessment->fetch()) {
 
-          echo '<tr>';
-          echo '<td>ASNo_'.$AssessmentNo.'</td>';
-          echo '<td><a href="#">Report '.$Report_to_Assess.'</a></td>';
-          echo '<td><a href="#">Link</a></td>';
-          echo '</tr>';
-        }
-        echo '</table></div>';
-      }
+      echo '<tr>';
+      echo '<td>ASNo_'.$AssessmentNo.'</td>';
+      echo '<td><a href="#">Report '.$Report_to_Assess.'</a></td>';
+      echo '<td><a href="#">Link</a></td>';
+      echo '</tr>';
+    }
+    echo '</table></div>';
+  }
 
       //close statement
-      $stmtAssessment->close();
+  $stmtAssessment->close();
 
       //close db connection
-      $conn->close();
+  $conn->close();
 
-      ?>
+  ?>
 
-      <div class="page-title">Ranking</div>
-      Your group is ranked _____ amongst _____.
-    </div><!-- end of container -->
+  <div class="page-title">Ranking</div>
+  Your group is ranked _____ amongst _____.
+</div><!-- end of container -->
 
-    <!-- footer -->
-    <footer class="footer">
-      <div class="container">
-        <p class="text-muted">GC06 Database Project. Copyright © Team 24, UCL2015.</p>
-      </div>
-    </footer>
+<!-- footer -->
+<footer class="footer">
+  <div class="container">
+    <p class="text-muted">GC06 Database Project. Copyright © Team 24, UCL2015.</p>
+  </div>
+</footer>
 
   <!-- Bootstrap core JavaScript
   ================================================== -->

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
-	<title>Profile</title>
+	<title>Admin Page</title>
+
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -11,7 +12,6 @@
 	<link rel="stylesheet" href="css/bootstrap.css">
 	<!-- Custom styles for this template -->
 	<link href="sticky-footer-navbar.css" rel="stylesheet">
-
 </head>
 
 <body>
@@ -29,13 +29,15 @@
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li role="presentation"><a href="index.php">Home</a></li>
-					<li role="presentation" class="active"><a href="#">Profile</a></li>
-					<li role="presentation"><a href="submission.php">Submission</a></li>
-					<li role="presentation"><a href="mygroup_assessment.php">My Assessment</a></li>
-					<li role="presentation"><a href="#review.php">Review</a></li>
-					<li role="presentation"><a href="#discussion.php">Discussion</a></li>
-					<li role="presentation"><a href="help.php">Help</a></li>
+					<li role="presentation" class="active"><a href="admin.php">Admin</a></li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Manage <span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="manage_group.php">Manage Group</a></li>
+							<li><a href="#">Manage Assessment</a></li>
+
+						</ul>
+					</li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="#logout">Log Out</a></li>
@@ -44,15 +46,10 @@
 		</div>
 	</nav>
 
-
-
-
 	<!-- content page -->
 	<div class="container">
-		<div class="page-header"><h1>Edit your profile</h1></div>
-		<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
 		<div class="page-title">Change your password</div>
-
+		<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 150</p>
 		<div class="col-xs-6 col-lg-4">
 
 			<form action = "change_pswd.php" method="post" name="pswd" target="help-inline">Current password:
@@ -84,8 +81,6 @@
 			</form>
 		</div>
 	</div>
-
-
 	<!-- footer -->
 	<footer class="footer">
 		<div class="container">
@@ -93,14 +88,12 @@
 		</div>
 	</footer>
 
-
 	<!-- Bootstrap core JavaScript
 	================================================== -->
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="js/bootstrap.min.js"></script>
-	
-</body>
 
-<html>
+</body>
+</html>
