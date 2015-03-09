@@ -10,7 +10,7 @@ include 'db_connect.php';
 if (!empty($_POST)){
 	/*check that all fields are filled*/
 	if (empty($_POST['CurrentPswd']) || empty($_POST['NewPswd']) || empty($_POST['ConfirmPswd'])) {
-		die("Fields cannot be empty");
+		die(header("location:profile.php?failed=true&reason=blank"));
 	}
 
 	if (isset($_POST['Submit'])) {
@@ -33,13 +33,13 @@ if (!empty($_POST)){
 
 		/*Check that the current password is the same as keyed in*/
 		if ($User_pass != $Current_Pswd) {
-			die("Password doesn't match!");
+			die(header("location:profile.php?failed=true&reason=currentpassword"));
 
 		}
 
 		/*Confirmed new password matches*/
 		if ($New_Pswd != $Confirm_Pswd) {
-			die("New password doesn't match! Please confirm again.");
+			die(header("location:profile.php?failed=true&reason=newpassword"));
 		}	
 
 	}
@@ -51,7 +51,7 @@ if (!empty($_POST)){
 	if ($updatePswd = $conn->prepare($queryNewPswd)) {
 		$updatePswd->bind_param('si', $New_Pswd, $StudentId);
 		$updatePswd->execute();
-		echo 'Password updated!';
+		echo(header("location:profile.php?success=true&reason=updatepassword"));
 	}
 
 	//close statement
