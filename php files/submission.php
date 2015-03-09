@@ -17,7 +17,7 @@
 	<script>
 		var Dropzone = require("dropzone");
 
-		$("div#mydropfile").dropzone({ url: "test2.php" });
+		$("div#mydropfile").dropzone({ url: "upload.php" });
 	</script>c
 </head>
 
@@ -60,7 +60,7 @@
 		<script src="js/dropzone.js"></script>
 		<!-- Drag n Drop File -->
 		<div id="dropzone">
-			<form action="test2.php" class="dropzone" id="mydropfile">
+			<form action="upload.php" class="dropzone" id="mydropfile">
 			</form>
 		</div>
 		<div class="page-title">Your report</div>
