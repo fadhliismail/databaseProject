@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 26, 2015 at 05:19 PM
+-- Generation Time: Mar 09, 2015 at 12:09 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -255,46 +255,60 @@ INSERT INTO `group` (`GroupNo`, `ReportNo`, `AverageScore`) VALUES
 
 CREATE TABLE IF NOT EXISTS `report` (
 `ReportNo` int(11) NOT NULL,
-  `ReportLink` varchar(255) NOT NULL,
+  `GroupNo` int(11) NOT NULL,
+  `File_Link` varchar(255) NOT NULL,
+  `File_Name` varchar(255) NOT NULL,
+  `File_Size` varchar(255) NOT NULL,
+  `File_Type` varchar(255) NOT NULL,
+  `Group` varchar(50) NOT NULL,
+  `Intro` blob NOT NULL,
+  `Main` blob NOT NULL,
+  `Conclusion` blob NOT NULL,
   `Submission_Timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `Submission_Updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `report`
 --
 
-INSERT INTO `report` (`ReportNo`, `ReportLink`, `Submission_Timestamp`, `Submission_Updated`) VALUES
-(1, 'BlackjackCoupons.co.uk', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(2, 'TribalCMS.co.uk', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(3, 'IRSAnalysis.co.uk', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(4, 'DumbDecisions.co.uk', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(5, 'eFlirtation.co.uk', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(6, 'GolfRebanking.co.uk', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(7, 'BirdWash.co.uk', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(8, 'VisitorBiz.co.uk', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(9, 'AdminParking.co.uk', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(10, 'MLSLibrary.co.uk', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(11, 'DetectMesothelioma.co.uk', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(12, 'IdahoFallsHouses.co.uk', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(13, 'WikiZip.co.uk', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(14, 'OyYachts.co.uk', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(15, 'InfoExam.co.uk', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(16, 'InnovationBrains.co.uk', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(17, 'ExtraProm.co.uk', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(18, 'LandscapingPortfolio.co.uk', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(19, 'FurnishingExperts.co.uk', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(20, 'VendingPrograms.co.uk', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(21, 'ConcertStaff.co.uk', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(22, 'DomainFundraiser.co.uk', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(23, 'SalaryGame.co.uk', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(24, 'PopBids.co.uk', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(25, 'DnOptions.co.uk', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(26, 'PalJam.co.uk', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(27, 'SlyFriend.co.uk', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(28, 'ParadeBlog.co.uk', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(29, 'AirEnhancer.co.uk', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(30, 'EspressoTalk.co.uk', '2015-02-05 14:53:10', '2015-02-05 14:53:10');
+INSERT INTO `report` (`ReportNo`, `GroupNo`, `File_Link`, `File_Name`, `File_Size`, `File_Type`, `Group`, `Intro`, `Main`, `Conclusion`, `Submission_Timestamp`, `Submission_Updated`) VALUES
+(1, 0, 'BlackjackCoupons.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(2, 0, 'TribalCMS.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(3, 0, 'IRSAnalysis.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(4, 0, 'DumbDecisions.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(5, 0, 'eFlirtation.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(6, 0, 'GolfRebanking.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(7, 0, 'BirdWash.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(8, 0, 'VisitorBiz.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(9, 0, 'AdminParking.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(10, 0, 'MLSLibrary.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(11, 0, 'DetectMesothelioma.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(12, 0, 'IdahoFallsHouses.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(13, 0, 'WikiZip.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(14, 0, 'OyYachts.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(15, 0, 'InfoExam.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(16, 0, 'InnovationBrains.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(17, 0, 'ExtraProm.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(18, 0, 'LandscapingPortfolio.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(19, 0, 'FurnishingExperts.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(20, 0, 'VendingPrograms.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(21, 0, 'ConcertStaff.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(22, 0, 'DomainFundraiser.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(23, 0, 'SalaryGame.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(24, 0, 'PopBids.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(25, 0, 'DnOptions.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(26, 0, 'PalJam.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(27, 0, 'SlyFriend.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(28, 0, 'ParadeBlog.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(29, 0, 'AirEnhancer.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(30, 0, 'EspressoTalk.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(31, 4, 'http://localhost/virtual_learning/uploads/unltd_logo.jpg', 'unltd_logo.jpg', '51430', 'image/jpeg', '', '', '', '', '2015-03-09 01:36:54', '2015-03-09 00:36:54'),
+(32, 4, 'http://localhost/virtual_learning/uploads/Soompi Post.docx', 'Soompi Post.docx', '14660', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', '', '', '', '', '2015-03-09 01:38:59', '2015-03-09 00:38:59'),
+(34, 4, 'http://localhost/virtual_learning/uploads/the-northern-line-game.jpg', 'the-northern-line-game.jpg', '276324', 'image/jpeg', '', '', '', '', '2015-03-09 01:46:48', '2015-03-09 00:46:48'),
+(35, 4, 'http://localhost/virtual_learning/uploads/Lee%20Juck%20-%20I%27m%20So%20Fortunate.docx', 'Lee Juck - I''m So Fortunate.docx', '15133', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', '', '', '', '', '2015-03-09 01:47:22', '2015-03-09 00:47:22'),
+(36, 4, 'http://localhost/virtual_learning/uploads/12339297_9648727_lz.jpg', '12339297_9648727_lz.jpg', '118379', 'image/jpeg', '', '', '', '', '2015-03-09 11:28:10', '2015-03-09 10:28:10'),
+(37, 4, 'http://localhost/virtual_learning/uploads/report.xml', 'report.xml', '2411', 'text/xml', '', '', '', '', '2015-03-09 11:41:29', '2015-03-09 10:41:29');
 
 -- --------------------------------------------------------
 
@@ -487,7 +501,7 @@ CREATE TABLE IF NOT EXISTS `student` (
 --
 
 INSERT INTO `student` (`StudentNo`, `FirstName`, `LastName`, `Email`, `User_pass`, `StudentId`, `GroupNo`) VALUES
-(1, 'Brooke', 'Pickering', 'BrookePickering@ucl.ac.uk', 'Chox3tuiz', 77825578, 1),
+(1, 'Brooke', 'Pickering', 'BrookePickering@ucl.ac.uk', 'test', 14073184, 1),
 (2, 'Lucy', 'Giles', 'LucyGiles@ucl.ac.uk', 'ees4liey1eY', 66526786, 1),
 (3, 'Benjamin', 'Dawson', 'BenjaminDawson@ucl.ac.uk', 'ic9zueGhi', 55728934, 1),
 (4, 'Adam', 'Bruce', 'AdamBruce@ucl.ac.uk', 'xier6Jie6', 65753208, 2),
@@ -630,7 +644,7 @@ MODIFY `GroupNo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=101;
 -- AUTO_INCREMENT for table `report`
 --
 ALTER TABLE `report`
-MODIFY `ReportNo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=31;
+MODIFY `ReportNo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=38;
 --
 -- AUTO_INCREMENT for table `score`
 --

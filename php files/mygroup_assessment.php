@@ -94,7 +94,7 @@
 
 		$Report_To_Assess = 4; /*this cannot be a fixed number. it has to get data from session.*/
 
-	//query statements
+		//query statements
 		$queryAssessment  = "SELECT score.AssessmentNo, SUM(score.Score_Criteria) as OverallScore, ROUND(SUM((score.Score_Criteria/3)*2)) AS AverageScore
 		FROM score
 		INNER JOIN assessment
@@ -118,7 +118,7 @@
 
 			echo '<div class="table-responsive"><table class ="table table-nonfluid"><tr><th>Assessment No</th><th>Overall Score</th><th>Score</th><th>Criteria</th><th>Comment</th></tr>';
 			
-		//fetch values by looping through each row
+			//fetch values by looping through each row
 			while ($stmtAssessment->fetch()) {
 				echo '<tr>';
 				echo '<td rowspan ="5" style="white-space:nowrap;">ASNo_'.$AssessmentNo.'</td>';
@@ -148,10 +148,10 @@
 			echo '</table></div>';
 		}
 
-    //close statement
+    	//close statement
 		$stmtAssessment->close();
 
-    //close db connection
+    	//close db connection
 		$conn->close();
 
 		?>

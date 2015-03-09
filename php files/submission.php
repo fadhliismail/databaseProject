@@ -8,13 +8,17 @@
 	<!-- Custom CSS -->
 	<link rel ="stylesheet" type="text/css" href="css/mystyle.css">
 	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 	<!-- Custom styles for footer -->
-	<link rel="stylesheet" href="sticky-footer-navbar.css">
+	<link rel="stylesheet" type="text/css" href="sticky-footer-navbar.css">
 	<!-- Custom styles for drag n drop -->
-	<link rel="stylesheet" href="css/dropzone.css">
+	<link rel="stylesheet" type="text/css" href="css/dropzone.css">
 
+	<script>
+		var Dropzone = require("dropzone");
 
+		$("div#mydropfile").dropzone({ url: "test2.php" });
+	</script>c
 </head>
 
 <body>
@@ -39,32 +43,32 @@
 					<li role="presentation"><a href="#review.php">Review</a></li>
 					<li role="presentation"><a href="#discussion.php">Discussion</a></li>
 					<li role="presentation"><a href="help.php">Help</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-      	<li><a href="#logout">Log Out</a></li>
-      </ul>
-  </div><!--/.nav-collapse -->
-</div>
-</nav>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#logout">Log Out</a></li>
+				</ul>
+			</div><!--/.nav-collapse -->
+		</div>
+	</nav>
 
-<!-- content page -->
-<div class="container">
-	<div class="page-header"><h1>Submit your report</h1></div>
-	The deadline of submission is on <b>Friday, 20 March 2014 before 12 PM</b>. Late submission will be deducted 5 marks from the final mark received from the peers.<p>
-	You can upload multiple files by drag `n drop. Your file must be of .xml type.
-	<!-- Drop n Drag javascript -->
-	<script src="js/dropzone.js"></script>
-	<!-- Drag n Drop File -->
-	<div id="dropzone"><form action="http://www.torrentplease.com/dropzone.php" class="dropzone" id="demo-upload">
-		<form action="/file-upload" class="dropzone" id="upload_file"></form>
+	<!-- content page -->
+	<div class="container">
+		<div class="page-header"><h1>Submit your report</h1></div>
+		The deadline of submission is on <b>Friday, 20 March 2014 before 12 PM</b>. Late submission will be deducted 5 marks from the final mark received from the peers.<p>
+		You can upload multiple files by drag `n drop. Your file must be of .xml type.
+		<!-- Drop n Drag javascript -->
+		<script src="js/dropzone.js"></script>
+		<!-- Drag n Drop File -->
+		<div id="dropzone">
+			<form action="test2.php" class="dropzone" id="mydropfile">
+			</form>
+		</div>
+		<div class="page-title">Your report</div>
+		Link to the group report is here.
 	</div>
-</form>
-<div class="page-title">Your report</div>
-Link to the group report is here.
-</div>
 
-<!-- footer -->
-<?php include 'footer.php'; ?>
+	<!-- footer -->
+	<?php include 'footer.php'; ?>
 
 	<!-- Bootstrap core JavaScript
 	================================================== -->
