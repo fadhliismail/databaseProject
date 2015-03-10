@@ -107,7 +107,7 @@
 				</tr>
 				<tr>
 					<td>Group 1</td>
-					<td><a href="reportpage.php">Reportpage</a> </td>
+					<td><a href="view_report.php">Reportpage</a> </td>
                                         <?php
                                         $GroupNo=1;
                                         $queryAverageScore = "SELECT `AverageScore` FROM `group` WHERE `GroupNo`=?"; 
@@ -123,7 +123,7 @@
 				</tr>
 				<tr>
 					<td>Group 2</td>
-					<td><a href="reportpage.php">Reportpage</a></td>
+					<td><a href="view_report.php">Reportpage</a></td>
                                         <?php
                                         $GroupNo=2;
                                         $queryAverageScore = "SELECT `AverageScore` FROM `group` WHERE `GroupNo`=?"; 
@@ -139,7 +139,7 @@
 				</tr>
 				<tr>
 					<td>Group 3</td>
-					<td><a href="reportpage.php">Reportpage</a></td>
+					<td><a href="view_report.php">Reportpage</a></td>
                                         <?php
                                         $GroupNo=3;
                                         $queryAverageScore = "SELECT `AverageScore` FROM `group` WHERE `GroupNo`=?"; 
