@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 09, 2015 at 12:09 PM
+-- Generation Time: Mar 10, 2015 at 03:15 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -146,9 +146,9 @@ CREATE TABLE IF NOT EXISTS `group` (
 --
 
 INSERT INTO `group` (`GroupNo`, `ReportNo`, `AverageScore`) VALUES
-(1, 1, 4),
-(2, 2, 7),
-(3, 3, 46),
+(1, 1, 33),
+(2, 2, 34),
+(3, 3, 37),
 (4, 4, 4),
 (5, 5, 11),
 (6, 6, 29),
@@ -260,55 +260,58 @@ CREATE TABLE IF NOT EXISTS `report` (
   `File_Name` varchar(255) NOT NULL,
   `File_Size` varchar(255) NOT NULL,
   `File_Type` varchar(255) NOT NULL,
+  `Forum_Link` varchar(255) NOT NULL,
   `Group` varchar(50) NOT NULL,
-  `Intro` blob NOT NULL,
-  `Main` blob NOT NULL,
-  `Conclusion` blob NOT NULL,
+  `Intro` longtext NOT NULL,
+  `Main` longtext NOT NULL,
+  `Conclusion` longtext NOT NULL,
   `Submission_Timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `Submission_Updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `report`
 --
 
-INSERT INTO `report` (`ReportNo`, `GroupNo`, `File_Link`, `File_Name`, `File_Size`, `File_Type`, `Group`, `Intro`, `Main`, `Conclusion`, `Submission_Timestamp`, `Submission_Updated`) VALUES
-(1, 0, 'BlackjackCoupons.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(2, 0, 'TribalCMS.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(3, 0, 'IRSAnalysis.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(4, 0, 'DumbDecisions.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(5, 0, 'eFlirtation.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(6, 0, 'GolfRebanking.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(7, 0, 'BirdWash.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(8, 0, 'VisitorBiz.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(9, 0, 'AdminParking.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(10, 0, 'MLSLibrary.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(11, 0, 'DetectMesothelioma.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(12, 0, 'IdahoFallsHouses.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(13, 0, 'WikiZip.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(14, 0, 'OyYachts.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(15, 0, 'InfoExam.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(16, 0, 'InnovationBrains.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(17, 0, 'ExtraProm.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(18, 0, 'LandscapingPortfolio.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(19, 0, 'FurnishingExperts.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(20, 0, 'VendingPrograms.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(21, 0, 'ConcertStaff.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(22, 0, 'DomainFundraiser.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(23, 0, 'SalaryGame.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(24, 0, 'PopBids.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(25, 0, 'DnOptions.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(26, 0, 'PalJam.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(27, 0, 'SlyFriend.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(28, 0, 'ParadeBlog.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(29, 0, 'AirEnhancer.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(30, 0, 'EspressoTalk.co.uk', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
-(31, 4, 'http://localhost/virtual_learning/uploads/unltd_logo.jpg', 'unltd_logo.jpg', '51430', 'image/jpeg', '', '', '', '', '2015-03-09 01:36:54', '2015-03-09 00:36:54'),
-(32, 4, 'http://localhost/virtual_learning/uploads/Soompi Post.docx', 'Soompi Post.docx', '14660', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', '', '', '', '', '2015-03-09 01:38:59', '2015-03-09 00:38:59'),
-(34, 4, 'http://localhost/virtual_learning/uploads/the-northern-line-game.jpg', 'the-northern-line-game.jpg', '276324', 'image/jpeg', '', '', '', '', '2015-03-09 01:46:48', '2015-03-09 00:46:48'),
-(35, 4, 'http://localhost/virtual_learning/uploads/Lee%20Juck%20-%20I%27m%20So%20Fortunate.docx', 'Lee Juck - I''m So Fortunate.docx', '15133', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', '', '', '', '', '2015-03-09 01:47:22', '2015-03-09 00:47:22'),
-(36, 4, 'http://localhost/virtual_learning/uploads/12339297_9648727_lz.jpg', '12339297_9648727_lz.jpg', '118379', 'image/jpeg', '', '', '', '', '2015-03-09 11:28:10', '2015-03-09 10:28:10'),
-(37, 4, 'http://localhost/virtual_learning/uploads/report.xml', 'report.xml', '2411', 'text/xml', '', '', '', '', '2015-03-09 11:41:29', '2015-03-09 10:41:29');
+INSERT INTO `report` (`ReportNo`, `GroupNo`, `File_Link`, `File_Name`, `File_Size`, `File_Type`, `Forum_Link`, `Group`, `Intro`, `Main`, `Conclusion`, `Submission_Timestamp`, `Submission_Updated`) VALUES
+(1, 0, 'BlackjackCoupons.co.uk', '', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(2, 0, 'TribalCMS.co.uk', '', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(3, 0, 'IRSAnalysis.co.uk', '', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(4, 0, 'DumbDecisions.co.uk', '', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(5, 0, 'eFlirtation.co.uk', '', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(6, 0, 'GolfRebanking.co.uk', '', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(7, 0, 'BirdWash.co.uk', '', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(8, 0, 'VisitorBiz.co.uk', '', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(9, 0, 'AdminParking.co.uk', '', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(10, 0, 'MLSLibrary.co.uk', '', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(11, 0, 'DetectMesothelioma.co.uk', '', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(12, 0, 'IdahoFallsHouses.co.uk', '', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(13, 0, 'WikiZip.co.uk', '', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(14, 0, 'OyYachts.co.uk', '', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(15, 0, 'InfoExam.co.uk', '', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(16, 0, 'InnovationBrains.co.uk', '', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(17, 0, 'ExtraProm.co.uk', '', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(18, 0, 'LandscapingPortfolio.co.uk', '', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(19, 0, 'FurnishingExperts.co.uk', '', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(20, 0, 'VendingPrograms.co.uk', '', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(21, 0, 'ConcertStaff.co.uk', '', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(22, 0, 'DomainFundraiser.co.uk', '', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(23, 0, 'SalaryGame.co.uk', '', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(24, 0, 'PopBids.co.uk', '', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(25, 0, 'DnOptions.co.uk', '', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(26, 0, 'PalJam.co.uk', '', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(27, 0, 'SlyFriend.co.uk', '', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(28, 0, 'ParadeBlog.co.uk', '', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(29, 0, 'AirEnhancer.co.uk', '', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(30, 0, 'EspressoTalk.co.uk', '', '', '', '', '', '', '', '', '2015-02-05 14:53:10', '2015-02-05 14:53:10'),
+(31, 4, 'http://localhost/virtual_learning/uploads/unltd_logo.jpg', 'unltd_logo.jpg', '51430', 'image/jpeg', '', '', '', '', '', '2015-03-09 01:36:54', '2015-03-09 00:36:54'),
+(32, 4, 'http://localhost/virtual_learning/uploads/Soompi Post.docx', 'Soompi Post.docx', '14660', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', '', '', '', '', '', '2015-03-09 01:38:59', '2015-03-09 00:38:59'),
+(34, 4, 'http://localhost/virtual_learning/uploads/the-northern-line-game.jpg', 'the-northern-line-game.jpg', '276324', 'image/jpeg', '', '', '', '', '', '2015-03-09 01:46:48', '2015-03-09 00:46:48'),
+(35, 4, 'http://localhost/virtual_learning/uploads/Lee%20Juck%20-%20I%27m%20So%20Fortunate.docx', 'Lee Juck - I''m So Fortunate.docx', '15133', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', '', '', '', '', '', '2015-03-09 01:47:22', '2015-03-09 00:47:22'),
+(36, 4, 'http://localhost/virtual_learning/uploads/12339297_9648727_lz.jpg', '12339297_9648727_lz.jpg', '118379', 'image/jpeg', '', '', '', '', '', '2015-03-09 11:28:10', '2015-03-09 10:28:10'),
+(37, 4, 'http://localhost/virtual_learning/uploads/report.xml', 'report.xml', '2411', 'text/xml', '', '', '', '', '', '2015-03-09 11:41:29', '2015-03-09 10:41:29'),
+(58, 0, '', '', '', '', '', 'Group 5', 'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth. Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.', 'A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at the present moment; and yet I feel that I never was a greater artist than now. When, while the lovely valley teems with vapour around me, and the meridian sun strikes the upper surface of the impenetrable foliage of my trees, and but a few stray gleams steal into the inner sanctuary, I throw myself down among the tall grass by the trickling stream; and, as I lie close to the earth, a thousand unknown plants are noticed by me: when I hear the buzz of the little world among the stalks, and grow familiar with the countless indescribable forms of the insects and flies, then I feel the presence of the Almighty, who formed us in his own image, and the breath', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. ', '2015-03-09 19:19:37', '2015-03-09 19:19:37'),
+(67, 4, 'http://localhost/virtual_learning/uploads/report.xml', 'report.xml', '2411', 'text/xml', 'http://www.google.com', '', '', '', '', '2015-03-10 13:48:13', '2015-03-10 12:48:13');
 
 -- --------------------------------------------------------
 
@@ -644,7 +647,7 @@ MODIFY `GroupNo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=101;
 -- AUTO_INCREMENT for table `report`
 --
 ALTER TABLE `report`
-MODIFY `ReportNo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=38;
+MODIFY `ReportNo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=68;
 --
 -- AUTO_INCREMENT for table `score`
 --
