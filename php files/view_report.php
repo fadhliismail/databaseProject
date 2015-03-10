@@ -1,5 +1,9 @@
-                                    <!DOCTYPE HTML>
-                                    <html>                                    
+                          
+<!DOCTYPE HTML>
+                                    <html>    
+                                            <?php
+                                             session_start();
+                                            ?>
                                     <head lang="en">
                                        <title>Assess Peer's Work</title>
 
@@ -32,7 +36,8 @@
                                   </script>
                               </head>
 
-                              <body>         
+                              <body>   
+                          
                                <!-- navigation bar -->
                                <nav class="navbar navbar-default navbar-fixed-top">
                                   <div class="container">
@@ -62,14 +67,14 @@
                              </div><!--/.nav-collapse -->
                          </div>
                      </nav>
-
+                          
                      <!-- content page -->
                      <div class="container">
-                        <div class="page-header"><h1>Report<h1/></div>
-
-                        <!-- show report -->
-                        <?php
-
+                         <?php
+                        echo '<div class="page-header"><h1>Report'.$_SESSION["ASSESSNO"].'<h1/></div>';
+                        // show report -->     
+                        
+                        //echo $_SESSION["ASSESSNO"];
                 //report any error
                         error_reporting(E_ALL); ini_set('display_errors', 1); mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
@@ -94,6 +99,8 @@
         exit('Failed to open file.');
     }
     ?>
+      
+    
 
     <div class="page-title">Assessment</div>
     <p> Please rate fairly and leaves a comment to justify the rating. Comment is <u>required</u> for each criteria.</p>
