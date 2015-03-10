@@ -100,8 +100,7 @@
 						<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
 						<input type="password" class="form-control" name="CurrentPswd" placeholder="password" aria-describedby="basic-addon1">
 
-					</div>	
-					<span class="help-inline"></span>	
+					</div>		
 					<br>
 
 					New password:

@@ -1,8 +1,3 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-</head>
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -42,16 +37,16 @@
 					<li role="presentation"><a href="#discussion.php">Discussion</a></li>
 					<li role="presentation"><a href="help.php">Help</a></li>
 
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-      	<li><a href="#logout">Log Out</a></li>
-      </ul>
-  </div><!--/.nav-collapse -->
-</div>
-</nav>
-        
-<!-- content page -->
-<div class="container"><div class="page-header"><h1>Review Page</h1></div>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#logout">Log Out</a></li>
+				</ul>
+			</div><!--/.nav-collapse -->
+		</div>
+	</nav>
+
+	<!-- content page -->
+	<div class="container"><div class="page-header"><h1>Review Page</h1></div>
 
 </div>
 <!-- footer -->
@@ -72,12 +67,12 @@
 
 <html>                                  
 <form action="scoreupdate.php" method="post"> 
-    <!-- content page -->
-    <?php   
+	<!-- content page -->
+	<?php   
     //report any error
-    error_reporting(E_ALL); ini_set('display_errors', 1); mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-    include 'db_connect.php';
-    
+	error_reporting(E_ALL); ini_set('display_errors', 1); mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+	include 'db_connect.php';
+
     // develop calculate averagescore
     // how can I  calculate average?? Select GroupNo = 1 and add Score, count++ each time
     // eg. Group1 has 5 and 30+35+25+46+35/5 is average score??
@@ -85,82 +80,99 @@
     // from score table ( calc average score and write it on)  assessment table
     // 
     // update AverageScore of group table ( this table should have only one Avgscore each group).
-    for($GroupNo = 1; $GroupNo <4 ; $GroupNo++){
-        $updateAverageScore= "UPDATE `group` as G SET `AverageScore`=(SELECT TRUNCATE(AVG(`Score`),0) 
-                         FROM `assessment` as A WHERE G.`GroupNo`= A.`GroupNo`)WHERE `GroupNo`=?";
-        if($stmtUpdateAvgScore = $conn->prepare($updateAverageScore)){
-            $stmtUpdateAvgScore->bind_param('i', $GroupNo);
-            $stmtUpdateAvgScore->execute();
-            $stmtUpdateAvgScore->store_result();
-        }
-    }
-    ?>
-	<div class="container">
-		
-		<p>Your group report will be assessed by your peers based on the following criteria:</p>	
-		<div class="table-responsive">
-			<table class ="table table-nonfluid">
-				<tr>
-					<th>Group Number</th>
-					<th>Detail of report</th>
-                                        <th>Grade</th>
-				</tr>
-				<tr>
-					<td>Group 1</td>
-					<td><a href="view_report.php">Reportpage</a> </td>
-                                        <?php
-                                        $GroupNo=1;
-                                        $queryAverageScore = "SELECT `AverageScore` FROM `group` WHERE `GroupNo`=?"; 
-                                        if ($stmtAvgScore = $conn->prepare($queryAverageScore)) {
-                                            $stmtAvgScore->bind_param('i', $GroupNo);
-                                            $stmtAvgScore->execute();
-                                            $stmtAvgScore->store_result();
-                                            $stmtAvgScore->bind_result($AverageScore1);
-                                            $stmtAvgScore->fetch();
-                                        }  
-                                        echo '<td>'.$AverageScore1.'</td>';
-                                        ?>
-				</tr>
-				<tr>
-					<td>Group 2</td>
-					<td><a href="view_report.php">Reportpage</a></td>
-                                        <?php
-                                        $GroupNo=2;
-                                        $queryAverageScore = "SELECT `AverageScore` FROM `group` WHERE `GroupNo`=?"; 
-                                        if ($stmtAvgScore = $conn->prepare($queryAverageScore)) {
-                                            $stmtAvgScore->bind_param('i', $GroupNo);
-                                            $stmtAvgScore->execute();
-                                            $stmtAvgScore->store_result();
-                                            $stmtAvgScore->bind_result($AverageScore2);
-                                            $stmtAvgScore->fetch();
-                                        }  
-                                        echo'<td>'.$AverageScore2.'</td>';
-                                        ?>
-				</tr>
-				<tr>
-					<td>Group 3</td>
-					<td><a href="view_report.php">Reportpage</a></td>
-                                        <?php
-                                        $GroupNo=3;
-                                        $queryAverageScore = "SELECT `AverageScore` FROM `group` WHERE `GroupNo`=?"; 
-                                        if ($stmtAvgScore = $conn->prepare($queryAverageScore)) {
-                                            $stmtAvgScore->bind_param('i', $GroupNo);
-                                            $stmtAvgScore->execute();
-                                            $stmtAvgScore->store_result();
-                                            $stmtAvgScore->bind_result($AverageScore3);
-                                            $stmtAvgScore->fetch();
-                                        }
-                                        echo '<td>'.$AverageScore3.'</td>';
-                                        ?>
-				</tr>
-			</table>
-		</div>
-		<div class = "page-title">Summary</div>
-		<p>These are the marks given by your peers who assessed your report:</p>
- 
+	for($GroupNo = 1; $GroupNo <4 ; $GroupNo++){
+		$updateAverageScore= "UPDATE `group` as G SET `AverageScore`=(SELECT TRUNCATE(AVG(`Score`),0) 
+			FROM `assessment` as A WHERE G.`GroupNo`= A.`GroupNo`)WHERE `GroupNo`=?";
+if($stmtUpdateAvgScore = $conn->prepare($updateAverageScore)){
+	$stmtUpdateAvgScore->bind_param('i', $GroupNo);
+	$stmtUpdateAvgScore->execute();
+	$stmtUpdateAvgScore->store_result();
+}
+}
+?>
+<div class="container">
+
+	<p>Your group report will be assessed by your peers based on the following criteria:</p>	
+	<div class="table-responsive">
+		<table class ="table table-nonfluid">
+			<tr>
+				<th>Group Number</th>
+				<th>Detail of report</th>
+				<th>Grade</th>
+				<th>Discussion thread</th>
+
+			</tr>
+			<tr>
+				<td>Group 1</td><!--  cannot do fixed thing like this. The group needs to be pulled from the database -->
+				<td><a href="view_report.php">Reportpage</a> </td>
+				<?php
+				$GroupNo=1;
+				$queryAverageScore = "SELECT `AverageScore` FROM `group` WHERE `GroupNo`=?"; 
+				if ($stmtAvgScore = $conn->prepare($queryAverageScore)) {
+					$stmtAvgScore->bind_param('i', $GroupNo);
+					$stmtAvgScore->execute();
+					$stmtAvgScore->store_result();
+					$stmtAvgScore->bind_result($AverageScore1);
+					$stmtAvgScore->fetch();
+				}  
+				echo '<td>'.$AverageScore1.'</td>';
+				?>
+				<td>
+					<!--need to change the address (Currently it is just dummy)-->
+					<!-- this also need to be pulled off from database. preferably from report table. -->
+					<a href="forum.php">DiscussionForum</a>
+				</td>
+			</tr>
+			<tr>
+				<td>Group 2</td>
+				<td><a href="view_report.php">Reportpage</a></td>
+				<?php
+				$GroupNo=2;
+				$queryAverageScore = "SELECT `AverageScore` FROM `group` WHERE `GroupNo`=?"; 
+				if ($stmtAvgScore = $conn->prepare($queryAverageScore)) {
+					$stmtAvgScore->bind_param('i', $GroupNo);
+					$stmtAvgScore->execute();
+					$stmtAvgScore->store_result();
+					$stmtAvgScore->bind_result($AverageScore2);
+					$stmtAvgScore->fetch();
+				}  
+				echo'<td>'.$AverageScore2.'</td>';
+				?>
+				<td>
+					<!--need to change the address (Currently it is just dummy)-->
+					<!-- this also need to be pulled off from database. preferably from report table. -->
+					<a href="forum.php">DiscussionForum</a>
+				</td>
+			</tr>
+			<tr>
+				<td>Group 3</td>
+				<td><a href="view_report.php">Reportpage</a></td>
+				<?php
+				$GroupNo=3;
+				$queryAverageScore = "SELECT `AverageScore` FROM `group` WHERE `GroupNo`=?"; 
+				if ($stmtAvgScore = $conn->prepare($queryAverageScore)) {
+					$stmtAvgScore->bind_param('i', $GroupNo);
+					$stmtAvgScore->execute();
+					$stmtAvgScore->store_result();
+					$stmtAvgScore->bind_result($AverageScore3);
+					$stmtAvgScore->fetch();
+				}
+				echo '<td>'.$AverageScore3.'</td>';
+				?>
+				<td>
+					<!--need to change the address (Currently it is just dummy)-->
+					<!-- this also need to be pulled off from database. preferably from report table. -->
+					<a href="forum.php">DiscussionForum</a>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div class = "page-title">Summary</div>
+	<p>These are the marks given by your peers who assessed your report:</p>
+
 </form> 
 <!-- dynamic content will be here -->
- <!-- just a header label -->
+<!-- just a header label -->
 </body>
 </html>
 

@@ -14,10 +14,24 @@
 	<!-- Custom styles for drag n drop -->
 	<link rel="stylesheet" type="text/css" href="css/dropzone.css">
 
+	<!-- Bootstrap core JavaScript
+	================================================== -->
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="js/bootstrap.min.js"></script>
+
 	<script>
 		var Dropzone = require("dropzone");
 
 		$("div#mydropfile").dropzone({ url: "upload.php" });
+		$(function() {
+			Dropzone.options.uiDZResume = {
+				success: function(file, response){
+					alert(response);
+				}
+			};
+		});
 	</script>c
 </head>
 
@@ -56,6 +70,38 @@
 		<div class="page-header"><h1>Submit your report</h1></div>
 		The deadline of submission is on <b>Friday, 20 March 2014 before 12 PM</b>. Late submission will be deducted 5 marks from the final mark received from the peers.<p>
 		You can upload multiple files by drag `n drop. Your file must be of .xml type.
+		<!-- function to show/hide alert -->
+		<script type="text/javascript">
+			function hideAlert(id){
+				var text = $('#'+id+' .showerror').text();
+				console.log(text.length);
+				if(text.length <= 0)
+					$('#'+id).hide();
+			}
+		</script>
+
+		<!-- feedback alert-->
+		<div id="a1" class="alert alert-danger alert-dismissible" role="alert">				
+			<div class = "showerror"><?php $reasons = array(
+				"failupload" => "Failed to upload file."); 
+			if (isset($_GET["failed"])) echo $reasons[$_GET["reason"]]; 
+			?></div>
+		</div>
+		<script type="text/javascript">
+			hideAlert("a1");
+		</script>
+
+		<!-- success feedback-->
+		<div id="a2" class="alert alert-success alert-dismissible" role="alert">				
+			<div class = "showerror"><?php $reasons = array(					
+				"uploaded" => "File uploaded successfully!"); 
+			if (isset($_GET["success"])) echo $reasons[$_GET["reason"]]; 
+			?></div>
+		</div>
+		<script type="text/javascript">
+			hideAlert("a2");
+		</script>
+
 		<!-- Drop n Drag javascript -->
 		<script src="js/dropzone.js"></script>
 		<!-- Drag n Drop File -->
@@ -70,12 +116,6 @@
 	<!-- footer -->
 	<?php include 'footer.php'; ?>
 
-	<!-- Bootstrap core JavaScript
-	================================================== -->
-	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-	<!-- Include all compiled plugins (below), or include individual files as needed -->
-	<script src="js/bootstrap.min.js"></script>
 
 </body>
 
