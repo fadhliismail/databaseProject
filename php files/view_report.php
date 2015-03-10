@@ -75,7 +75,7 @@
 
         //connect to database
                         include 'db_connect.php';
-    $filename = 'report.xml' //Should not be "report.xml" but must get the file name from the "File_Name" column in the "report" table in the database
+    $filename = 'report.xml'; //Should not be "report.xml" but must get the file name from the "File_Name" column in the "report" table in the database
 
     //Write query here to query File_Name WHERE ReportNo or you can use WHERE GroupNo
     //Bind param to ReportNo or GroupNo whichever you choose
