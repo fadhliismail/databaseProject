@@ -83,30 +83,45 @@
 	for($GroupNo = 1; $GroupNo <4 ; $GroupNo++){
 		$updateAverageScore= "UPDATE `group` as G SET `AverageScore`=(SELECT TRUNCATE(AVG(`Score`),0) 
 			FROM `assessment` as A WHERE G.`GroupNo`= A.`GroupNo`)WHERE `GroupNo`=?";
-if($stmtUpdateAvgScore = $conn->prepare($updateAverageScore)){
-	$stmtUpdateAvgScore->bind_param('i', $GroupNo);
-	$stmtUpdateAvgScore->execute();
-	$stmtUpdateAvgScore->store_result();
-}
-}
-?>
+            if($stmtUpdateAvgScore = $conn->prepare($updateAverageScore)){
+                $stmtUpdateAvgScore->bind_param('i', $GroupNo);
+                $stmtUpdateAvgScore->execute();
+                $stmtUpdateAvgScore->store_result();
+            }
+        }
+        ?>
 <div class="container">
 
 	<p>Your group report will be assessed by your peers based on the following criteria:</p>	
 	<div class="table-responsive">
 		<table class ="table table-nonfluid">
 			<tr>
-				<th>Group Number</th>
+				<th>Assessment Number</th>
 				<th>Detail of report</th>
 				<th>Grade</th>
 				<th>Discussion thread</th>
 
 			</tr>
 			<tr>
-				<td>Group 1</td><!--  cannot do fixed thing like this. The group needs to be pulled from the database -->
-				<td><a href="view_report.php">Reportpage</a> </td>
+				<!--<td>Group 1</td>  cannot do fixed thing like this. The group needs to be pulled from the database -->
+                                <?php
+                                $Report_To_Assess = 4; /*this cannot be a fixed number. it has to get data from session.*/
+                                //query statements
+                                $queryAssessment  = "SELECT `AssessmentNo` FROM `assessment` WHERE  `Report_to_Assess` = ?";                               
+                                if ($stmtAssessment = $conn->prepare($queryAssessment)) {
+                                    $stmtAssessment->bind_param('i', $Report_To_Assess);
+                                    $stmtAssessment->execute();
+                                    $stmtAssessment->store_result();
+                                    $stmtAssessment->bind_result($AssessmentNo);
+                                    $stmtAssessment->fetch();
+                                }
+                                echo '<td>'.$AssessmentNo.'</td>';
+                                echo '<td><a href="view_report.php?id='.$AssessmentNo.'">Reportpage_'.$Report_To_Assess.'</a> </td>';
+                                ?>
+                                <!--<td>Group 1</td>-->
+                                
 				<?php
-				$GroupNo=1;
+                                $GroupNo=1;
 				$queryAverageScore = "SELECT `AverageScore` FROM `group` WHERE `GroupNo`=?"; 
 				if ($stmtAvgScore = $conn->prepare($queryAverageScore)) {
 					$stmtAvgScore->bind_param('i', $GroupNo);
@@ -124,8 +139,21 @@ if($stmtUpdateAvgScore = $conn->prepare($updateAverageScore)){
 				</td>
 			</tr>
 			<tr>
-				<td>Group 2</td>
-				<td><a href="view_report.php">Reportpage</a></td>
+				<?php
+                                $Report_To_Assess = 23; /*this cannot be a fixed number. it has to get data from session.*/
+                                //query statements
+                                $queryAssessment  = "SELECT `AssessmentNo` FROM `assessment` WHERE  `Report_to_Assess` = ?";                               
+                                if ($stmtAssessment = $conn->prepare($queryAssessment)) {
+                                    $stmtAssessment->bind_param('i', $Report_To_Assess);
+                                    $stmtAssessment->execute();
+                                    $stmtAssessment->store_result();
+                                    $stmtAssessment->bind_result($AssessmentNo);
+                                    $stmtAssessment->fetch();
+                                }
+                                echo '<td>'.$AssessmentNo.'</td>';
+                                echo '<td><a href="view_report.php?id='.$AssessmentNo.'">Reportpage_'.$Report_To_Assess.'</a> </td>';
+                                ?>
+				<!--<td><a href="view_report.php">Reportpage</a></td>-->
 				<?php
 				$GroupNo=2;
 				$queryAverageScore = "SELECT `AverageScore` FROM `group` WHERE `GroupNo`=?"; 
@@ -145,8 +173,21 @@ if($stmtUpdateAvgScore = $conn->prepare($updateAverageScore)){
 				</td>
 			</tr>
 			<tr>
-				<td>Group 3</td>
-				<td><a href="view_report.php">Reportpage</a></td>
+                                <?php
+                                $Report_To_Assess = 16; /*this cannot be a fixed number. it has to get data from session.*/
+                                //query statements
+                                $queryAssessment  = "SELECT `AssessmentNo` FROM `assessment` WHERE  `Report_to_Assess` = ?";                               
+                                if ($stmtAssessment = $conn->prepare($queryAssessment)) {
+                                    $stmtAssessment->bind_param('i', $Report_To_Assess);
+                                    $stmtAssessment->execute();
+                                    $stmtAssessment->store_result();
+                                    $stmtAssessment->bind_result($AssessmentNo);
+                                    $stmtAssessment->fetch();
+                                }
+                                echo '<td>'.$AssessmentNo.'</td>';
+                                echo '<td><a href="view_report.php?id='.$AssessmentNo.'">Reportpage_'.$Report_To_Assess.'</a> </td>';
+                                ?>
+				<!--<td><a href="view_report.php">Reportpage</a></td>-->
 				<?php
 				$GroupNo=3;
 				$queryAverageScore = "SELECT `AverageScore` FROM `group` WHERE `GroupNo`=?"; 
