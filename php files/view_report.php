@@ -67,41 +67,57 @@
                           
                      <!-- content page -->
                      <div class="container">
-                         <?php  
-                         // $id is assessmentNo
-                        $id = $_GET['id'];
-                        echo '<div class="page-header"><h1>Report_assessmentNo.'.$id.'<h1/></div>';
+    <?php  
+        //$id is assessmentNo
+        $id = $_GET['id'];
+        echo '<div class="page-header"><h1>Report_assessmentNo.'.$id.'<h1/></div>';
                        
-                        //report any error
-                        error_reporting(E_ALL); ini_set('display_errors', 1); mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+        //report any error
+        error_reporting(E_ALL); ini_set('display_errors', 1); mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
-                        //connect to database
-                        include 'db_connect.php';
-                        $filename = 'report.xml'; //Should not be "report.xml" but must get the file name from the "File_Name" column in the "report" table in the database
+        //connect to database
+        include 'db_connect.php';
+        $filename = 'report.xml'; //Should not be "report.xml" but must get the file name from the "File_Name" column in the "report" table in the database
 
     //Write query here to query File_Name WHERE ReportNo or you can use WHERE GroupNo
     //Bind param to ReportNo or GroupNo whichever you choose
+        $queryGroupNo = "SELECT `GroupNo` FROM `assessment` WHERE `AssessmentNo`= $id";
+        
+        if ($stmtGroupNo = $conn->prepare($queryGroupNo))
+                        {        
+                                $stmtGroupNo->execute();
+                                $stmtGroupNo->store_result();
+                                $stmtGroupNo->bind_result($GroupNo);
+                                $stmtGroupNo->fetch();
+                        }
+        //echo $GroupNo;
+        $queryFileName = "SELECT `File_Name` FROM `report` WHERE `GroupNo`= $GroupNo"; 
+        if ($stmtFileName = $conn->prepare($queryFileName))
+                        {        
+                                $stmtFileName->execute();
+                                $stmtFileName->store_result();
+                                $stmtFileName->bind_result($FileName);
+                                $stmtFileName->fetch();
+                        }
+        //echo $FileName; FileName must contain extension.   
     //Execute below script
-
-    if (file_exists('./uploads/' .$filename)) { //fetch file from "uploads" folder
-        $xml = simplexml_load_file('./uploads/' .$filename);
-
-        $mygroup = $xml->Group;
-        echo $mygroup. '</br></br>';
-        echo $xml -> Intro. '</br></br>';
-        echo $xml -> Main. '</br></br>';
-        echo $xml -> Conclusion. '</br></br>';
-
-    } else {
-        exit('Failed to open file.');
-    }
+        if (file_exists('./uploads/' .$FileName)) { //fetch file from "uploads" folder
+            $xml = simplexml_load_file('./uploads/' .$FileName);
+            $mygroup = $xml->Group;
+            echo $mygroup. '</br></br>';
+            echo $xml -> Intro. '</br></br>';
+            echo $xml -> Main. '</br></br>';
+            echo $xml -> Conclusion. '</br></br>';
+        } else {
+            exit('Failed to open xml file.');
+        }
     ?>
       
     <div class="page-title">Assessment</div>
     <p> Please rate fairly and leaves a comment to justify the rating. Comment is <u>required</u> for each criteria.</p>
-<?php
-            echo '<form action="report.php?id='.$id.'" method="post" onsubmit="return chk1(this)">';
-?>
+    <?php
+        echo '<form action="report.php?id='.$id.'" method="post" onsubmit="return chk1(this)">';
+    ?>
         <script type="text/javascript">
             function chk1(frm){
                 for(var i =1; i<6; i++){
@@ -123,14 +139,39 @@
                     <th>Comment</th>
                 </tr>
                 <tr>
-                   
+                        <?php
+                            for($i =1; $i<6 ; $i++){
+                                $queryCriteria = "SELECT `CriteriaNo`,`Score_Criteria`,`Comment` FROM `score` WHERE  `AssessmentNo` = $id AND `CriteriaNo`=$i ";
+                                if ($stmtCriteria = $conn->prepare($queryCriteria))
+                                {   
+                                    $stmtCriteria->execute();
+                                    $stmtCriteria->store_result();
+                                    $stmtCriteria->bind_result($CriteriaNO[$i],$Score_Criteria[$i],$Comment[$i]);
+                                    $stmtCriteria->fetch();
+                                }
+                            }       
+                        ?>
                     <td>Criteria 1</td>
                     <td>
                         <input type="range" name = "c1" min="0" max="10"  value="5" step="1" onchange="updateTextInput(this.value);" /><br>
-                        <input type="text" id="textInput" size="10" value="5" align="center" />
+                        <?php
+                            $Criteria_1 = var_export($Score_Criteria[1],true);
+                            if(isset($Criteria_1)){
+                            echo '<input type="text" id="textInput" size="10" value='.$Criteria_1.' align="center" />';
+                            }else{
+                            echo '<input type="text" id="textInput" size="10" value="5" align="center" />';
+                            }
+                        ?>    
                     </td>
-                    <td>                    
-                        <input type="text" name="comment1" style="width:350px;height:80px;">
+                    <td>
+                        <?php
+                            $Comment_1 = var_export($Comment[1],true);
+                            if(isset($Comment_1)){
+                            echo '<input type="text" name="comment1" value='.$Comment_1.' style="width:350px;height:80px;">';
+                            }else{
+                            echo '<input type="text" name="comment1" style="width:350px;height:80px;">';
+                            }
+                        ?>
                     </td>
                     	
                 </tr>
@@ -139,10 +180,24 @@
                     <td>Criteria 2</td>
                     <td>
                         <input type="range" name = "c2" min="0" max="10" value="5" step="1" onchange="updateTextInput2(this.value)" /><br>
-                        <input type="text" id="textInput2" size="10" value="5" />
+                        <?php
+                            $Criteria_2 = var_export($Score_Criteria[2],true);
+                            if(isset($Criteria_2)){
+                            echo '<input type="text" id="textInput2" size="10" value='.$Criteria_2.' align="center" />';
+                            }else{
+                            echo '<input type="text" id="textInput2" size="10" value="5" align="center" />';
+                            }
+                        ?>    
                     </td>
-                    <td>                    
-                        <input type="text" name="comment2" style="width:350px;height:80px;">
+                    <td>
+                        <?php
+                            $Comment_2 = var_export($Comment[2],true);
+                            if(isset($Comment_2)){
+                            echo '<input type="text" name="comment2" value='.$Comment_2.' style="width:350px;height:80px;">';
+                            }else{
+                            echo '<input type="text" name="comment2" style="width:350px;height:80px;">';
+                            }
+                        ?>                        
                     </td>
                 </tr>
 
@@ -150,10 +205,24 @@
                     <td>Criteria 3</td>
                     <td>
                      <input type="range" name = "c3" min="0" max="10" value="5" step="1" onchange="updateTextInput3(this.value)" /><br>
-                     <input type="text" id="textInput3" size="10" value="5" />
+                        <?php
+                            $Criteria_3 = var_export($Score_Criteria[3],true);
+                            if(isset($Criteria_3)){
+                            echo '<input type="text" id="textInput3" size="10" value='.$Criteria_3.' align="center" />';
+                            }else{
+                            echo '<input type="text" id="textInput3" size="10" value="5" align="center" />';
+                            }
+                        ?> 
                  </td>
-                 <td>                
-                        <input type="text" name="comment3" style="width:350px;height:80px;">
+                 <td>     
+                        <?php
+                            $Comment_3 = var_export($Comment[3],true);
+                            if(isset($Comment_3)){
+                            echo '<input type="text" name="comment3" value='.$Comment_3.' style="width:350px;height:80px;">';
+                            }else{
+                            echo '<input type="text" name="comment3" style="width:350px;height:80px;">';
+                            }
+                        ?>  
                  </td>
              </tr>
 
@@ -161,22 +230,50 @@
                 <td>Criteria 4</td>
                 <td>
                     <input type="range" name = "c4" min="0" max="10" value="5" step="1" onchange="updateTextInput4(this.value)" /><br>
-                    <input type="text" id="textInput4" size="10" value="5" />
+                        <?php
+                            $Criteria_4 = var_export($Score_Criteria[4],true);
+                            if(isset($Criteria_4)){
+                            echo '<input type="text" id="textInput4" size="10" value='.$Criteria_4.' align="center" />';
+                            }else{
+                            echo '<input type="text" id="textInput4" size="10" value="5" align="center" />';
+                            }
+                        ?> 
                 </td>
                 <td>
-                        <input type="text" name="comment4" style="width:350px;height:80px;">
+                        <?php
+                            $Comment_4 = var_export($Comment[4],true);
+                            if(isset($Comment_4)){
+                            echo '<input type="text" name="comment4" value='.$Comment_4.' style="width:350px;height:80px;">';
+                            }else{
+                            echo '<input type="text" name="comment4" style="width:350px;height:80px;">';
+                            }
+                        ?>  
                 </td>
             </tr>
 
             <tr>
                 <td>Criteria 5</td>
                 <td>
-                 <input type="range" name = "c5" min="0" max="10" value="5" step="1" onchange="updateTextInput5(this.value)" /><br>
-                 <input type="text" id="textInput5" size="10" value="5" />
-             </td>
-             <td>
-                    <input type="text" name="comment5" style="width:350px;height:80px;">
-            </td>
+                    <input type="range" name = "c5" min="0" max="10" value="5" step="1" onchange="updateTextInput5(this.value)" /><br>
+                        <?php
+                            $Criteria_5 = var_export($Score_Criteria[5],true);
+                            if(isset($Criteria_5)){
+                            echo '<input type="text" id="textInput5" size="10" value='.$Criteria_5.' align="center" />';
+                            }else{
+                            echo '<input type="text" id="textInput5" size="10" value="5" align="center" />';
+                            }
+                        ?> 
+                </td>
+                <td>
+                        <?php
+                            $Comment_5 = var_export($Comment[5],true);
+                            if(isset($Comment_5)){
+                            echo '<input type="text" name="comment5" value='.$Comment_5.' style="width:350px;height:80px;">';
+                            }else{
+                            echo '<input type="text" name="comment5" style="width:350px;height:80px;">';
+                            }
+                        ?>  
+                </td>
         </tr>
 
     </table>
