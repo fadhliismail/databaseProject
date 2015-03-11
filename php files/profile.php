@@ -36,7 +36,7 @@
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
 						<li role="presentation"><a href="index.php">Home</a></li>
-						<li role="presentation" class="active"><a href="#">Profile</a></li>
+						<li role="presentation" class="active"><a href="profile.php">Profile</a></li>
 						<li role="presentation"><a href="submission.php">Submission</a></li>
 						<li role="presentation"><a href="mygroup_assessment.php">My Assessment</a></li>
 						<li role="presentation"><a href="review.php">Review</a></li>

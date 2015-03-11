@@ -120,7 +120,44 @@
   ?>
 
   <div class="page-title">Ranking</div>
-  Your group is ranked _____ amongst _____.
+  <?php
+
+  //report any error
+  error_reporting(E_ALL); ini_set('display_errors', 1); mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+
+        //connect to database
+  include 'db_connect.php';
+
+        //check value is set or not
+  if (isset($_POST['GroupNo'])) {
+    $GroupNo = $_POST['GroupNo'];
+  }
+
+  $GroupNo = 4;
+  //$query1 = "SET @rownum := 0";
+  $query2 = "SELECT GroupNo, rank, AverageScore FROM (
+                    SELECT @rownum := @rownum + 1 AS rank, AverageScore, GroupNo
+                    FROM `group` 
+    CROSS JOIN (SELECT @rownum := 0) c
+    ORDER BY AverageScore DESC
+                    ) as result WHERE GroupNo = ?";
+
+ // if($stmt = $conn->prepare($query1)) {
+
+
+    if ($stmt = $conn->prepare($query2)) {
+      $stmt->bind_param('i', $GroupNo);
+      $stmt->execute();
+      $stmt->bind_result($GroupNo, $rank, $AverageScore);
+      $stmt->fetch();
+
+      echo 'Your group is ranked<button type="button" disabled class="btn btn-lg" style="margin:0 0 15px 15px"><b> ' .$rank. '</b></button>';
+ //   }
+  }
+  $stmt -> close();
+  $conn -> close();
+  ?>
+
 </div><!-- end of container -->
 
 <!-- footer -->

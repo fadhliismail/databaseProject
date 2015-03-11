@@ -33,9 +33,9 @@ if(!empty($_FILES)) {
 	$stmt->bind_param('isisss', $GroupNo, $myfileName, $myfileSize, $myfileLink, $myfileType, $myfileDate);
 	
 	if($stmt->execute()) {
-		header("location:submission.php?success=true&reason=uploaded"));
+		//header("location:submission.php?success=true&reason=uploaded"));
 } else {
-	die(header("location:submission.php?failed=true&reason=failupload"));
+	//die(header("location:submission.php?failed=true&reason=failupload"));
 }
 
 }
