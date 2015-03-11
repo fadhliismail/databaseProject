@@ -1,9 +1,6 @@
                           
 <!DOCTYPE HTML>
                                     <html>    
-                                            <?php
-                                             session_start();
-                                            ?>
                                     <head lang="en">
                                        <title>Assess Peer's Work</title>
 
@@ -70,17 +67,17 @@
                           
                      <!-- content page -->
                      <div class="container">
-                         <?php
-                        echo '<div class="page-header"><h1>Report'.$_SESSION["ASSESSNO"].'<h1/></div>';
-                        // show report -->     
-                        
-                        //echo $_SESSION["ASSESSNO"];
-                //report any error
+                         <?php  
+                         // $id is assessmentNo
+                        $id = $_GET['id'];
+                        echo '<div class="page-header"><h1>Report_assessmentNo.'.$id.'<h1/></div>';
+                       
+                        //report any error
                         error_reporting(E_ALL); ini_set('display_errors', 1); mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
-        //connect to database
+                        //connect to database
                         include 'db_connect.php';
-    $filename = 'report.xml'; //Should not be "report.xml" but must get the file name from the "File_Name" column in the "report" table in the database
+                        $filename = 'report.xml'; //Should not be "report.xml" but must get the file name from the "File_Name" column in the "report" table in the database
 
     //Write query here to query File_Name WHERE ReportNo or you can use WHERE GroupNo
     //Bind param to ReportNo or GroupNo whichever you choose
@@ -100,12 +97,23 @@
     }
     ?>
       
-    
-
     <div class="page-title">Assessment</div>
     <p> Please rate fairly and leaves a comment to justify the rating. Comment is <u>required</u> for each criteria.</p>
-    <form action="report.php" method="post">    
-
+<?php
+            echo '<form action="report.php?id='.$id.'" method="post" onsubmit="return chk1(this)">';
+?>
+        <script type="text/javascript">
+            function chk1(frm){
+                for(var i =1; i<6; i++){
+                    if(frm.elements["comment"+i].value==""){
+                        alert("please input commnet of criteria"+i);
+                        return false;
+                    }else{
+                        //return true;
+                    }
+                }
+            }
+        </script>
         <!-- show table -->
         <div class="table-responsive">
             <table class ="table table-nonfluid">
@@ -115,14 +123,16 @@
                     <th>Comment</th>
                 </tr>
                 <tr>
+                   
                     <td>Criteria 1</td>
                     <td>
                         <input type="range" name = "c1" min="0" max="10"  value="5" step="1" onchange="updateTextInput(this.value);" /><br>
                         <input type="text" id="textInput" size="10" value="5" align="center" />
                     </td>
                     <td>                    
-                        <textarea name="comment1" cols="50" rows="5"></textarea>
+                        <input type="text" name="comment1" style="width:350px;height:80px;">
                     </td>
+                    	
                 </tr>
 
                 <tr>
@@ -132,7 +142,7 @@
                         <input type="text" id="textInput2" size="10" value="5" />
                     </td>
                     <td>                    
-                        <textarea name="comment2" cols="50" rows="5"></textarea>
+                        <input type="text" name="comment2" style="width:350px;height:80px;">
                     </td>
                 </tr>
 
@@ -143,7 +153,7 @@
                      <input type="text" id="textInput3" size="10" value="5" />
                  </td>
                  <td>                
-                     <textarea name="comment3" cols="50" rows="5"></textarea>
+                        <input type="text" name="comment3" style="width:350px;height:80px;">
                  </td>
              </tr>
 
@@ -154,7 +164,7 @@
                     <input type="text" id="textInput4" size="10" value="5" />
                 </td>
                 <td>
-                    <textarea name="comment4" cols="50" rows="5"></textarea>
+                        <input type="text" name="comment4" style="width:350px;height:80px;">
                 </td>
             </tr>
 
@@ -165,7 +175,7 @@
                  <input type="text" id="textInput5" size="10" value="5" />
              </td>
              <td>
-                <textarea name="comment5" cols="50" rows="5"></textarea>
+                    <input type="text" name="comment5" style="width:350px;height:80px;">
             </td>
         </tr>
 

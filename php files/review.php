@@ -116,11 +116,7 @@
                                     $stmtAssessment->fetch();
                                 }
                                 echo '<td>'.$AssessmentNo.'</td>';
-                                
-                                session_start();
-                                $_SESSION["ASSESSNO"] = $Report_To_Assess;
-                                //echo $_SESSION["ASSESSNO"];
-                                echo '<td><a href="view_report.php">Reportpage_'.$Report_To_Assess.'</a> </td>';
+                                echo '<td><a href="view_report.php?id='.$AssessmentNo.'">Reportpage_'.$Report_To_Assess.'</a> </td>';
                                 ?>
                                 <!--<td>Group 1</td>-->
                                 
@@ -155,7 +151,7 @@
                                     $stmtAssessment->fetch();
                                 }
                                 echo '<td>'.$AssessmentNo.'</td>';
-                                echo '<td><a href="view_report.php">Reportpage_'.$Report_To_Assess.'</a> </td>';
+                                echo '<td><a href="view_report.php?id='.$AssessmentNo.'">Reportpage_'.$Report_To_Assess.'</a> </td>';
                                 ?>
 				<!--<td><a href="view_report.php">Reportpage</a></td>-->
 				<?php
@@ -189,7 +185,7 @@
                                     $stmtAssessment->fetch();
                                 }
                                 echo '<td>'.$AssessmentNo.'</td>';
-                                echo '<td><a href="view_report.php">Reportpage_'.$Report_To_Assess.'</a> </td>';
+                                echo '<td><a href="view_report.php?id='.$AssessmentNo.'">Reportpage_'.$Report_To_Assess.'</a> </td>';
                                 ?>
 				<!--<td><a href="view_report.php">Reportpage</a></td>-->
 				<?php
