@@ -21,10 +21,16 @@ if(isset($_POST['Submit'])){
 		
 		$User_pass = SHA1($User_pass);
 		
-		$query = "INSERT INTO student (FirstName, LastName, Email, User_pass, StudentId, GroupNo)".
-				"VALUES ('${firstName}', '${lastName}', '${emailAddress}', '${User_pass}', ${StudentId}','${GroupNo}')";
-		$result = mysqli_query($conn, $query)
-			or die('Error saving to database.' . mysql_error());
+		$query = "INSERT INTO student (FirstName, LastName, Email, User_pass, StudentId, GroupNo)
+				VALUES ('$firstName', '$lastName', '$emailAddress', '$User_pass', '$StudentId','$GroupNo')";
+		$result = mysqli_query($conn, $query);
+		
+		if($result){
+			echo "New record created.";
+		}
+		else {
+			echo "Error: " . $query. "<br>" . mysqli_error($conn);
+		}
 		mysqli_close($conn);
 
 	}
