@@ -21,18 +21,6 @@
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="js/bootstrap.min.js"></script>
 
-	<script>
-		var Dropzone = require("dropzone");
-
-		$("div#mydropfile").dropzone({ url: "upload.php" });
-		$(function() {
-			Dropzone.options.uiDZResume = {
-				success: function(file, response){
-					alert(response);
-				}
-			};
-		});
-	</script>c
 </head>
 
 <body>
@@ -78,28 +66,6 @@
 				if(text.length <= 0)
 					$('#'+id).hide();
 			}
-		</script>
-
-		<!-- feedback alert-->
-		<div id="a1" class="alert alert-danger alert-dismissible" role="alert">				
-			<div class = "showerror"><?php $reasons = array(
-				"failupload" => "Failed to upload file."); 
-			if (isset($_GET["failed"])) echo $reasons[$_GET["reason"]]; 
-			?></div>
-		</div>
-		<script type="text/javascript">
-			hideAlert("a1");
-		</script>
-
-		<!-- success feedback-->
-		<div id="a2" class="alert alert-success alert-dismissible" role="alert">				
-			<div class = "showerror"><?php $reasons = array(					
-				"uploaded" => "File uploaded successfully!"); 
-			if (isset($_GET["success"])) echo $reasons[$_GET["reason"]]; 
-			?></div>
-		</div>
-		<script type="text/javascript">
-			hideAlert("a2");
 		</script>
 
 		<!-- Drop n Drag javascript -->

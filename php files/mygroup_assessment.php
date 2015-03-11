@@ -49,8 +49,8 @@
 	<div class="container">
 		<div class="page-header"><h1>Your group assessment</h1></div>
 		<p>Your group report will be assessed by your peers based on the following criteria:</p>	
-		<div class="table-responsive">
-			<table class ="table table-nonfluid">
+			<div class="table-responsive">
+				<table class ="table table-nonfluid">
 				<tr>
 					<th>Criteria Number</th>
 					<th>Description of Criteria</th>
