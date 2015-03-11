@@ -77,7 +77,7 @@
 
         //connect to database
         include 'db_connect.php';
-        $filename = 'report.xml'; //Should not be "report.xml" but must get the file name from the "File_Name" column in the "report" table in the database
+        //$filename = 'report.xml'; //Should not be "report.xml" but must get the file name from the "File_Name" column in the "report" table in the database
 
     //Write query here to query File_Name WHERE ReportNo or you can use WHERE GroupNo
     //Bind param to ReportNo or GroupNo whichever you choose
@@ -99,18 +99,24 @@
                                 $stmtFileName->bind_result($FileName);
                                 $stmtFileName->fetch();
                         }
-        //echo $FileName; FileName must contain extension.   
+    //echo $FileName; FileName must contain extension.   
     //Execute below script
-        if (file_exists('./uploads/' .$FileName)) { //fetch file from "uploads" folder
-            $xml = simplexml_load_file('./uploads/' .$FileName);
-            $mygroup = $xml->Group;
-            echo $mygroup. '</br></br>';
-            echo $xml -> Intro. '</br></br>';
-            echo $xml -> Main. '</br></br>';
-            echo $xml -> Conclusion. '</br></br>';
-        } else {
-            exit('Failed to open xml file.');
-        }
+        if(isset($FileName)){
+                if (file_exists('./uploads/' .$FileName)) { //fetch file from "uploads" folder
+                    $xml = simplexml_load_file('./uploads/' .$FileName);
+                    $mygroup = $xml->Group;
+                    echo $mygroup. '</br></br>';
+                    echo $xml -> Intro. '</br></br>';
+                    echo $xml -> Main. '</br></br>';
+                    echo $xml -> Conclusion. '</br></br>';
+                } else {
+                    exit('Failed to open xml file.');
+                }
+            }else{
+                //when DB doesn't contain filename.
+                echo "FileName is empty";
+        };
+
     ?>
       
     <div class="page-title">Assessment</div>
@@ -156,7 +162,7 @@
                         <input type="range" name = "c1" min="0" max="10"  value="5" step="1" onchange="updateTextInput(this.value);" /><br>
                         <?php
                             $Criteria_1 = var_export($Score_Criteria[1],true);
-                            if(isset($Criteria_1)){
+                            if(isset($Criteria_1)and $Criteria_1!== "NULL"){
                             echo '<input type="text" id="textInput" size="10" value='.$Criteria_1.' align="center" />';
                             }else{
                             echo '<input type="text" id="textInput" size="10" value="5" align="center" />';
@@ -166,7 +172,7 @@
                     <td>
                         <?php
                             $Comment_1 = var_export($Comment[1],true);
-                            if(isset($Comment_1)){
+                            if(isset($Comment_1)and $Comment_1!== "NULL"){
                             echo '<input type="text" name="comment1" value='.$Comment_1.' style="width:350px;height:80px;">';
                             }else{
                             echo '<input type="text" name="comment1" style="width:350px;height:80px;">';
@@ -182,7 +188,7 @@
                         <input type="range" name = "c2" min="0" max="10" value="5" step="1" onchange="updateTextInput2(this.value)" /><br>
                         <?php
                             $Criteria_2 = var_export($Score_Criteria[2],true);
-                            if(isset($Criteria_2)){
+                            if(isset($Criteria_2)and $Criteria_2!== "NULL"){
                             echo '<input type="text" id="textInput2" size="10" value='.$Criteria_2.' align="center" />';
                             }else{
                             echo '<input type="text" id="textInput2" size="10" value="5" align="center" />';
@@ -192,7 +198,7 @@
                     <td>
                         <?php
                             $Comment_2 = var_export($Comment[2],true);
-                            if(isset($Comment_2)){
+                            if(isset($Comment_2)and $Comment_2!== "NULL"){
                             echo '<input type="text" name="comment2" value='.$Comment_2.' style="width:350px;height:80px;">';
                             }else{
                             echo '<input type="text" name="comment2" style="width:350px;height:80px;">';
@@ -207,7 +213,7 @@
                      <input type="range" name = "c3" min="0" max="10" value="5" step="1" onchange="updateTextInput3(this.value)" /><br>
                         <?php
                             $Criteria_3 = var_export($Score_Criteria[3],true);
-                            if(isset($Criteria_3)){
+                            if(isset($Criteria_3)and $Criteria_3!== "NULL"){
                             echo '<input type="text" id="textInput3" size="10" value='.$Criteria_3.' align="center" />';
                             }else{
                             echo '<input type="text" id="textInput3" size="10" value="5" align="center" />';
@@ -217,7 +223,7 @@
                  <td>     
                         <?php
                             $Comment_3 = var_export($Comment[3],true);
-                            if(isset($Comment_3)){
+                            if(isset($Comment_3)and $Comment_3!== "NULL"){
                             echo '<input type="text" name="comment3" value='.$Comment_3.' style="width:350px;height:80px;">';
                             }else{
                             echo '<input type="text" name="comment3" style="width:350px;height:80px;">';
@@ -232,7 +238,7 @@
                     <input type="range" name = "c4" min="0" max="10" value="5" step="1" onchange="updateTextInput4(this.value)" /><br>
                         <?php
                             $Criteria_4 = var_export($Score_Criteria[4],true);
-                            if(isset($Criteria_4)){
+                            if(isset($Criteria_4)and $Criteria_4!== "NULL"){
                             echo '<input type="text" id="textInput4" size="10" value='.$Criteria_4.' align="center" />';
                             }else{
                             echo '<input type="text" id="textInput4" size="10" value="5" align="center" />';
@@ -242,7 +248,7 @@
                 <td>
                         <?php
                             $Comment_4 = var_export($Comment[4],true);
-                            if(isset($Comment_4)){
+                            if(isset($Comment_4)and $Comment_4!== "NULL"){
                             echo '<input type="text" name="comment4" value='.$Comment_4.' style="width:350px;height:80px;">';
                             }else{
                             echo '<input type="text" name="comment4" style="width:350px;height:80px;">';
@@ -257,7 +263,7 @@
                     <input type="range" name = "c5" min="0" max="10" value="5" step="1" onchange="updateTextInput5(this.value)" /><br>
                         <?php
                             $Criteria_5 = var_export($Score_Criteria[5],true);
-                            if(isset($Criteria_5)){
+                            if(isset($Criteria_5)and $Criteria_5!== "NULL"){
                             echo '<input type="text" id="textInput5" size="10" value='.$Criteria_5.' align="center" />';
                             }else{
                             echo '<input type="text" id="textInput5" size="10" value="5" align="center" />';
@@ -267,7 +273,7 @@
                 <td>
                         <?php
                             $Comment_5 = var_export($Comment[5],true);
-                            if(isset($Comment_5)){
+                            if(isset($Comment_5)and $Comment_5!== "NULL"){
                             echo '<input type="text" name="comment5" value='.$Comment_5.' style="width:350px;height:80px;">';
                             }else{
                             echo '<input type="text" name="comment5" style="width:350px;height:80px;">';
