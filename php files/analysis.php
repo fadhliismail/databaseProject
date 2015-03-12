@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
-	<title>Admin Page</title>
+	<title>Review</title>
 
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -49,42 +49,57 @@
 
 	<!-- content page -->
 	<div class="container">
-		<div class="page-title">Change your password</div>
-		<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 150</p>
-		<div class="col-xs-6 col-lg-4">
 
-			<form action = "change_pswd.php" method="post" name="pswd" target="help-inline">Current password:
-				<div class="input-group">
-					<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-					<input type="password" class="form-control" name="CurrentPswd" placeholder="password" aria-describedby="basic-addon1">
+		<div class="page-header"><h1>Summary</h1></div>
+		<? php
 
-				</div>	
-				<span class="help-inline"></span>	
-				<br>
+		//report any error
+		error_reporting(E_ALL); ini_set('display_errors', 1); mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
-				New password:
-				<div class="input-group">
-					<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-					<input type="password" class="form-control" name="NewPswd" placeholder="password" aria-describedby="basic-addon1" >
-				</div>
-				<br>
+		//connect to database
+		include 'db_connect.php';
 
+		$query = "SELECT GroupNo, rank, AverageScore FROM (
+			SELECT @rownum := @rownum + 1 AS rank, AverageScore, GroupNo
+			FROM `group` 
+			CROSS JOIN (SELECT @rownum := 0) c
+			ORDER BY AverageScore DESC) as result";
 
-				Confirmed new password:
-				<div class="input-group">
-					<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>	
-					<input type="password" class="form-control" name="ConfirmPswd" placeholder="password" aria-describedby="basic-addon1">
-				</div>
-				<br>
+if ($stmt=$conn->prepare($query)) {
+	$stmt->execute();
+	$resultrow = $stmt->get_result();
+	$stmt->store_result();
+	$stmt->bind_result($GroupNo, $rank, $AverageScore);
 
-				<input type="Submit" class="btn btn-lg" name="Submit" value="Submit">
-				<!-- <button type="button" class="btn btn-lg" name="pswd">Submit</button> -->
-			</form>
-		</div>
-	</div>
-	
-	<!-- footer -->
-	<?php include 'footer.php'; ?>
+	echo '<div class="table-responsive"><table class ="table table-nonfluid"><tr><th>Group</th><th>Rank</th><th>Average Score</th>';	
+
+	$td = $array();
+	while ($stmt->fetch()) {
+		echo '<tr>';
+		$td = array();
+		foreach ($resultrow as $row) {
+			$td[] = 
+			'<td>' .$row['GroupNo']. '</td>';
+			'<td>' .$row['rank']. '</td>';
+			'<td>' .$row['AverageScore']. '</td></tr>';
+		}
+
+	}
+
+	echo '</table></div>';
+}
+
+// Close statement
+$stmt->close();
+
+// Close connection
+$conn->close();
+
+?>
+</div>
+
+<!-- footer -->
+<?php include 'footer.php'; ?>
 
 	<!-- Bootstrap core JavaScript
 	================================================== -->
