@@ -1,3 +1,11 @@
+<?php
+	session_start();
+	if(!isset($_SESSION['login_user'])){
+		header("location: loginPage.php");
+	}
+	$login_user=$_SESSION['login_user'];
+?>
+
 <!DOCTYPE html>
 <html>
 <head lang="en">

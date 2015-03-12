@@ -1,3 +1,11 @@
+<?php
+	session_start();
+	if(!isset($_SESSION['login_user'])){
+		header("location: loginPage.php");
+	}
+	$login_user=$_SESSION['login_user'];
+?>
+
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -39,7 +47,9 @@
 
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#logout">Log Out</a></li>
+					<li><a href="registerPage.php">Register</a></li>
+					<li><a href="loginPage.php">Log In</a></li>
+					<li><a href="logout.php">Log Out</a></li>
 				</ul>
 			</div><!--/.nav-collapse -->
 		</div>
