@@ -1,3 +1,11 @@
+<?php
+	session_start();
+	if(!isset($_SESSION['login_user'])){
+		header("location: loginPage.php");
+	}
+	$login_user=$_SESSION['login_user'];
+	?>
+
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -39,11 +47,19 @@
 
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#logout">Log Out</a></li>
+					<li><a href="registerPage.php">Register</a></li>
+				    <li><a href="loginPage.php">Log In</a></li>
+				    <li><a href="logout.php">Log Out</a></li>
 				</ul>
 			</div><!--/.nav-collapse -->
 		</div>
 	</nav>
+    
+    <div id="profile">
+			<p>Welcome : <i><?php echo $login_user; ?></p>
+			<b id="welcome">Welcome : <i><?php echo $login_user; ?></i></b>
+			<b id="logout"><a href="logout.php">Log Out</a></b>
+		</div>
 
 	<!-- content page -->
 	<div class="container"><div class="page-header"><h1>Review Page</h1></div>
