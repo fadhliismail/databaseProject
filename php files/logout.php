@@ -1,5 +1,7 @@
 <?php
-session_start();
-session_destroy();
-header('Location: index.php'); // need to redirect to login page. index.php right now is the homepage.
+if(isset($_SESSION['login_user'])){
+    unset($_SESSION['login_user']);
+   }
+    echo '<h1>You have been successfully logout</h1>';
+	header('Location: loginPage.php');
 ?>
