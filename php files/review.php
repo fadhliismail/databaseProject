@@ -43,7 +43,7 @@
 					<li role="presentation"><a href="submission.php">Submission</a></li>
 					<li role="presentation"><a href="mygroup_assessment.php">My Assessment</a></li>
 					<li role="presentation" class="active"><a href="review.php">Review</a></li>
-					<li role="presentation"><a href="#discussion.php">Discussion</a></li>
+					<li role="presentation"><a href="discussion.php">Discussion</a></li>
 					<li role="presentation"><a href="help.php">Help</a></li>
 
 				</ul>
@@ -93,7 +93,6 @@
 				<th>Assessment Number</th>
 				<th>Detail of report</th>
 				<th>Discussion thread</th>
-
 			</tr>
 			<tr>
                                 <?php
@@ -108,8 +107,7 @@
                                     
                                     while($stmtReportToAssess->fetch()){  
                                         echo '<td>'.$AssessmentNo.'</td>';
-                                        echo '<td><a href="view_report.php?id='.$AssessmentNo.'">Reportpage_'.$Report_To_Assess.'</a> </td>';
-                                                                      
+                                        echo '<td><a href="view_report.php?id='.$AssessmentNo.'">Reportpage_'.$Report_To_Assess.'</a> </td>';                                                               
                                         echo '<td>';
 					echo '<a href="forum.php">DiscussionForum</a>';
                                         echo '</td>';
