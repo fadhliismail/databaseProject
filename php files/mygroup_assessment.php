@@ -4,6 +4,7 @@
 		header("location: loginPage.php");
 	}
 	$login_user=$_SESSION['login_user'];
+	$GroupNo=$_SESSION['GroupNo'];
 ?>
 
 <!DOCTYPE html>
@@ -58,6 +59,7 @@
 	<!-- content page -->
 	<div class="container">
 		<div class="page-header"><h1>Your group assessment</h1></div>
+		<p>Welcome <?php print $login_user ?> of group <?php print $GroupNo ?>!</p>
 		<p>Your group report will be assessed by your peers based on the following criteria:</p>	
 			<div class="table-responsive">
 				<table class ="table table-nonfluid">

@@ -1,3 +1,11 @@
+<?php
+	session_start();
+	if(isset($_SESSION['login_user'])){
+		$message = "You are already logged in!";
+		echo "<script type='text/javascript'>alert('$message');</script>";
+		header("location: profile.php");
+	}
+?>
 
 	<!DOCTYPE html>
 	<html>
@@ -69,10 +77,6 @@
 
 		<!-- footer -->
 		<?php include 'footer.php'; ?>
-
-
-		
 		
 	</body>
-
-	<html>
+	</html>

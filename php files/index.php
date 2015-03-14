@@ -4,6 +4,8 @@
 		header("location: loginPage.php");
 	}
 	$login_user=$_SESSION['login_user'];
+	$GroupNo=$_SESSION['GroupNo'];
+	
 ?>
 
 <!DOCTYPE html>
