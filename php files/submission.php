@@ -1,3 +1,12 @@
+<?php
+	session_start();
+	if(!isset($_SESSION['login_user'])){
+		header("location: loginPage.php");
+	}
+	$login_user=$_SESSION['login_user'];
+	$GroupNo=$_SESSION['GroupNo'];
+?>
+
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -47,7 +56,9 @@
 					<li role="presentation"><a href="help.php">Help</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#logout">Log Out</a></li>
+					<li><a href="registerPage.php">Register</a></li>
+					<li><a href="loginPage.php">Log In</a></li>
+					<li><a href="logout.php">Log Out</a></li>
 				</ul>
 			</div><!--/.nav-collapse -->
 		</div>

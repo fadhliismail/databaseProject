@@ -19,7 +19,7 @@ if(isset($_POST['Submit'])){
 		$StudentId = mysqli_real_escape_string($conn, $StudentId);
 		$User_pass = mysqli_real_escape_string($conn, $User_pass);
 		
-		$User_pass = SHA1($User_pass);
+		$User_pass = password_hash($User_pass, PASSWORD_DEFAULT);
 		
 		$query = "INSERT INTO student (FirstName, LastName, Email, User_pass, StudentId, GroupNo)
 				VALUES ('$firstName', '$lastName', '$emailAddress', '$User_pass', '$StudentId','$GroupNo')";

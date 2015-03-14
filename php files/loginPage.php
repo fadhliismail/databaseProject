@@ -1,3 +1,11 @@
+<?php
+	session_start();
+	if(isset($_SESSION['login_user'])){
+		$message = "You are already logged in!";
+		echo "<script type='text/javascript'>alert('$message');</script>";
+		header("location: profile.php");
+	}
+?>
 
 	<!DOCTYPE html>
 	<html>
@@ -36,7 +44,9 @@
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#logout">Log Out</a></li>
+						<li><a href="registerPage.php">Register</a></li>
+						<li><a href="loginPage.php">Log In</a></li>
+						<li><a href="logout.php">Log Out</a></li>
 					</ul>
 				</div><!--/.nav-collapse -->
 			</div>
@@ -67,10 +77,6 @@
 
 		<!-- footer -->
 		<?php include 'footer.php'; ?>
-
-
-		
 		
 	</body>
-
-	<html>
+	</html>

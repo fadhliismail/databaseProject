@@ -59,8 +59,10 @@
 
                                    </ul>
                                    <ul class="nav navbar-nav navbar-right">
-                                     <li><a href="#logout">Log Out</a></li>
-                                 </ul>
+										<li><a href="registerPage.php">Register</a></li>
+										<li><a href="loginPage.php">Log In</a></li>
+										<li><a href="logout.php">Log Out</a></li>
+									</ul>
                              </div><!--/.nav-collapse -->
                          </div>
                      </nav>
