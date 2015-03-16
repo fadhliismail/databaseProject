@@ -25,7 +25,7 @@ function exception_to_array(Exception $e) {
 }
 
 //initialize variables
-foreach (array('name', 'text', 'token', 'page', 'submit') as $v) {
+foreach (array('name', 'text','assessmentID', 'token', 'page', 'submit') as $v) {
     $$v = isset($_POST[$v]) && is_string($_POST[$v]) ? trim($_POST[$v]) : '';
 }
 // page number must be over 1 page
@@ -38,6 +38,7 @@ if (!$_SESSION) {
     $_SESSION = array(
         'name'  => '',
         'text'  => '',
+        'assessmentID'=> '',
         'token' => array(),
         'prev'  => null,
     );
@@ -48,10 +49,13 @@ try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     // code of pushing submission button
     if ($submit) {
+        //$id is assessmentNo
+        $id = $_GET['id'];
         try {
             $_SESSION['name'] = $name;
             $_SESSION['text'] = $text;
-
+            $_SESSION['assessmentID'] = $id;
+       
             if (!isset($_SESSION['token'][$token])) {
                 throw e('The expiration date is outdated', $e);
             }
@@ -77,13 +81,14 @@ try {
             }
             $stmt = $pdo->prepare(implode(' ', array(
                 'INSERT',
-                'INTO mini_board(`name`, `text`, `time`)',
-                'VALUES( ?, ?, ?)',
+                'INTO mini_board(`name`, `text`,`assessmentID`,`time`)',
+                'VALUES( ?, ?, ?, ?)',
             )));
             //execute writing 
             $stmt->execute(array(
                 $name,
                 $text,
+                $id,
                 date('Y-m-d H:i:s', $_SERVER['REQUEST_TIME'])
             ));
             // set time session information
@@ -93,14 +98,16 @@ try {
             throw e('submission finished', $e);
         } catch (Exception $e) { }
     }
+    $id = $_GET['id'];
     $stmt = $pdo->prepare(implode(' ', array(
         'SELECT',
-        'SQL_CALC_FOUND_ROWS `name`, `text`, `time`',
+        'SQL_CALC_FOUND_ROWS `name`, `text`, `time`,`AssessmentID`',
         'FROM mini_board',
+        'WHERE AssessmentID =',
+        $id,
         'ORDER BY `id` DESC',
         'LIMIT ?, ?',
     )));
-
     $stmt->bindValue(1, ($page - 1) * DISP_MAX, PDO::PARAM_INT);
     $stmt->bindValue(2, DISP_MAX, PDO::PARAM_INT);
     $stmt->execute();
@@ -165,7 +172,9 @@ $_SESSION['token'] = array_slice(
 	</nav>
     <div >
       <div >
-        <h1>discussion board</h1>
+        <?php //$id is assessmentNo
+        $id = $_GET['id'];
+        echo '<h1>discussion board#'.$id.'</h1>' ?>
       </div>
       <div>
         <div id="textarea">

@@ -105,7 +105,7 @@
                                         echo '<td>'.$AssessmentNo.'</td>';
                                         echo '<td><a href="view_report.php?id='.$AssessmentNo.'">Reportpage_'.$Report_To_Assess.'</a> </td>';                                                               
                                         echo '<td>';
-					echo '<a href="discussion.php">DiscussionForum</a>';
+					echo '<a href="discussion.php?id='.$AssessmentNo.'">DiscussionForum_'.$AssessmentNo.'</a>';
                                         echo '</td>';
                                         echo '</tr>';
                                         echo '<tr>';
