@@ -116,43 +116,21 @@ $_SESSION['token'] = array_slice(
     0,
     TOKEN_MAX
 );
-header('Content-Type: application/xhtml+xml; charset=utf-8');
 ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <title>discussion board</title>
- 
-   <style type="text/css"><![CDATA[
-    <!--
-    #messages, #textarea, #articles {
-      width: 550px;
-      border-top: 3px double brown;
-    }
-    .article {
-      margin-top: -1px;
-      border-top: 1px dotted brown;
-    }
-    .article_name {
-      font-size: 30px;
-    }
-    .article_text {
-      margin: 20px;
-    }
-    .article_time {
-      text-align: left;
-      font-size: 15px;
-    }
-    .page {
-      font-size: 15px;
-      text-align: left;
-    }
-    textarea {
-      width: 100%;
-      height: 150px;
-    }
-    -->
- ]]></style>
+        <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Custom CSS -->
+	<link rel ="stylesheet" type="text/css" href="css/mystyle.css">
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<!-- Custom styles for this template -->
+	<link href="sticky-footer-navbar.css" rel="stylesheet">
+
   </head>
   <body>
       	<nav class="navbar navbar-default navbar-fixed-top">
@@ -172,8 +150,8 @@ header('Content-Type: application/xhtml+xml; charset=utf-8');
 					<li role="presentation"><a href="profile.php">Profile</a></li>
 					<li role="presentation"><a href="submission.php">Submission</a></li>
 					<li role="presentation"><a href="mygroup_assessment.php">My Assessment</a></li>
-					<li role="presentation" class="active"><a href="review.php">Review</a></li>
-					<li role="presentation"><a href="discussion.php">Discussion</a></li>
+					<li role="presentation"><a href="review.php">Review</a></li>
+					<li role="presentation" class="active"><a href="discussion.php">Discussion</a></li>
 					<li role="presentation"><a href="help.php">Help</a></li>
 
 				</ul>
@@ -182,7 +160,7 @@ header('Content-Type: application/xhtml+xml; charset=utf-8');
 					<li><a href="loginPage.php">Log In</a></li>
 					<li><a href="logout.php">Log Out</a></li>
 				</ul>
-			</div><!--/.nav-collapse -->
+			</div>
 		</div>
 	</nav>
     <div >
@@ -192,8 +170,8 @@ header('Content-Type: application/xhtml+xml; charset=utf-8');
       <div>
         <div id="textarea">
           <form action="" method="post">
-            <label>name: <input name="name" type="text" value="<?=h($_SESSION['name'])?>" /></label>
-            <label>text<p><textarea name="text"><?=h($_SESSION['text'])?></textarea></p></label>
+              <label>name: <input name="name" type="text" value="<?=h($_SESSION['name'])?>" /></label><br>
+                  <label>text<p><textarea name="text" rows="4"cols="40"><?=h($_SESSION['text'])?></textarea></p></label><br>
             <label style="text-align:left;"><input type="submit" name="submit" value="submission" /></label>
             <label><input type="hidden" name="token" value="<?=h($token)?>" /></label>
           </form>
@@ -242,9 +220,5 @@ header('Content-Type: application/xhtml+xml; charset=utf-8');
       </div>
     </div>
   </body>
-  <footer class="footer">
-	<div class="container">
-		<p class="text-muted">GC06 Database Project. Copyright © Team 24, UCL2015.</p>
-	</div>
-  </footer>
+    <?php include 'footer.php'?>
 </html>

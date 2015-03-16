@@ -61,11 +61,7 @@
 
 </div>
 <!-- footer -->
-<footer class="footer">
-	<div class="container">
-		<p class="text-muted">GC06 Database Project. Copyright © Team 24, UCL2015.</p>
-	</div>
-</footer>
+<?php include 'footer.php'?>
 
 	<!-- Bootstrap core JavaScript
 	================================================== -->
@@ -109,7 +105,7 @@
                                         echo '<td>'.$AssessmentNo.'</td>';
                                         echo '<td><a href="view_report.php?id='.$AssessmentNo.'">Reportpage_'.$Report_To_Assess.'</a> </td>';                                                               
                                         echo '<td>';
-					echo '<a href="forum.php">DiscussionForum</a>';
+					echo '<a href="discussion.php">DiscussionForum</a>';
                                         echo '</td>';
                                         echo '</tr>';
                                         echo '<tr>';
