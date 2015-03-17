@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
-	<title>Admin Page</title>
+	<title>Student Assessment</title>
 
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,7 +29,7 @@
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li role="presentation" class="active"><a href="admin.php">Admin</a></li>
+					<li role="presentation"><a href="admin.php">Admin</a></li>
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Manage <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
@@ -38,10 +38,10 @@
 
 						</ul>
 					</li>
-					<li role="presentation"><a href="student_assessment.php">Student Assessment</a></li>
+					<li role="presentation" class="active"><a href="student_assessment.php">Student Assessment</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="logout.php">Log Out</a></li>
+					<li><a href="#logout">Log Out</a></li>
 				</ul>
 			</div><!--/.nav-collapse -->
 		</div>
@@ -49,42 +49,54 @@
 
 	<!-- content page -->
 	<div class="container">
-		<div class="page-title">Change your password</div>
-		<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 150</p>
-		<div class="col-xs-6 col-lg-4">
 
-			<form action = "change_pswd.php" method="post" name="pswd" target="help-inline">Current password:
-				<div class="input-group">
-					<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-					<input type="password" class="form-control" name="CurrentPswd" placeholder="password" aria-describedby="basic-addon1">
+		<div class="page-header"><h1>Summary</h1></div>
+		<p>Below is the ranking list for each group based on their average score.</p>
 
-				</div>	
-				<span class="help-inline"></span>	
-				<br>
+		<?php
 
-				New password:
-				<div class="input-group">
-					<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-					<input type="password" class="form-control" name="NewPswd" placeholder="password" aria-describedby="basic-addon1" >
-				</div>
-				<br>
+		//report any error
+		error_reporting(E_ALL); ini_set('display_errors', 1); mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
+		//connect to database
+		include 'db_connect.php';
 
-				Confirmed new password:
-				<div class="input-group">
-					<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>	
-					<input type="password" class="form-control" name="ConfirmPswd" placeholder="password" aria-describedby="basic-addon1">
-				</div>
-				<br>
+		$query = "SELECT rank, GroupNo, AverageScore FROM
+		(SELECT @rownum := @rownum + 1 AS rank, AverageScore, GroupNo
+			FROM `group` 
+			CROSS JOIN (SELECT @rownum := 0) c
+			ORDER BY AverageScore DESC) as result";
 
-				<input type="Submit" class="btn btn-lg" name="Submit" value="Submit">
-				<!-- <button type="button" class="btn btn-lg" name="pswd">Submit</button> -->
-			</form>
-		</div>
-	</div>
+if ($stmt = $conn->prepare($query)) {
+	$stmt->execute();
+	//$resultrow = $stmt->get_result();
+	//$stmt->store_result();
+	$stmt->bind_result($rank, $GroupNo, $AverageScore);
+
+	echo '<div class="table-responsive"><table class ="table table-nonfluid"><tr><th>Rank</th><th>Group</th><th>Average Score</th>';	
 	
-	<!-- footer -->
-	<?php include 'footer.php'; ?>
+	while ($stmt->fetch()) {
+		echo '<tr>';
+		echo '<td>' .$rank. '</td>';
+		echo '<td>' .$GroupNo. '</td>';
+		echo '<td>' .$AverageScore. '</td></tr>';
+	}
+
+	echo '</table></div>';
+}
+
+// Close statement
+$stmt->close();
+
+// Close connection
+$conn->close();
+
+?>
+
+</div>
+
+<!-- footer -->
+<?php include 'footer.php'; ?>
 
 	<!-- Bootstrap core JavaScript
 	================================================== -->

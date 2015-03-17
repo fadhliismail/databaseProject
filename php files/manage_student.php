@@ -46,11 +46,10 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Manage <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="manage_group.php">Manage Group</a></li>
-                            <li><a href="#">Manage Assessment</a></li>
                             <li><a href="manage_student.php" class="active">Manage Student</a></li>
                         </ul>
                     </li>
-                    <li role="presentation"><a href="analysis.php">Analysis</a></li>
+                    <li role="presentation"><a href="student_assessment.php">Analysis</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="logout.php">Log Out</a></li>
@@ -91,10 +90,10 @@
                 while($stmt->fetch()) {
                     echo '<tr><td>' .$StudentId. '</td><td>' .$FirstName. '</td><td>' .$LastName. '</td><td><div class="arrow"></div></td></tr>';
                     echo '<tr><td colspan="5"><i>Click to edit</i><br>';
-                    echo '<b>Name:</b> <a href="#" class="xeditable" id="FirstName" data-type="text" data-pk="' .$StudentNo. '" data-url="update.php" data-title="Enter username">' .$FirstName. '</a>';
-                    echo ' <a href="#" class="xeditable" id="LastName" data-type="text" data-pk="' .$StudentNo. '" data-url="update.php" data-title="Enter username">' .$LastName. '</a><br>';
-                    echo '<b>Email:</b> <a href="#" class="xeditable" id="Email" data-type="text" data-pk="' .$StudentNo. '" data-url="update.php" data-title="Enter username">' .$Email. '</a><br>';
-                    echo '<b>Group:</b> <a href="#" class="xeditable" id="GroupNo" data-type="text" data-pk="' .$StudentNo. '" data-url="update.php" data-title="Enter username">' .$GroupNo. '</a><br>';
+                    echo '<b>Name:</b> <a href="#" class="xeditable" id="FirstName" data-type="text" data-pk="' .$StudentNo. '" data-url="update_student.php" data-title="Enter username">' .$FirstName. '</a>';
+                    echo ' <a href="#" class="xeditable" id="LastName" data-type="text" data-pk="' .$StudentNo. '" data-url="update_student.php" data-title="Enter username">' .$LastName. '</a><br>';
+                    echo '<b>Email:</b> <a href="#" class="xeditable" id="Email" data-type="text" data-pk="' .$StudentNo. '" data-url="update_student.php" data-title="Enter username">' .$Email. '</a><br>';
+                    echo '<b>Group:</b> <a href="#" class="xeditable" id="GroupNo" data-type="text" data-pk="' .$StudentNo. '" data-url="update_student.php" data-title="Enter username">' .$GroupNo. '</a><br>';
                 }
 
                 echo '</table>';

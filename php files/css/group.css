@@ -1,0 +1,110 @@
+body {
+    margin: 0;
+}
+
+
+/* ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    padding: 0 10px;
+    height: 25px;
+    line-height: 25px;
+} */
+
+/* li:nth-child(odd) {
+    background-color: #CCC;
+}
+
+li:nth-child(even) {
+    background-color: white;
+} */
+
+li:hover {
+    cursor: move;
+}
+
+
+.box {
+    min-height: 100px;
+    height: auto;
+    width: 100px;
+    padding: 10px;
+    border-width: 4px;
+    border-style: solid;
+    position: absolute;
+}
+
+#orange {
+    border-color: orange;
+    left: 50px;
+    top: 100px;
+}
+
+#blue {
+    border-color: blue;
+    left: 250px;
+    top: 120px;
+}
+
+#green {
+    border-color: green;
+    left: 30px;
+    top: 350px;
+}
+
+#red {
+    border-color: red;
+    left: 290px;
+    top: 290px;
+}
+
+.instructions {
+    color: red;
+}
+
+
+#reorder ul {
+    margin-left: 20px;
+    width: 200px;
+    border: 1px solid black;
+    list-style: none;
+    padding: 0;
+}
+
+#reorder li {
+    padding: 2px 20px;
+    height: 25px;
+    line-height: 25px;
+}
+
+#update-button, #update-message {
+    height: 30px;
+    margin-left: 20px;
+    width: 200px;
+    font-weight: bold;
+}
+
+.indexpage {
+    padding: 10px 0 10px 20px; 
+    font-family: Arial, sans-serif;
+}
+
+ol.indexpage {
+    list-style: none;
+}
+
+.indexpage li {
+    line-height: 2em !important;
+    background-color: transparent !important;
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: default;
+    margin-bottom: 10px;
+}
+
+.click li {
+    cursor: default;
+}

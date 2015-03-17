@@ -27,7 +27,6 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
 	<script src="js/multi-list-connect.js"></script>
-
 </head>
 
 <body>
@@ -54,7 +53,7 @@
 
 						</ul>
 					</li>
-					<li><a href="student_assessment.php">Student Assessment</a></li>
+					<li><a href="analysis.php">Analysis</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="#logout">Log Out</a></li>
@@ -66,22 +65,16 @@
 	<!-- content page -->
 	<div class="container">
 		<div class="page-header"><h1>Manage Student Group</h1></div>
-		<p>Below is a list of student names. You can key in the number of groups you wish to make. You can drag the student name into the the container group to assign the group to the student.</p>
+		<p>Below is a list of student names & the groups. You can drag the student name into the the container group to assign the group to the student.</p>
 		<div class="page-title">Assign Students to Group</div>
-		<p>How many groups to generate?</p>
-		<form action="show_groups.php" method="post" onsubmit="location:grouping.php">
-			<div class="col-lg-3"><input type="text" class="form-control" name="counts"></div>
-			<input type="Submit" class="btn btn-default" name="Submit" value="Submit">
-		</form>
-		<br>
-
+		
 		<!-- Show list of students with no group assigned -->
 		<?php
 
-                //student any error
+    	//student any error
 		error_reporting(E_ALL); ini_set('display_errors', 1); mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
-                //connect to database
+  		//connect to database
 		include 'db_connect.php';
 
 		$queryStudent = "SELECT `StudentNo`, `FirstName`, `LastName`, `GroupNo` FROM `student` WHERE `GroupNo` = 0 ORDER BY `FirstName`";
@@ -100,7 +93,7 @@
 				echo '<li id="' .$StudentNo. '">' .$FirstName. ' ' .$LastName. '</li>';	
 			}
 
-			echo '</ul></div></div></div></div>';
+			echo '</ul></div></div></div>';
 		}
 
 		$stmt->close();
@@ -108,14 +101,48 @@
 
 		?>
 
-		
-		
+		<?php
+            //student any error
+		error_reporting(E_ALL); ini_set('display_errors', 1); mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+
+                //connect to database
+		include 'db_connect.php';
+
+		if(isset($_POST['Submit'])){
+			$counts = $_POST['counts'];
+		}
+
+		/*Show list of students in the assigned group*/
+		for ($x= 1; $x<=$counts;$x++) {
+
+			$query = "SELECT `StudentNo`, `FirstName`, `LastName`, `GroupNo` FROM `student` WHERE `GroupNo` = " .$x;
+
+			if($stmt=$conn->prepare($query)) {
+				$stmt->execute();
+				$stmt->bind_result($StudentNo, $FirstName, $LastName, $GroupNo);
+
+				echo '<div class="col-xs-6 col-sm-3">';
+				echo '<div class="layer tile" data-force="30">';
+				echo '<div class="tile__name"><b>Group ' .$x. '</b></div>';
+				echo '<div id="tile__list">';
+				echo '<ul id="' .$x. '" class="connectedSortable" style="padding: 2px;"}>';
+
+				while ($stmt->fetch()){
+					echo '<li id="' .$StudentNo. '">' .$FirstName. ' ' .$LastName. '</li>';					
+				}
+
+				echo '</ul></div></div></div>';
+			}
+
+		}
+		$stmt->close();
+		$conn->close();
+		?>
+
 	</div>
-	
+
 	<!-- footer -->
 	<?php include 'footer.php'; ?>
-	
-	
 
 
 </body>
