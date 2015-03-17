@@ -1,3 +1,13 @@
+	<?php
+	session_start();
+	if(!isset($_SESSION['login_user'])){
+		header("location: loginPage.php");
+	}
+	$login_user=$_SESSION['login_user'];
+	$GroupNo=$_SESSION['GroupNo'];
+
+	?>
+
 	<!DOCTYPE html>
 	<html>
 	<head lang="en">
@@ -49,9 +59,6 @@
 				</div><!--/.nav-collapse -->
 			</div>
 		</nav>
-
-
-
 
 		<!-- content page -->
 		<div class="container">
@@ -126,10 +133,7 @@
 
 
 		<!-- footer -->
-		<?php include 'footer.php'; ?>
-
-
-		
+		<?php include 'footer.php'; ?>		
 		
 	</body>
 

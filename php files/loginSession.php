@@ -36,7 +36,7 @@ if(isset($_POST['Submit'])){
 			
 				$_SESSION['login_user']=$StudentId; // Initializing Session
 				$_SESSION['GroupNo']=$GroupNo;
-				header("Refresh: 2; url= profile.php");
+				header("Refresh: 2; url= index.php");
 				//header('Location: '. $indexURL); // Redirecting To Other Page
 			} else {
 				echo 'Error: ' . $query. '<br>' . mysqli_error($conn);
