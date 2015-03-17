@@ -1,3 +1,13 @@
+<?php
+  session_start();
+  if(!isset($_SESSION['login_user'])){
+    header("location: loginPage.php");
+  }
+  $login_user=$_SESSION['login_user'];
+  $GroupNo=$_SESSION['GroupNo'];
+  
+?>
+
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -10,17 +20,20 @@
     <link rel ="stylesheet" type="text/css" href="css/mystyle.css">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="css/bootstrap.css">
+    <!-- x-editable CSS -->
+    <link href="css/bootstrap-editable.css" rel="stylesheet">
+
      <!-- Bootstrap core JavaScript
      ================================================== -->
      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-
      <!-- Include all compiled plugins (below), or include individual files as needed -->
      <script src="js/bootstrap.min.js"></script>
+     <!-- JavaScript: Filter student info -->
      <script src="js/filter.js"></script>
-     <script src="js/expand.js"></script>
-
-     <link href="css/bootstrap-editable.css" rel="stylesheet">
+     <!-- JavaScript: Expand & collapse student info -->
+     <script src="js/expand.js"></script>     
+     <!-- JavaScript: Edit student info -->
      <script src="js/bootstrap-editable.js"></script>
      <script src="js/edit_info.js"></script>
 

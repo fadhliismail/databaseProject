@@ -44,7 +44,7 @@
         <li role="presentation"><a href="submission.php">Submission</a></li>
         <li role="presentation"><a href="mygroup_assessment.php">My Assessment</a></li>
         <li role="presentation"><a href="review.php">Review</a></li>
-        <li role="presentation"><a href="#discussion.php">Discussion</a></li>
+        <li role="presentation"><a href="discussion.php">Discussion</a></li>
         <li role="presentation"><a href="help.php">Help</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">

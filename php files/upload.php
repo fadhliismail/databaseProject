@@ -8,11 +8,6 @@ include 'db_connect.php';
 
 $GroupNo = 4;
 
-$queryUpload = "INSERT INTO report (GroupNo, File_Name, File_Size, File_Link, File_Type, Submission_Timestamp) VALUES (?, ?, ?, ?, ?, ?)";
-//$queryXML = "LOAD DATA LOCAL INFILE '?' INTO TABLE report ROWS IDENTIFIED BY '<report>'";
-//$query = "LOAD XML LOCAL INFILE '?' INTO TABLE report ROWS IDENTIFIED BY '<report>' SET GroupNo = ?, File_Name = ?, File_Size = ?, File_Link = ?, File_Type = ?, Submission_Timestamp = ?";
-//SET GroupNo = ?, File_Name = ?, File_Size = ?, File_Link = ?, File_Type = ?, Submission_Timestamp = ?
-
 $ds = "/";
 $storeFolder = 'uploads';
 
@@ -22,21 +17,27 @@ if(!empty($_FILES)) {
 	$myfileType = $_FILES['file']['type'];
 	$myfileSize = $_FILES['file']['size'];
 	$myfileLink = 'http://localhost/virtual_learning/uploads/' . rawurlencode($myfileName);
-	$myfileDate = date("Y-m-d H:i:s");
 
 	$tempFile = $_FILES['file']['tmp_name'];
 	$targetPath = dirname(__FILE__) . $ds . $storeFolder . $ds;
 	$targetFile = $targetPath . $_FILES['file']['name'];
 	move_uploaded_file($tempFile, $targetFile);
 
+	$xml = simplexml_load_file($targetFile);
+
+	$mygroup = $xml->Group;
+	$intro = $xml->Intro;
+	$main = $xml->Main;
+	$conclusion = $xml->Conclusion;
+
+	$queryUpload = "INSERT INTO report (GroupNo, File_Link, File_Name, File_Size, File_Type, GroupIT, Intro, Main, Conclusion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
 	$stmt = $conn->prepare($queryUpload);
-	$stmt->bind_param('isisss', $GroupNo, $myfileName, $myfileSize, $myfileLink, $myfileType, $myfileDate);
-	
-	if($stmt->execute()) {
-		//header("location:submission.php?success=true&reason=uploaded"));
-} else {
-	//die(header("location:submission.php?failed=true&reason=failupload"));
-}
+	$stmt->bind_param('issssssss', $GroupNo, $myfileLink, $myfileName, $myfileSize, $myfileType, $mygroup, $intro, $main, $conclusion);
+	$stmt->execute();
+	$stmt->store_result();
+	$stmt->bind_result($GroupNo, $File_Link, $File_Name, $File_Size, $File_Type, $GroupIT, $Intro, $Main, $Conclusion);
+
 
 }
 

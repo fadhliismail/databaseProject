@@ -1,3 +1,13 @@
+<?php
+session_start();
+if(!isset($_SESSION['login_user'])){
+	header("location: loginPage.php");
+}
+$login_user=$_SESSION['login_user'];
+$GroupNo=$_SESSION['GroupNo'];
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -6,7 +16,6 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<link rel="stylesheet" href="css/group.css">
 	<!-- Custom CSS -->
 	<link rel ="stylesheet" type="text/css" href="css/mystyle.css">
 	<!-- Latest compiled and minified CSS -->
@@ -19,13 +28,12 @@
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
-	<script src="js/bootstrap.min.js"></script>
-	
+	<script src="js/bootstrap.min.js"></script>	
 	<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 	<script src="http://code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
-
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+	<!-- JavaScript: Connect multi lists of groups -->
 	<script src="js/multi-list-connect.js"></script>
 
 </head>
@@ -57,7 +65,7 @@
 					<li><a href="student_assessment.php">Student Assessment</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#logout">Log Out</a></li>
+					<li><a href="logout.php">Log Out</a></li>
 				</ul>
 			</div><!--/.nav-collapse -->
 		</div>
@@ -78,10 +86,10 @@
 		<!-- Show list of students with no group assigned -->
 		<?php
 
-                //student any error
+        //student any error
 		error_reporting(E_ALL); ini_set('display_errors', 1); mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
-                //connect to database
+        //connect to database
 		include 'db_connect.php';
 
 		$queryStudent = "SELECT `StudentNo`, `FirstName`, `LastName`, `GroupNo` FROM `student` WHERE `GroupNo` = 0 ORDER BY `FirstName`";
@@ -106,17 +114,12 @@
 		$stmt->close();
 		$conn->close();
 
-		?>
-
-		
+		?>	
 		
 	</div>
 	
 	<!-- footer -->
 	<?php include 'footer.php'; ?>
 	
-	
-
-
 </body>
 </html>

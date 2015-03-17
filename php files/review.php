@@ -1,10 +1,10 @@
 <?php
-	session_start();
-	if(!isset($_SESSION['login_user'])){
-		header("location: loginPage.php");
-	}
-	$login_user=$_SESSION['login_user'];
-	$GroupNo=$_SESSION['GroupNo'];
+session_start();
+if(!isset($_SESSION['login_user'])){
+	header("location: loginPage.php");
+}
+$login_user=$_SESSION['login_user'];
+$GroupNo=$_SESSION['GroupNo'];
 ?>
 
 <!DOCTYPE html>
@@ -48,8 +48,6 @@
 
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="registerPage.php">Register</a></li>
-					<li><a href="loginPage.php">Log In</a></li>
 					<li><a href="logout.php">Log Out</a></li>
 				</ul>
 			</div><!--/.nav-collapse -->
@@ -60,8 +58,51 @@
 	<div class="container"><div class="page-header"><h1>Review Page</h1></div>
 
 </div>
-<!-- footer -->
-<?php include 'footer.php'?>
+
+<form action="scoreupdate.php" method="post"> 
+	<!-- content page -->
+	<?php   
+        //report any error
+	error_reporting(E_ALL); ini_set('display_errors', 1); mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+	include 'db_connect.php';
+	?>
+	<div class="container">
+		<p>Below are the details of peer assessment you need to conduct together with your group members:</p>	
+		<div class="table-responsive">
+			<table class ="table table-nonfluid">
+				<tr>
+					<th>Assessment Number</th>
+					<th>Detail of report</th>
+					<th>Discussion thread</th>
+				</tr>
+				<tr>
+					<?php
+					
+					$queryReportToAssess = "SELECT  `Report_to_Assess`,`AssessmentNo` FROM `assessment` WHERE `GroupNo` = ?";                           
+					if($stmtReportToAssess = $conn->prepare($queryReportToAssess)){
+						$stmtReportToAssess->bind_param('i', $GroupNo);
+						$stmtReportToAssess->execute();
+						$stmtReportToAssess->store_result();
+						$stmtReportToAssess->bind_result($Report_To_Assess,$AssessmentNo);
+
+						while($stmtReportToAssess->fetch()){  
+							echo '<td>ASNo_'.$AssessmentNo.'</td>';
+							echo '<td><a href="view_report.php?id='.$AssessmentNo.'">ReportNo_'.$Report_To_Assess.'</a> </td>';                                                               
+							echo '<td>';
+							echo '<a href="discussion.php?id='.$AssessmentNo.'">Discussion Forum_'.$AssessmentNo.'</a>';
+							echo '</td>';
+							echo '</tr>';
+							echo '<tr>';
+						}
+					}
+					?>                                     				
+				</tr>
+			</table>
+		</div>
+	</form> 
+
+	<!-- footer -->
+	<?php include 'footer.php' ?>
 
 	<!-- Bootstrap core JavaScript
 	================================================== -->
@@ -69,58 +110,6 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="js/bootstrap.min.js"></script>
-
-</body>
-
-<html>                                  
-<form action="scoreupdate.php" method="post"> 
-	<!-- content page -->
-	<?php   
-        //report any error
-	error_reporting(E_ALL); ini_set('display_errors', 1); mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-	include 'db_connect.php';
-        ?>
-<div class="container">
-	<p>Welcome <?php print $login_user ?> of group <?php print $GroupNo ?>!</p>
-	<p>Your group report will be assessed by your peers based on the following criteria:</p>	
-	<div class="table-responsive">
-		<table class ="table table-nonfluid">
-			<tr>
-				<th>Assessment Number</th>
-				<th>Detail of report</th>
-				<th>Discussion thread</th>
-			</tr>
-			<tr>
-                                <?php
-                                //extrace Report_To_Assess
-                                //querystatement
-                                $queryReportToAssess = "SELECT  `Report_to_Assess`,`AssessmentNo` FROM `assessment` WHERE `GroupNo` = ?";                           
-                                if($stmtReportToAssess = $conn->prepare($queryReportToAssess)){
-                                    $stmtReportToAssess->bind_param('i', $GroupNo);
-                                    $stmtReportToAssess->execute();
-                                    $stmtReportToAssess->store_result();
-                                    $stmtReportToAssess->bind_result($Report_To_Assess,$AssessmentNo);
-                                    
-                                    while($stmtReportToAssess->fetch()){  
-                                        echo '<td>'.$AssessmentNo.'</td>';
-                                        echo '<td><a href="view_report.php?id='.$AssessmentNo.'">Reportpage_'.$Report_To_Assess.'</a> </td>';                                                               
-                                        echo '<td>';
-					echo '<a href="discussion.php?id='.$AssessmentNo.'">DiscussionForum_'.$AssessmentNo.'</a>';
-                                        echo '</td>';
-                                        echo '</tr>';
-                                        echo '<tr>';
-                                    }
-                                }
-                                ?>                                     				
-			</tr>
-		</table>
-	</div>
-	<div class = "page-title">Summary</div>
-	<p>These are the marks given by your peers who assessed your report:</p>
-
-</form> 
-<!-- dynamic content will be here -->
-<!-- just a header label -->
 </body>
 </html>
 

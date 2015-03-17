@@ -1,3 +1,13 @@
+	<?php
+	session_start();
+	if(!isset($_SESSION['login_user'])){
+		header("location: loginPage.php");
+	}
+	$login_user=$_SESSION['login_user'];
+	$GroupNo=$_SESSION['GroupNo'];
+
+	?>
+
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -9,8 +19,6 @@
 	<link rel ="stylesheet" type="text/css" href="css/mystyle.css">
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="css/bootstrap.css">
-	<!-- Custom styles for footer -->
-	<link rel="stylesheet" href="sticky-footer-navbar.css">
 	<!-- Custom styles for drag n drop -->
 	<link rel="stylesheet" href="css/dropzone.css">
 
@@ -36,24 +44,12 @@
 					<li role="presentation"><a href="profile.php">Profile</a></li>
 					<li role="presentation"><a href="submission.php">Submission</a></li>
 					<li role="presentation"><a href="mygroup_assessment.php">My Assessment</a></li>
-					<li role="presentation"><a href="#review.php">Review</a></li>
-					<li role="presentation"><a href="#discussion.php">Discussion</a></li>
+					<li role="presentation"><a href="review.php">Review</a></li>
+					<li role="presentation"><a href="discussion.php">Discussion</a></li>
 					<li role="presentation" class="active"><a href="help.php">Help</a></li>
-            <!-- <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li class="divider"></li>
-                <li class="dropdown-header">Nav header</li>
-                <li><a href="#">Separated link</a></li>
-                <li><a href="#">One more separated link</a></li>
-              </ul>
-          </li> -->
       </ul>
       <ul class="nav navbar-nav navbar-right">
-      	<li><a href="#logout">Log Out</a></li>
+      	<li><a href="logout.php">Log Out</a></li>
       </ul>
   </div><!--/.nav-collapse -->
 </div>

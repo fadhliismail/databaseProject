@@ -43,13 +43,11 @@
 					<li role="presentation"><a href="submission.php">Submission</a></li>
 					<li role="presentation" class="active"><a href="mygroup_assessment.php">My Assessment</a></li>
 					<li role="presentation"><a href="review.php">Review</a></li>
-					<li role="presentation"><a href="#discussion.php">Discussion</a></li>
+					<li role="presentation"><a href="discussion.php">Discussion</a></li>
 					<li role="presentation"><a href="help.php">Help</a></li>
 					
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="registerPage.php">Register</a></li>
-					<li><a href="loginPage.php">Log In</a></li>
 					<li><a href="logout.php">Log Out</a></li>
 				</ul>
 			</div><!--/.nav-collapse -->
@@ -59,8 +57,8 @@
 	<!-- content page -->
 	<div class="container">
 		<div class="page-header"><h1>Your group assessment</h1></div>
-		<p>Welcome <?php print $login_user ?> of group <?php print $GroupNo ?>!</p>
-		<p>Your group report will be assessed by your peers based on the following criteria:</p>	
+		<p>Your group report will be assessed by your peers based on the following criteria:</p>
+		<p>Welcome <?php print $login_user ?> of group <?php print $GroupNo ?>!</p>	
 			<div class="table-responsive">
 				<table class ="table table-nonfluid">
 				<tr>

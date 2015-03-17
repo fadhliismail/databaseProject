@@ -52,13 +52,11 @@
 					<li role="presentation" class="active"><a href="submission.php">Submission</a></li>
 					<li role="presentation"><a href="mygroup_assessment.php">My Assessment</a></li>
 					<li role="presentation"><a href="review.php">Review</a></li>
-					<li role="presentation"><a href="#discussion.php">Discussion</a></li>
+					<li role="presentation"><a href="discussion.php">Discussion</a></li>
 					<li role="presentation"><a href="help.php">Help</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="registerPage.php">Register</a></li>
-					<li><a href="loginPage.php">Log In</a></li>
-					<li><a href="logout.php">Log Out</a></li>
+					<li><a href="logout.php">">Log Out</a></li>
 				</ul>
 			</div><!--/.nav-collapse -->
 		</div>
@@ -67,6 +65,7 @@
 	<!-- content page -->
 	<div class="container">
 		<div class="page-header"><h1>Submit your report</h1></div>
+		<p>Welcome <?php print $login_user ?> of group <?php print $GroupNo ?>!</p>
 		The deadline of submission is on <b>Friday, 20 March 2014 before 12 PM</b>. Late submission will be deducted 5 marks from the final mark received from the peers.<p>
 		You can upload multiple files by drag `n drop. Your file must be of .xml type.
 		<!-- function to show/hide alert -->

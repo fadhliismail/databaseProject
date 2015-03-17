@@ -3,7 +3,7 @@
 	if(isset($_SESSION['login_user'])){
 		$message = "You are already logged in!";
 		echo "<script type='text/javascript'>alert('$message');</script>";
-		header("location: profile.php");
+		header("location: index.php");
 	}
 ?>
 
@@ -77,9 +77,6 @@
 					</div>
 					<div class="form-group">
 						<input type="text" name ="StudentId" class="form-control input-lg" placeholder="Student ID">
-					</div>
-					<div class="form-group">
-						<input type="text" name="GroupNo" class="form-control input-lg" placeholder="Group No">
 					</div>
 					
 					<input type="Submit" class="btn btn-lg" name="Submit" value="Submit">
