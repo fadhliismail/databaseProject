@@ -1,9 +1,6 @@
 <?php
-/* setting */
-// DSN(Data Source Name)
-define('DB_DSN', 'mysql:dbname=virtual_learning;host=127.0.0.1;charset=utf8');
-define('DB_USER', 'root');               // username 
-define('DB_PASS', '');                   // password
+//connect to database
+include 'db_connect.php';
 define('SESSION_NAME', 'MiniBoard');     // Sessuion Name
 
 function h($str) {
@@ -20,7 +17,6 @@ session_name(SESSION_NAME);
 if (!$_SESSION) {
     $_SESSION = array(
         'id'    => '',
-        'title' => '',
         'name'  => '',
         'text'  => '',
         'assessmentID'=> '',
@@ -29,8 +25,6 @@ if (!$_SESSION) {
 }
 
 try {
-    $pdo = new PDO(DB_DSN, DB_USER, DB_PASS);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     // code of pushing submission button
     if ($submit) {
         //$id is assessmentNo
@@ -38,7 +32,6 @@ try {
         try {
             $_SESSION['name'] = $name;
             $_SESSION['text'] = $text;
-            $_SESSION['title'] = $title;
             $_SESSION['assessmentID'] = $id;
             
             // name check
@@ -55,41 +48,64 @@ try {
                 echo '</script>';
                 throw new Exception;
             }
-                 
             
-            $stmt = $pdo->prepare(implode(' ', array(
+            $stmt = $conn->prepare(implode(' ', array(
                 'INSERT',
-                'INTO mini_board(`title`,`name`, `text`,`assessmentID`,`time`)',
-                'VALUES( ?,?, ?, ?, ?)',
+                'INTO mini_board(`name`,`text`,`assessmentID`,`time`)',
+                'VALUES(?, ?, ?, ?)',
             )));
-            //execute writing 
-            $stmt->execute(array(
-                $title,
-                $name,
-                $text,
-                $id,
-                date('Y-m-d H:i:s', $_SERVER['REQUEST_TIME'])
-            ));
-            // set time session information
+            $date =  date('Y-m-d H:i:s', $_SERVER['REQUEST_TIME']);
+            $stmt->bind_param('ssis', $name,$text,$id,$date);
+            $stmt->execute();  
+              echo '<script type="text/javascript">';
+              echo 'alert( "Your message is submitted" )';
+              echo '</script>';
             $_SESSION['prev'] = $_SERVER['REQUEST_TIME'];
             $_SESSION['text'] = '';
-      
-        } catch (Exception $e) { }
+        } catch (Exception $e) { echo'error'; }
     }
     $id = $_GET['id'];
 
-    $stmt = $pdo->prepare(implode(' ', array(
+    $stmt = $conn->prepare(implode(' ', array(
         'SELECT',
-        'SQL_CALC_FOUND_ROWS `id`,`name`,`text`, `time`,`AssessmentID`, `title`',
+        '`id`,`name`,`text`, `time`,`AssessmentID`',
         'FROM mini_board',
         'WHERE AssessmentID =',
         $id,
     )));
-    $stmt->bindValue(2, 10, PDO::PARAM_INT);
+   
+    echo '<div class="container">';
     $stmt->execute();
-    $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt->store_result();
+    $stmt->bind_result($id,$name,$text,$time,$AssessmentID);
+    echo '<h1>discussion board#'.$id.'</h1>';
+    echo '<div id="textarea">';
+    echo ' <form action="" method="post">';
+    echo ' <label>name: <input name="name" type="text" value="'.$name.'" /></label><br>';
+    echo ' <label>text<p><textarea name="text" rows="4"cols="40">'.$text.'</textarea></p></label><br>';
+    echo '           <label style="text-align:left;"><input type="submit" name="submit" value="submission" /></label>';
+    echo '      </form>';
+    echo '      </div>';
 
+    echo '<div class="table-responsive">';
+            echo '<table class ="table table-nonfluid">';
+            echo '	<tr>';
+            echo '		<th>Name</th>';
+            echo '		<th>Text</th>';
+            echo '		<th>Time</th>';
+            echo '	</tr>';
+    while($stmt->fetch()){
 
+            echo '	<tr>';
+            echo '              <td>'.$name.'</td> ';
+            echo '              <td>'.$text.'</td> ';
+            echo '              <td>'.$time.'</td>';
+            echo '	</tr>';         
+    }
+            echo '</table>';
+    echo '</div>';
+    echo '<div class="container">';
+    
 } catch (Exception $e) { }
 ?>
 <!DOCTYPE html>
@@ -135,33 +151,6 @@ try {
 			</div>
 		</div>
 	</nav>
-    <div >
-      <div>
-        <?php
-        //$id is assessmentNo
-        $id = $_GET['id'];
-        echo '<h1>discussion board#'.$id.'</h1>' ?>
-      </div>
-          <div id="textarea">
-          <form action="" method="post">
-                <label>name: <input name="name" type="text" value="<?=h($_SESSION['name'])?>" /></label><br>
-                <label>text<p><textarea name="text" rows="4"cols="40"><?=h($_SESSION['text'])?></textarea></p></label><br>
-                <label style="text-align:left;"><input type="submit" name="submit" value="submission" /></label>
-          </form>
-        </div>
-      <div>   
-
-<?php if (!empty($articles)): ?>
-<?php foreach ($articles as $article): ?>
-         <div class="article">
-            <div class="article_text"><h4>name:</h4><?=h($article['name'])?></div>
-            <div class="article_text"><h4>text:</h4><?=h($article['text'])?></div>
-            <div class="article_time"><?=h($article['time'])?></div>
-          </div>
-<?php endforeach; ?>
-        </div>
-<?php endif; ?>
-      </div>
     </div>
   </body>
     <?php include 'footer.php'?>

@@ -1,9 +1,6 @@
 <?php
-/* setting */
-// DSN(Data Source Name)
-define('DB_DSN', 'mysql:dbname=virtual_learning;host=127.0.0.1;charset=utf8');
-define('DB_USER', 'root');               // username 
-define('DB_PASS', '');                   // password
+//connect to database
+include 'db_connect.php';
 define('SESSION_NAME', 'MiniBoard');     // Sessuion Name
 
 function h($str) {
@@ -30,20 +27,40 @@ if (!$_SESSION) {
 }
 
 try {
-    $pdo = new PDO(DB_DSN, DB_USER, DB_PASS);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    
-    $stmt = $pdo->prepare(implode(' ', array(
+    $stmt = $conn->prepare(implode(' ', array(
         'SELECT',
-        'SQL_CALC_FOUND_ROWS `name`, `text`, `time`,`AssessmentID`,`title`',
+        '`name`, `text`, `time`,`AssessmentID`',
         'FROM mini_board',
         'ORDER BY `time` DESC',
     )));
-
-    $stmt->bindValue(2, 10, PDO::PARAM_INT);
+    
+    echo '<div class="container">';
+    echo '<div>';
+    echo '<h1>discussion summary</h1>';
+    echo '</div>';
+    
     $stmt->execute();
-    $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt->store_result();
+    $stmt->bind_result($name,$text,$time,$AssessmentID);
+    
+    echo '<div class="table-responsive">';
+            echo '<table class ="table table-nonfluid">';
+            echo '	<tr>';
+            echo '		<th>Name</th>';
+            echo '		<th>Text</th>';
+            echo '		<th>Time</th>';
+            echo '	</tr>';
+    while($stmt->fetch()){
 
+            echo '	<tr>';
+            echo '              <td>'.$name.'</td> ';
+            echo '              <td>'.$text.'</td> ';
+            echo '              <td>'.$time.'</td>';
+            echo '	</tr>';         
+    }
+            echo '</table>';
+    echo '</div>';
+    echo '<div class="container">';
 } catch (Exception $e) { }
 ?>
 <!DOCTYPE html>
@@ -91,26 +108,7 @@ try {
 			</div>
 		</div>
 	</nav>
-    <div >
-      <div >
-        <h1>discussion summary</h1>
-      </div>
-        
-      <div>
-<?php if (!empty($articles)): ?>
-        <div id="articles">
-<?php foreach ($articles as $article): ?>
-          <div class="article">
-            <div class="article_text"><h4>title:</h4><?=h($article['title'])?></div>  
-            <div class="article_text"><h4>name:</h4><?=h($article['name'])?></div>  
-            <div class="article_text"><h4>text:</h4><?=h($article['text'])?></div>
-            <div class="article_time"><?=h($article['time'])?></div>
-          </div>
-<?php endforeach; ?>
-        </div>
-<?php endif; ?>
-      </div>
-
+    <div>
   </body>
     <?php include 'footer.php'?>
 </html>
