@@ -11,7 +11,7 @@ $GroupNo=$_SESSION['GroupNo'];
 <!DOCTYPE html>
 <html>
 <head lang="en">
-	<title>Manage Group</title>
+	<title>Manage Assessment</title>
 
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -59,7 +59,7 @@ $GroupNo=$_SESSION['GroupNo'];
 						<ul class="dropdown-menu" role="menu">
 							<li><a href="manage_group.php" class="active">Manage Group</a></li>
 							<li><a href="manage_student.php">Manage Student</a></li>
-							<li><a href="manage_assessment.php">Manage Assessment</a></li>
+
 						</ul>
 					</li>
 					<li><a href="student_assessment.php">Student Assessment</a></li>

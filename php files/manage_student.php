@@ -60,9 +60,10 @@
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="manage_group.php">Manage Group</a></li>
                             <li><a href="manage_student.php" class="active">Manage Student</a></li>
+                            <li><a href="manage_assessment.php">Manage Assessment</a></li>
                         </ul>
                     </li>
-                    <li role="presentation"><a href="student_assessment.php">Analysis</a></li>
+                    <li role="presentation"><a href="student_assessment.php">Student Assessment</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="logout.php">Log Out</a></li>

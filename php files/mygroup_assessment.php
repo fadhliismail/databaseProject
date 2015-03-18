@@ -34,11 +34,11 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Virtual Learning</a>
+				<a class="navbar-brand" href="home.php">Virtual Learning</a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li role="presentation"><a href="index.php">Home</a></li>
+					<li role="presentation"><a href="home.php">Home</a></li>
 					<li role="presentation"><a href="profile.php">Profile</a></li>
 					<li role="presentation"><a href="submission.php">Submission</a></li>
 					<li role="presentation" class="active"><a href="mygroup_assessment.php">My Assessment</a></li>
@@ -88,7 +88,8 @@
 			</table>
 		</div>
 		<div class = "page-title">Summary</div>
-		<p>These are the marks given by your peers who assessed your report:</p>
+
+		<!-- Show marks given to group by peers -->
 		<?php
 
         //report any error
@@ -102,14 +103,14 @@
 			$GroupNo = $_POST['GroupNo'];
 		}
 
-		$Report_To_Assess = 4; /*this cannot be a fixed number. it has to get data from session.*/
+		$Group_to_Assess = $GroupNo;
 
 		//query statements
 		$queryAssessment  = "SELECT score.AssessmentNo, SUM(score.Score_Criteria) as OverallScore, ROUND(SUM((score.Score_Criteria/3)*2)) AS AverageScore
 		FROM score
 		INNER JOIN assessment
 		ON assessment.AssessmentNo = score.AssessmentNo
-		WHERE assessment.Report_To_Assess = ?
+		WHERE assessment.Group_to_Assess = ?
 		GROUP BY assessment.AssessmentNo";
 
 		$queryCriteria  = "SELECT score.CriteriaNo, score.Comment, score.Score_Criteria
@@ -120,12 +121,15 @@
 
 		/*Calculate final score*/
 		$finalscore ="";
-		if ($stmtAssessment = $conn->prepare($queryAssessment)) {
-			$stmtAssessment->bind_param('i', $Report_To_Assess);
+		$stmtAssessment = $conn->prepare($queryAssessment);
+
+		if ($Group_to_Assess != 0) {			
+			$stmtAssessment->bind_param('i', $Group_to_Assess);
 			$stmtAssessment->execute();
 			$stmtAssessment->store_result();
 			$stmtAssessment->bind_result($AssessmentNo, $OverallScore, $AverageScore);
 
+			echo '<p>These are the marks given by your peers who assessed your report:</p>';
 			echo '<div class="table-responsive"><table class ="table table-nonfluid"><tr><th>Assessment No</th><th>Overall Score</th><th>Score</th><th>Criteria</th><th>Comment</th></tr>';
 			
 			//fetch values by looping through each row
@@ -156,6 +160,8 @@
 			echo 'Your group received a mark of<button type="button" disabled class="btn btn-lg" style="margin:0 0 15px 15px"><b> ' .$finalscore. '/100</b></button>';
 
 			echo '</table></div>';
+		} else {
+			echo 'No peer assessment has been made yet.';
 		}
 
     	//close statement

@@ -35,7 +35,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Virtual Learning</a>
+				<a class="navbar-brand" href="admin.php">Virtual Learning</a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
@@ -45,7 +45,7 @@
 						<ul class="dropdown-menu" role="menu">
 							<li><a href="manage_group.php">Manage Group</a></li>
 							<li><a href="manage_student.php">Manage Student</a></li>
-
+							<li><a href="manage_assessment.php">Manage Assessment</a></li>
 						</ul>
 					</li>
 					<li role="presentation"><a href="student_assessment.php">Student Assessment</a></li>

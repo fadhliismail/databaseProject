@@ -36,11 +36,11 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Virtual Learning</a>
+				<a class="navbar-brand" href="home.php">Virtual Learning</a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li role="presentation"><a href="index.php">Home</a></li>
+					<li role="presentation"><a href="home.php">Home</a></li>
 					<li role="presentation"><a href="profile.php">Profile</a></li>
 					<li role="presentation"><a href="submission.php">Submission</a></li>
 					<li role="presentation"><a href="mygroup_assessment.php">My Assessment</a></li>

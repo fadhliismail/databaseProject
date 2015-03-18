@@ -1,12 +1,19 @@
 <?php
+session_start();
+if(!isset($_SESSION['login_user'])){
+	header("location: loginPage.php");
+}
+$login_user=$_SESSION['login_user'];
+$GroupNo=$_SESSION['GroupNo'];
+?>
+
+<?php
 
 //report any error
 error_reporting(E_ALL); ini_set('display_errors', 1); mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
 //connect to database
 include 'db_connect.php';
-
-$GroupNo = 4;
 
 $ds = "/";
 $storeFolder = 'uploads';
@@ -30,15 +37,13 @@ if(!empty($_FILES)) {
 	$main = $xml->Main;
 	$conclusion = $xml->Conclusion;
 
-	$queryUpload = "INSERT INTO report (GroupNo, File_Link, File_Name, File_Size, File_Type, GroupIT, Intro, Main, Conclusion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	$queryUpload = "INSERT INTO report (GroupNo, File_Link, File_Name, File_Size, File_Type, Intro, Main, Conclusion) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
 	$stmt = $conn->prepare($queryUpload);
-	$stmt->bind_param('issssssss', $GroupNo, $myfileLink, $myfileName, $myfileSize, $myfileType, $mygroup, $intro, $main, $conclusion);
+	$stmt->bind_param('isssssss', $GroupNo, $myfileLink, $myfileName, $myfileSize, $myfileType, $intro, $main, $conclusion);
 	$stmt->execute();
 	$stmt->store_result();
-	$stmt->bind_result($GroupNo, $File_Link, $File_Name, $File_Size, $File_Type, $GroupIT, $Intro, $Main, $Conclusion);
-
-
+	$stmt->bind_result($GroupNo, $File_Link, $File_Name, $File_Size, $File_Type, $Intro, $Main, $Conclusion);
 }
 
 //Close statement

@@ -41,11 +41,11 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">Virtual Learning</a>
+					<a class="navbar-brand" href="home.php">Virtual Learning</a>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
-						<li role="presentation"><a href="index.php">Home</a></li>
+						<li role="presentation"><a href="home.php">Home</a></li>
 						<li role="presentation" class="active"><a href="profile.php">Profile</a></li>
 						<li role="presentation"><a href="submission.php">Submission</a></li>
 						<li role="presentation"><a href="mygroup_assessment.php">My Assessment</a></li>
@@ -63,7 +63,7 @@
 		<!-- content page -->
 		<div class="container">
 			<div class="page-header"><h1>Edit your profile</h1></div>
-			<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+			<p>You may change your password here.</p>
 			<p>Welcome <?php print $login_user ?> of group <?php print $GroupNo ?>!</p>
 			<div class="page-title">Change your password</div>
 
