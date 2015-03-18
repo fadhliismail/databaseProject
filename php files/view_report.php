@@ -54,7 +54,7 @@
                                        <li role="presentation"><a href="submission.php">Submission</a></li>
                                        <li role="presentation"><a href="mygroup_assessment.php">My Assessment</a></li>
                                        <li role="presentation" class="active"><a href="   review.php">Review</a></li>
-                                       <li role="presentation"><a href="#discussion.php">Discussion</a></li>
+                                       <li role="presentation"><a href="discussion.php">Discussion</a></li>
                                        <li role="presentation"><a href="help.php">Help</a></li>
 
                                    </ul>
@@ -79,10 +79,8 @@
 
         //connect to database
         include 'db_connect.php';
-        //$filename = 'report.xml'; //Should not be "report.xml" but must get the file name from the "File_Name" column in the "report" table in the database
-
-    //Write query here to query File_Name WHERE ReportNo or you can use WHERE GroupNo
-    //Bind param to ReportNo or GroupNo whichever you choose
+        //to query File_Name WHERE ReportNo or you can use WHERE GroupNo
+        //Bind param to ReportNo or GroupNo whichever you choose
         $queryGroupNo = "SELECT `GroupNo` FROM `assessment` WHERE `AssessmentNo`= $id";
         
         if ($stmtGroupNo = $conn->prepare($queryGroupNo))
@@ -92,7 +90,6 @@
                                 $stmtGroupNo->bind_result($GroupNo);
                                 $stmtGroupNo->fetch();
                         }
-        //echo $GroupNo;
         $queryFileName = "SELECT `File_Name` FROM `report` WHERE `GroupNo`= $GroupNo"; 
         if ($stmtFileName = $conn->prepare($queryFileName))
                         {        
@@ -100,8 +97,7 @@
                                 $stmtFileName->store_result();
                                 $stmtFileName->bind_result($FileName);
                                 $stmtFileName->fetch();
-                        }
-    //echo $FileName; FileName must contain extension.   
+                        }  
     //Execute below script
         if(isset($FileName)){
                 if (file_exists('./uploads/' .$FileName)) { //fetch file from "uploads" folder
