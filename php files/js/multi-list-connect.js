@@ -18,7 +18,7 @@ $(document).ready(function() {
 		}, // end receive
 	}) // end sortable
 	
-	/*$('li').on('mousedown', function() {
+/*	$('li').on('mousedown', function() {
 		$(this).css(
 			{
 				'backgroundColor' : 'black',
