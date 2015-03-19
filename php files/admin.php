@@ -61,8 +61,8 @@
 		<!-- content page -->
 		<div class="container">
 			<div class="page-title">Change your password</div>
+			<p>Welcome <span class="badge badge-info"><?php print $firstName ?> <?php print $lastName ?></span>!</p>
 			<p>You may change your password here.</p>
-			<p>Welcome <?php print $firstName ?> <?php print $lastName ?>!</p>
 			<div class="col-xs-6 col-lg-4">
 
 				<form class="col-md-12" action = "change_pswd.php" method="post" name="pswd" target="help-inline">
