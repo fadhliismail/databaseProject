@@ -93,7 +93,7 @@ $GroupNo=$_SESSION['GroupNo'];
 			while($stmtReportToAssess->fetch()){  
 				echo '<tr>';
 				echo '<td><a href="view_report.php?id='.$AssessmentNo.'">ASNo_'.$AssessmentNo.'</a></td>';                                                              
-				echo '<td><a href="discussion.php?id='.$AssessmentNo.'">Discussion Forum_'.$AssessmentNo.'</a></td>';
+				echo '<td><a href="discussionTitle.php?id='.$AssessmentNo.'">Discussion Forum_'.$AssessmentNo.'</a></td>';
 				echo '</tr>';
 			}
 
