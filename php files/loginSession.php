@@ -51,7 +51,7 @@ if(isset($_POST['Submit'])){
 						$_SESSION['lastName']=$lastName;
 						
 						echo "Student";
-						header("Refresh: 1; url= profile.php");
+						header("Refresh: 1; url= home.php");
 					
 					}
 					else {
