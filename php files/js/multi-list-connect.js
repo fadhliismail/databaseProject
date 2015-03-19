@@ -17,6 +17,25 @@ $(document).ready(function() {
 			}); // end ajax
 		}, // end receive
 	}) // end sortable
+
+	$(".assessmentSortable").sortable({ // begin sortable
+		connectWith: ".assessmentSortable",
+		dropOnEmpty: true,
+		receive: function(event, ui) { // begin receive
+			var id = $(ui.item).attr('id');
+			var group = this.id;
+			//alert( ui.item.closest('ul').attr('id'));
+			$.ajax({ // begin ajax
+			   url: "update_assessment.php",
+			   type: "GET",
+			   data: {
+				'id': id,
+				'group': group
+				},
+			}); // end ajax
+		}, // end receive
+	}) // end sortable
+
 	
 /*	$('li').on('mousedown', function() {
 		$(this).css(

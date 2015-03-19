@@ -7,8 +7,6 @@
 	$GroupNo=$_SESSION['GroupNo'];
 	$firstName=$_SESSION['firstName'];
 	$lastName=$_SESSION['lastName'];
-	
-
 	?>
 
 	<!DOCTYPE html>
@@ -76,24 +74,27 @@
 				<form class="col-md-12" action = "change_pswd.php" method="post" name="pswd" target="help-inline">
 					Current password:
 					<div class="input-group">
-						<input title="Password contain at least 8 characters" type="password" class="form-control" name="CurrentPswd" placeholder="Current Password" required pattern=".{8,}">
+						<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+						<input title="Password must contain at least 8 characters" type="password" class="form-control" name="CurrentPswd" placeholder="Current Password" required pattern=".{8,}">
 
 					</div>		
 					<br>
 
 					New password:
 					<div class="input-group">
+						<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
 						<input title="Password must contain at least 8 characters including UPPER/lowercase and numbers" type="password" class="form-control" name="NewPswd" placeholder="New Password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-							onchange="this.setCustomValidity(this.validity.patternMismatch ? this.title : '');
-										if(this.checkValidity()) form.Confirm_User_pass.pattern = this.value;">
+						onchange="this.setCustomValidity(this.validity.patternMismatch ? this.title : '');
+						if(this.checkValidity()) form.Confirm_User_pass.pattern = this.value;">
 					</div>
 					<br>
 
 
 					Confirmed new password:
 					<div class="input-group">
+						<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
 						<input title="Please enter the same Password as above" type="password" class="form-control" name="ConfirmPswd" placeholder="Confirmed Password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-							onchange="this.setCustomValidity(this.validity.patternMismatch ? this.title : '');">
+						onchange="this.setCustomValidity(this.validity.patternMismatch ? this.title : '');">
 					</div>
 					<br>
 

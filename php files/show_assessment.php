@@ -1,29 +1,29 @@
-<?php
-session_start();
-if(!isset($_SESSION['login_user'])){
-	header("location: loginPage.php");
-}
-$login_user=$_SESSION['login_user'];
-$GroupNo=$_SESSION['GroupNo'];
-
-?>
-
-<!DOCTYPE html>
-<html>
-<head lang="en">
-	<title>Manage Assessment</title>
-
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-	<link rel="stylesheet" href="css/group.css">
-	<!-- Custom CSS -->
-	<link rel ="stylesheet" type="text/css" href="css/mystyle.css">
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="css/bootstrap.css">
-	<!-- drag n drop CSS -->
-	<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
+	<?php
+	session_start();
+	if(!isset($_SESSION['login_user'])){
+		header("location: loginPage.php");
+	}
+	$login_user=$_SESSION['login_user'];
+	$firstName=$_SESSION['firstName'];
+	$lastName=$_SESSION['lastName'];
+	?>
 	
+	<!DOCTYPE html>
+	<html>
+	<head lang="en">
+		<title>Manage Assessment</title>
+
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="css/group.css">
+		<!-- Custom CSS -->
+		<link rel ="stylesheet" type="text/css" href="css/mystyle.css">
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="css/bootstrap.css">
+		<!-- drag n drop CSS -->
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
+		
 	<!-- Bootstrap core JavaScript
 	================================================== -->
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

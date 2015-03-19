@@ -1,27 +1,27 @@
-<?php
-  session_start();
-  if(!isset($_SESSION['login_user'])){
-    header("location: loginPage.php");
-  }
-  $login_user=$_SESSION['login_user'];
-  $GroupNo=$_SESSION['GroupNo'];
-  
-?>
+    <?php
+    session_start();
+    if(!isset($_SESSION['login_user'])){
+        header("location: loginPage.php");
+    }
+    $login_user=$_SESSION['login_user'];
+    $firstName=$_SESSION['firstName'];
+    $lastName=$_SESSION['lastName'];
+    ?>
+    
+    <!DOCTYPE html>
+    <html>
+    <head lang="en">
+        <title>Manage Student</title>
 
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <title>Manage Student</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Custom CSS -->
-    <link rel ="stylesheet" type="text/css" href="css/mystyle.css">
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <!-- x-editable CSS -->
-    <link href="css/bootstrap-editable.css" rel="stylesheet">
+        <!-- Custom CSS -->
+        <link rel ="stylesheet" type="text/css" href="css/mystyle.css">
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="css/bootstrap.css">
+        <!-- x-editable CSS -->
+        <link href="css/bootstrap-editable.css" rel="stylesheet">
 
      <!-- Bootstrap core JavaScript
      ================================================== -->

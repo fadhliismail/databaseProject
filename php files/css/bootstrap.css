@@ -5554,7 +5554,7 @@ a.list-group-item-danger.active:focus {
   border-bottom-color: #ddd;
 }
 .panel-primary {
-  border-color: #ddd;
+ /*  border-color: #ddd; */
 }
 .panel-primary > .panel-heading {
   color: #fff;
