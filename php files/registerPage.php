@@ -3,7 +3,7 @@
 	if(isset($_SESSION['login_user'])){
 		$message = "You are already logged in!";
 		echo "<script type='text/javascript'>alert('$message');</script>";
-		header("location: index.php");
+		header("location: profile.php");
 	}
 ?>
 
@@ -46,7 +46,6 @@
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="registerPage.php">Register</a></li>
 						<li><a href="loginPage.php">Log In</a></li>
-						<li><a href="logout.php">Log Out</a></li>
 					</ul>
 				</div><!--/.nav-collapse -->
 			</div>
@@ -64,19 +63,25 @@
 
 				<form class="col-md-12" action="registerStudent.php" method="POST">
 					<div class="form-group">
-						<input type="text" name ="firstName" class="form-control input-lg" placeholder="First Name">
+						<input title="Enter your first name" type="text" name ="firstName" class="form-control input-lg" placeholder="First Name" required pattern="\w+">
 					</div>
 					<div class="form-group">
-						<input type="text" name ="lastName" class="form-control input-lg" placeholder="Last Name">
+						<input title="Enter your last name" type="text" name ="lastName" class="form-control input-lg" placeholder="Last Name" required pattern="\w+">
 					</div>
 					<div class="form-group">
-						<input type="text" name ="emailAddress" class="form-control input-lg" placeholder="Email">
+						<input title="Enter your student email address" type="email" name ="emailAddress" class="form-control input-lg" placeholder="Email" required>
 					</div>
 					<div class="form-group">
-						<input type="password" name="User_pass" class="form-control input-lg" placeholder="Password">
+						<input title="Enter your 8 Student ID" type="text" name ="StudentId" class="form-control input-lg" placeholder="Student ID" required pattern="^[A-Za-z0-9_]{8,8}$">
 					</div>
 					<div class="form-group">
-						<input type="text" name ="StudentId" class="form-control input-lg" placeholder="Student ID">
+						<input title="Password must contain at least 8 characters including UPPER/lowercase and numbers" type="password" name="User_pass" class="form-control input-lg" placeholder="Password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+							onchange="this.setCustomValidity(this.validity.patternMismatch ? this.title : '');
+										if(this.checkValidity()) form.Confirm_User_pass.pattern = this.value;">
+					</div>
+					<div class="form-group">
+						<input title="Please enter the same Password as above" type="password" name="Confirm_User_pass" class="form-control input-lg" placeholder="Password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+							onchange="this.setCustomValidity(this.validity.patternMismatch ? this.title : '');">
 					</div>
 					
 					<input type="Submit" class="btn btn-lg" name="Submit" value="Submit">

@@ -5,6 +5,9 @@
 	}
 	$login_user=$_SESSION['login_user'];
 	$GroupNo=$_SESSION['GroupNo'];
+	$firstName=$_SESSION['firstName'];
+	$lastName=$_SESSION['lastName'];
+	
 
 	?>
 
@@ -64,70 +67,37 @@
 		<div class="container">
 			<div class="page-header"><h1>Edit your profile</h1></div>
 			<p>You may change your password here.</p>
-			<p>Welcome <?php print $login_user ?> of group <?php print $GroupNo ?>!</p>
+			<p>Welcome <?php print $firstName ?> <?php print $lastName ?> of group <?php print $GroupNo ?>!</p>
 			<div class="page-title">Change your password</div>
 
-			<!-- function to show/hide alert -->
-			<script type="text/javascript">
-				function hideAlert(id){
-					var text = $('#'+id+' .showerror').text();
-					console.log(text.length);
-					if(text.length <= 0)
-						$('#'+id).hide();
-				}
-			</script>
-
-			<!-- feedback alert-->
-			<div id="err1" class="alert alert-danger alert-dismissible" role="alert">				
-				<div class = "showerror"><?php $reasons = array(
-					"blank" => "One or more fields blank.",
-					"currentpassword" => "Invalid current password!", 			
-					"newpassword" => "New password doesn't match! Please enter your password again."); 
-				if (isset($_GET["failed"])) echo $reasons[$_GET["reason"]]; 
-				?></div>
-			</div>
-			<script type="text/javascript">
-				hideAlert("err1");
-			</script>
-
-			<!-- success feedback-->
-			<div id="err2" class="alert alert-success alert-dismissible" role="alert">				
-				<div class = "showerror"><?php $reasons = array(					
-					"updatepassword" => "Password updated!"); 
-				if (isset($_GET["success"])) echo $reasons[$_GET["reason"]]; 
-				?></div>
-			</div>
-			<script type="text/javascript">
-				hideAlert("err2");
-			</script>
 
 			<div class="col-xs-6 col-lg-4">
 
-				<form action = "change_pswd.php" method="post" name="pswd" target="help-inline">Current password:
+				<form class="col-md-12" action = "change_pswd.php" method="post" name="pswd" target="help-inline">
+					Current password:
 					<div class="input-group">
-						<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-						<input type="password" class="form-control" name="CurrentPswd" placeholder="password" aria-describedby="basic-addon1">
+						<input title="Password contain at least 8 characters" type="password" class="form-control" name="CurrentPswd" placeholder="Current Password" required pattern=".{8,}">
 
 					</div>		
 					<br>
 
 					New password:
 					<div class="input-group">
-						<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-						<input type="password" class="form-control" name="NewPswd" placeholder="password" aria-describedby="basic-addon1" >
+						<input title="Password must contain at least 8 characters including UPPER/lowercase and numbers" type="password" class="form-control" name="NewPswd" placeholder="New Password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+							onchange="this.setCustomValidity(this.validity.patternMismatch ? this.title : '');
+										if(this.checkValidity()) form.Confirm_User_pass.pattern = this.value;">
 					</div>
 					<br>
 
 
 					Confirmed new password:
 					<div class="input-group">
-						<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>	
-						<input type="password" class="form-control" name="ConfirmPswd" placeholder="password" aria-describedby="basic-addon1">
+						<input title="Please enter the same Password as above" type="password" class="form-control" name="ConfirmPswd" placeholder="Confirmed Password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+							onchange="this.setCustomValidity(this.validity.patternMismatch ? this.title : '');">
 					</div>
 					<br>
 
 					<input type="Submit" class="btn btn-lg" name="Submit" value="Submit">
-					<!-- <button type="button" class="btn btn-lg" name="pswd">Submit</button> -->
 				</form>
 			</div>
 		</div>

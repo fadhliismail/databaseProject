@@ -3,7 +3,7 @@
 	if(isset($_SESSION['login_user'])){
 		$message = "You are already logged in!";
 		echo "<script type='text/javascript'>alert('$message');</script>";
-		header("location: home.php");
+		header("location: profile.php");
 	}
 ?>
 
@@ -45,6 +45,7 @@
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="registerPage.php">Register</a></li>
+						<li><a href="loginPage.php">Log In</a></li>
 					</ul>
 				</div><!--/.nav-collapse -->
 			</div>
@@ -60,15 +61,18 @@
 
 			<div class="col-xs-6 col-lg-4">
 
+				<!-- for login for student -->
 				<form class="col-md-12" action="loginSession.php" method="POST">
 					<div class="form-group">
-						<input type="text" name ="StudentId" class="form-control input-lg" placeholder="Student ID">
+						<input title="Enter your 8 Student ID" type="text" name ="StudentId" class="form-control input-lg" placeholder="Student ID" required pattern="^[A-Za-z0-9_]{8,8}$">
 					</div>
 					<div class="form-group">
-						<input type="password" name="User_pass" class="form-control input-lg" placeholder="Password">
+						<input title="Password contain at least 8 characters" type="password" name="User_pass" class="form-control input-lg" placeholder="Password" required pattern=".{8,}">
 					</div>
-					<input type="Submit" class="btn btn-lg" name="Submit" value="Login">
+					<input type="Submit" class="btn btn-lg" name="Submit" value="Submit">
+					
 				</form>
+				<p>Forgot your password? Retrieve it <a href=retrievePasswordPage.php>here</a></p>
 			</div>
 		</div>
 
