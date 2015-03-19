@@ -64,7 +64,7 @@ error_reporting(E_ALL); ini_set('display_errors', 1); mysqli_report(MYSQLI_REPOR
 include 'db_connect.php';
 $response = array();
 // $id is assessmentNo
-$AssessmentNo = $_GET['id']; /*this cannot be a fixed number. it has to get data from session.*/
+$AssessmentNo = $_GET['id']; 
 
 for($j = 1; $j<6 ; $j++){
     $comment = 'comment'.$j;
@@ -79,11 +79,12 @@ for($j = 1; $j<6 ; $j++){
         }
 }
         //query statement
-        $queryTime = "UPDATE `report` SET `Submission_Timestamp`= NOW(),`Submission_Updated`= NOW() WHERE `ReportNo`=1";
+        $queryTime = "UPDATE `report` SET `Submission_Timestamp`= NOW(),`Submission_Updated`= NOW() WHERE `GroupNo`=?";
         $queryScore = "SELECT `CriteriaNo`, `Comment`,`Score_Criteria`FROM `score` WHERE `AssessmentNo` = ?";
     
         // Update timestamp 
         if ($stmtTimeUpdate = $conn->prepare($queryTime)) {
+            $stmtTimeUpdate->bind_param('i', $GroupNo);
             $stmtTimeUpdate->execute();
             $stmtTimeUpdate->store_result();
         }
@@ -96,15 +97,16 @@ for($j = 1; $j<6 ; $j++){
 
             
             echo '<div class="table-responsive"><table class ="table table-nonfluid"><tr><th>CriteriaNo</th><th>Comment</th><th>Score_Criteria</th></tr>';
-            echo '<div class="page-header"><h1>Group '.$AssessmentNo.'</h1></div>';
+            echo '<div class="page-header"><h1>Group '.$GroupNo.'</h1></div>';
             echo '<p><b>database value:</b></p>';
-
+           
             while ($stmtScore->fetch()) {
             echo '<tr>';
             echo '<th>'.$CriteriaNo.'</th><th>'.$Comment.'</th><th>'.$Score_Criteria.'</th>';
             echo '</tr>';
             }
             echo '</table></div>';
+            
         }
 ?>
 
