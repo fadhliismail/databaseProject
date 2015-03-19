@@ -12,7 +12,7 @@ $value = $_POST['value']; //Updated value
 
 if(!empty($value)) {
 
-	$query = "UPDATE `student` SET " .$name. " = ? WHERE StudentNo = ?";
+	$query = "UPDATE `users` SET " .$name. " = ? WHERE UserId = ?";
 	//$result = 'update users set '.mysql_escape_string($name).'="'.mysql_escape_string($value).'" where user_id = "'.mysql_escape_string($pk).'"';
 
 	$stmt = $conn->prepare($query);

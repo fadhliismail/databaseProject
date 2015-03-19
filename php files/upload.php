@@ -1,11 +1,13 @@
-<?php
-session_start();
-if(!isset($_SESSION['login_user'])){
-	header("location: loginPage.php");
-}
-$login_user=$_SESSION['login_user'];
-$GroupNo=$_SESSION['GroupNo'];
-?>
+	<?php
+	session_start();
+	if(!isset($_SESSION['login_user'])){
+		header("location: loginPage.php");
+	}
+	$login_user=$_SESSION['login_user'];
+	$GroupNo=$_SESSION['GroupNo'];
+	$firstName=$_SESSION['firstName'];
+	$lastName=$_SESSION['lastName'];
+	?>
 
 <?php
 

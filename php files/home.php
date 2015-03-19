@@ -1,12 +1,13 @@
-<?php
-session_start();
-if(!isset($_SESSION['login_user'])){
-  header("location: loginPage.php");
-}
-$login_user=$_SESSION['login_user'];
-$GroupNo=$_SESSION['GroupNo'];
-
-?>
+  <?php
+  session_start();
+  if(!isset($_SESSION['login_user'])){
+    header("location: loginPage.php");
+  }
+  $login_user=$_SESSION['login_user'];
+  $GroupNo=$_SESSION['GroupNo'];
+  $firstName=$_SESSION['firstName'];
+  $lastName=$_SESSION['lastName'];
+  ?>
 
 <!DOCTYPE html>
 <html>
@@ -73,7 +74,7 @@ $GroupNo=$_SESSION['GroupNo'];
   }
 
       //query statements
-  $queryStudent  = "SELECT FirstName, LastName, Email FROM `student` WHERE GroupNo = ?";
+  $queryStudent  = "SELECT FirstName, LastName, Email FROM `users` WHERE GroupNo = ?";
 
   $stmtStudent = $conn->prepare($queryStudent);
 

@@ -6,28 +6,28 @@ require_once('db_connect.php');
 if(isset($_POST['Submit'])){
 	
 	//php simple validation if html5 validation is not working
-	if(empty($_POST['StudentId']) || empty($_POST['User_pass'])) {
-		die ('Please enter your Student ID and password');
+	if(empty($_POST['Login_Id']) || empty($_POST['User_pass'])) {
+		die ('Please enter your users ID and password');
 		
 	}
 	else{
-		//Define $StudentId and $User_pass
-		$StudentId = $_POST['StudentId'];
+		//Define $Login_Id and $User_pass
+		$Login_Id = $_POST['Login_Id'];
 		$User_pass = $_POST['User_pass'];
 		
 		//
-		$StudentId = mysqli_real_escape_string($conn, $StudentId);
+		$Login_Id = mysqli_real_escape_string($conn, $Login_Id);
 		$User_password = mysqli_real_escape_string($conn, $User_pass);
 			
 		//query for getting GroupNo and User_pass from database
 		$query = "SELECT GroupNo, User_pass, user_level, FirstName, LastName
-					FROM student
-						WHERE StudentId = ?";
+					FROM users
+						WHERE Login_Id = ?";
 		
 		//preparing query
 		if($statement = $conn->prepare($query)){
 			
-			$statement->bind_param('s', $StudentId);
+			$statement->bind_param('s', $Login_Id);
 			
 			//execute statement
 			$statement->execute();
@@ -44,20 +44,20 @@ if(isset($_POST['Submit'])){
 					if ($user_level === 'student'){
 						session_start();
 			
-						$_SESSION['login_user']=$StudentId;
+						$_SESSION['login_user']=$Login_Id;
 						$_SESSION['user_level']=$user_level;
 						$_SESSION['GroupNo']=$GroupNo;
 						$_SESSION['firstName']=$firstName;
 						$_SESSION['lastName']=$lastName;
 						
-						echo "Student";
+						echo "student";
 						header("Refresh: 1; url= home.php");
 					
 					}
 					else {
 						session_start();
 			
-						$_SESSION['login_user']=$StudentId;
+						$_SESSION['login_user']=$Login_Id;
 						$_SESSION['user_level']=$user_level;
 						$_SESSION['firstName']=$firstName;
 						$_SESSION['lastName']=$lastName;

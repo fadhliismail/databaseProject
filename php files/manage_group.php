@@ -86,7 +86,7 @@
         //connect to database
 		include 'db_connect.php';
 
-		$queryStudent = "SELECT COUNT(*) AS `countstudents` FROM student; ";
+		$queryStudent = "SELECT COUNT(*) AS `countstudents` FROM users; ";
 
 		if($stmt=$conn->prepare($queryStudent)) {
 			$stmt->execute();
@@ -129,7 +129,7 @@
 
         //connect to database
 		include 'db_connect.php';
-		$querygroup = "SELECT COUNT(DISTINCT GroupNo) AS `countgroup` FROM student WHERE `GroupNo` !=0";
+		$querygroup = "SELECT COUNT(DISTINCT GroupNo) AS `countgroup` FROM users WHERE `GroupNo` !=0";
 
 		
 		$stmt=$conn->prepare($querygroup);

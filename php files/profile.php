@@ -64,8 +64,8 @@
 		<!-- content page -->
 		<div class="container">
 			<div class="page-header"><h1>Edit your profile</h1></div>
+			<p>Welcome <span class="badge badge-info"><?php print $firstName ?> <?php print $lastName ?></span>!</p>
 			<p>You may change your password here.</p>
-			<p>Welcome <?php print $firstName ?> <?php print $lastName ?> of group <?php print $GroupNo ?>!</p>
 			<div class="page-title">Change your password</div>
 
 

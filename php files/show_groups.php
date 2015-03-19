@@ -88,11 +88,11 @@
   		//connect to database
 		include 'db_connect.php';
 
-		$queryStudent = "SELECT `StudentNo`, `FirstName`, `LastName`, `GroupNo` FROM `student` WHERE `GroupNo` = 0 ORDER BY `FirstName`";
+		$queryStudent = "SELECT `UserId`, `FirstName`, `LastName`, `GroupNo` FROM `users` WHERE `GroupNo` = 0 AND `User_Level` = 'student' ORDER BY `FirstName`";
 
 		if($stmt=$conn->prepare($queryStudent)) {
 			$stmt->execute();
-			$stmt->bind_result($StudentNo, $FirstName, $LastName, $GroupNo);
+			$stmt->bind_result($UserId, $FirstName, $LastName, $GroupNo);
 
 			echo '<div class="col-xs-6 col-sm-3">';
 			echo '<div class="layer tile_unsorted" data-force="30">';
@@ -101,7 +101,7 @@
 			echo '<ul id="0" class="connectedSortable" style="padding: 2px;"}>';
 
 			while ($stmt->fetch()){
-				echo '<li id="' .$StudentNo. '">' .$FirstName. ' ' .$LastName. '</li>';	
+				echo '<li id="' .$UserId. '">' .$FirstName. ' ' .$LastName. '</li>';	
 			}
 
 			echo '</ul></div></div></div>';
@@ -133,12 +133,12 @@
 		if ($counts != 0) {
 			for ($x= 1; $x<=$counts;$x++) {
 
-				$query = "SELECT `StudentNo`, `FirstName`, `LastName`, `GroupNo` FROM `student` WHERE `GroupNo` = ?";
+				$query = "SELECT `UserId`, `FirstName`, `LastName`, `GroupNo` FROM `users` WHERE `GroupNo` = ?";
 
 				if($stmt=$conn->prepare($query)) {
 					$stmt->bind_param('i', $x);
 					$stmt->execute();
-					$stmt->bind_result($StudentNo, $FirstName, $LastName, $GroupNo);
+					$stmt->bind_result($UserId, $FirstName, $LastName, $GroupNo);
 
 					echo '<div class="col-xs-6 col-sm-3">';
 					echo '<div class="layer tile" data-force="30">';
@@ -147,7 +147,7 @@
 					echo '<ul id="' .$x. '" class="connectedSortable" style="padding: 2px;"}>';
 
 					while ($stmt->fetch()){
-						echo '<li id="' .$StudentNo. '">' .$FirstName. ' ' .$LastName. '</li>';					
+						echo '<li id="' .$UserId. '">' .$FirstName. ' ' .$LastName. '</li>';					
 					}
 
 					echo '</ul></div></div></div>';

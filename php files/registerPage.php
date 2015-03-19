@@ -72,7 +72,7 @@
 						<input title="Enter your student email address" type="email" name ="emailAddress" class="form-control input-lg" placeholder="Email" required>
 					</div>
 					<div class="form-group">
-						<input title="Enter your 8 Student ID" type="text" name ="StudentId" class="form-control input-lg" placeholder="Student ID" required pattern="^[A-Za-z0-9_]{8,8}$">
+						<input title="Enter your 8 Student ID" type="text" name ="Login_Id" class="form-control input-lg" placeholder="Student ID" required pattern="^[A-Za-z0-9_]{8,8}$">
 					</div>
 					<div class="form-group">
 						<input title="Password must contain at least 8 characters including UPPER/lowercase and numbers" type="password" name="User_pass" class="form-control input-lg" placeholder="Password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
@@ -80,7 +80,7 @@
 										if(this.checkValidity()) form.Confirm_User_pass.pattern = this.value;">
 					</div>
 					<div class="form-group">
-						<input title="Please enter the same Password as above" type="password" name="Confirm_User_pass" class="form-control input-lg" placeholder="Password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+						<input title="Please enter the same Password as above" type="password" name="Confirm_User_pass" class="form-control input-lg" placeholder="Retype Password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
 							onchange="this.setCustomValidity(this.validity.patternMismatch ? this.title : '');">
 					</div>
 					

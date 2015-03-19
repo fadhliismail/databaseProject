@@ -87,11 +87,11 @@
                 //connect to database
                 include 'db_connect.php';
 
-                $queryStudent = "SELECT `StudentNo`, `FirstName`, `LastName`, `Email`, `StudentId`, `GroupNo` FROM `student` ORDER BY `FirstName`";
+                $queryStudent = "SELECT `UserId`, `FirstName`, `LastName`, `Email`, `Login_Id`, `GroupNo` FROM `users` WHERE `User_Level` = 'student' ORDER BY `FirstName`";
 
                 if($stmt=$conn->prepare($queryStudent)) {
                     $stmt->execute();
-                    $stmt->bind_result($StudentNo, $FirstName, $LastName, $Email, $StudentId, $GroupNo);
+                    $stmt->bind_result($UserId, $FirstName, $LastName, $Email, $Login_Id, $GroupNo);
 
 
                     echo '<div class="table-responsive"><table class="table table-nonfluid" id="student"><thead><tr class="filters">
@@ -102,12 +102,12 @@
                 </tr></thead>';
 
                 while($stmt->fetch()) {
-                    echo '<tr><td>' .$StudentId. '</td><td>' .$FirstName. '</td><td>' .$LastName. '</td><td><div class="arrow"></div></td></tr>';
+                    echo '<tr><td>' .$Login_Id. '</td><td>' .$FirstName. '</td><td>' .$LastName. '</td><td><div class="arrow"></div></td></tr>';
                     echo '<tr><td colspan="5"><i>Click to edit</i><br>';
-                    echo '<b>Name:</b> <a href="#" class="xeditable" id="FirstName" data-type="text" data-pk="' .$StudentNo. '" data-url="update_student.php" data-title="Enter username">' .$FirstName. '</a>';
-                    echo ' <a href="#" class="xeditable" id="LastName" data-type="text" data-pk="' .$StudentNo. '" data-url="update_student.php" data-title="Enter username">' .$LastName. '</a><br>';
-                    echo '<b>Email:</b> <a href="#" class="xeditable" id="Email" data-type="text" data-pk="' .$StudentNo. '" data-url="update_student.php" data-title="Enter username">' .$Email. '</a><br>';
-                    echo '<b>Group:</b> <a href="#" class="xeditable" id="GroupNo" data-type="text" data-pk="' .$StudentNo. '" data-url="update_student.php" data-title="Enter username">' .$GroupNo. '</a><br>';
+                    echo '<b>Name:</b> <a href="#" class="xeditable" id="FirstName" data-type="text" data-pk="' .$UserId. '" data-url="update_student.php" data-title="Enter username">' .$FirstName. '</a>';
+                    echo ' <a href="#" class="xeditable" id="LastName" data-type="text" data-pk="' .$UserId. '" data-url="update_student.php" data-title="Enter username">' .$LastName. '</a><br>';
+                    echo '<b>Email:</b> <a href="#" class="xeditable" id="Email" data-type="text" data-pk="' .$UserId. '" data-url="update_student.php" data-title="Enter username">' .$Email. '</a><br>';
+                    echo '<b>Group:</b> <a href="#" class="xeditable" id="GroupNo" data-type="text" data-pk="' .$UserId. '" data-url="update_student.php" data-title="Enter username">' .$GroupNo. '</a><br>';
                 }
 
                 echo '</table></div>';

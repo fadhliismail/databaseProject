@@ -65,7 +65,6 @@ $GroupNo=$_SESSION['GroupNo'];
 	<!-- content page -->
 	<div class="container">
 		<div class="page-header"><h1>Submit your report</h1></div>
-		<p>Welcome <?php print $login_user ?> of group <?php print $GroupNo ?>!</p>
 		The deadline of submission is on <b>Friday, 20 March 2014 before 12 PM</b>. Late submission will be deducted 5 marks from the final mark received from the peers.<p>
 		Your file must be of <b>.xml</b> type.
 		

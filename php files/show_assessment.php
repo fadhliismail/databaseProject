@@ -75,8 +75,8 @@
 
 	<!-- content page -->
 	<div class="container">
-		<div class="page-header"><h1>Manage Student Group</h1></div>
-		<p>Below is a list of student names & the groups. You can drag the student name into the the container group to assign the group to the student.</p>
+		<div class="page-header"><h1>Manage Assessment</h1></div>
+		<p>Below is a list of groups. You can drag the group into the the container group to assign which groups each group should assess.</p>
 		<div class="page-title">Assign Students to Group</div>
 
 		<!-- show group assessments distribution -->
@@ -89,7 +89,7 @@
 		include 'db_connect.php';
 
 		/*Calculate number of existing groups*/
-		$querygroup = "SELECT COUNT(DISTINCT GroupNo) AS `countgroup` FROM student WHERE `GroupNo` !=0";
+		$querygroup = "SELECT COUNT(DISTINCT GroupNo) AS `countgroup` FROM users WHERE `GroupNo` !=0";
 
 		if($stmt=$conn->prepare($querygroup)) {
 			$stmt->execute();
@@ -128,8 +128,8 @@
 		$stmt3->bind_result($Group_to_Assess);
 		$row=$stmt3->num_rows; //return number of rows
 
-		for($i=1;$i<=$row;$i++) { //for each assessor = $i, set group_to_assess = 
-			$queryShuffle = "UPDATE `assessment` SET `Group_to_Assess`=' .$row['rand($row)']. ' WHERE =`Assessor`=$i";
+		for($i=1;$i<=$row;$i++) { //for each assessor = $i, set group_to_assess
+			$queryShuffle = "UPDATE `assessment` SET `Group_to_Assess`= rand('.$row. ') WHERE =`Assessor`=' .$i";
 			$stmt4=$conn->prepare($queryShuffle);
 			$stmt4->execute();
 		}
