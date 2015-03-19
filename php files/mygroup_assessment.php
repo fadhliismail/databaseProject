@@ -105,7 +105,7 @@
 
 		$Group_to_Assess = $GroupNo;
 
-		//query statements
+		//calculate overall score for each assessment and find the average
 		$queryAssessment  = "SELECT score.AssessmentNo, SUM(score.Score_Criteria) as OverallScore, ROUND(SUM((score.Score_Criteria/3)*2)) AS AverageScore
 		FROM score
 		INNER JOIN assessment
@@ -113,6 +113,7 @@
 		WHERE assessment.Group_to_Assess = ?
 		GROUP BY assessment.AssessmentNo";
 
+		//show comment & score received for each criteria
 		$queryCriteria  = "SELECT score.CriteriaNo, score.Comment, score.Score_Criteria
 		FROM score
 		INNER JOIN assessment

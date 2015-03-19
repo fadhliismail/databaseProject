@@ -1,11 +1,11 @@
 <?php
-  session_start();
-  if(!isset($_SESSION['login_user'])){
-    header("location: loginPage.php");
-  }
-  $login_user=$_SESSION['login_user'];
-  $GroupNo=$_SESSION['GroupNo'];
-  
+session_start();
+if(!isset($_SESSION['login_user'])){
+	header("location: loginPage.php");
+}
+$login_user=$_SESSION['login_user'];
+$GroupNo=$_SESSION['GroupNo'];
+
 ?>
 
 <!DOCTYPE html>
@@ -64,7 +64,7 @@
 
 						</ul>
 					</li>
-					<li><a href="student_assessment.php">Analysis</a></li>
+					<li><a href="student_assessment.php">Student Assessment</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="logout.php">Log Out</a></li>
@@ -112,40 +112,52 @@
 
 		?>
 
+		<!-- Show list of students with groups assigned -->
 		<?php
-            //student any error
+        //student any error
 		error_reporting(E_ALL); ini_set('display_errors', 1); mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
-                //connect to database
+        //connect to database
 		include 'db_connect.php';
 
 		if(isset($_POST['Submit'])){
 			$counts = $_POST['counts'];
 		}
 
-		/*Show list of students in the assigned group*/
-		for ($x= 1; $x<=$counts;$x++) {
-
-			$query = "SELECT `StudentNo`, `FirstName`, `LastName`, `GroupNo` FROM `student` WHERE `GroupNo` = " .$x;
-
-			if($stmt=$conn->prepare($query)) {
-				$stmt->execute();
-				$stmt->bind_result($StudentNo, $FirstName, $LastName, $GroupNo);
-
-				echo '<div class="col-xs-6 col-sm-3">';
-				echo '<div class="layer tile" data-force="30">';
-				echo '<div class="tile__name"><b>Group ' .$x. '</b></div>';
-				echo '<div id="tile__list">';
-				echo '<ul id="' .$x. '" class="connectedSortable" style="padding: 2px;"}>';
-
-				while ($stmt->fetch()){
-					echo '<li id="' .$StudentNo. '">' .$FirstName. ' ' .$LastName. '</li>';					
-				}
-
-				echo '</ul></div></div></div>';
-			}
-
+		if(isset($_GET['countgroup'])){
+			$counts = $_GET['countgroup'];
 		}
+
+		/*Show list of students in the assigned group*/
+
+		if ($counts != 0) {
+			for ($x= 1; $x<=$counts;$x++) {
+
+				$query = "SELECT `StudentNo`, `FirstName`, `LastName`, `GroupNo` FROM `student` WHERE `GroupNo` = ?";
+
+				if($stmt=$conn->prepare($query)) {
+					$stmt->bind_param('i', $x);
+					$stmt->execute();
+					$stmt->bind_result($StudentNo, $FirstName, $LastName, $GroupNo);
+
+					echo '<div class="col-xs-6 col-sm-3">';
+					echo '<div class="layer tile" data-force="30">';
+					echo '<div class="tile__name"><b>Group ' .$x. '</b></div>';
+					echo '<div id="tile__list">';
+					echo '<ul id="' .$x. '" class="connectedSortable" style="padding: 2px;"}>';
+
+					while ($stmt->fetch()){
+						echo '<li id="' .$StudentNo. '">' .$FirstName. ' ' .$LastName. '</li>';					
+					}
+
+					echo '</ul></div></div></div>';
+				}
+			}
+		} else {
+			die('<div class="col-xs-6 col-sm-3"><div id="err1" class="alert alert-danger alert-dismissible" role="alert"><div class = "showerror">You have not created any group yet!</div></div></div>');
+		}
+
+
 		$stmt->close();
 		$conn->close();
 		?>

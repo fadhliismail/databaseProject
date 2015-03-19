@@ -56,7 +56,7 @@ $GroupNo=$_SESSION['GroupNo'];
 					<li role="presentation"><a href="help.php">Help</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="logout.php">">Log Out</a></li>
+					<li><a href="logout.php">Log Out</a></li>
 				</ul>
 			</div><!--/.nav-collapse -->
 		</div>

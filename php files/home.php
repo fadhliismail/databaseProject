@@ -129,23 +129,71 @@ $GroupNo=$_SESSION['GroupNo'];
     FROM `group` 
     CROSS JOIN (SELECT @rownum := 0) c
     ORDER BY AverageScore DESC
-    ) as result WHERE GroupNo = ?";
+    ) AS result WHERE GroupNo = ?";
 
 $stmt = $conn->prepare($query2);
 
 if ($GroupNo != 0) {
   $stmt->bind_param('i', $GroupNo);
   $stmt->execute();
+  $stmt->store_result();
   $stmt->bind_result($GroupNo, $rank, $AverageScore);
   $stmt->fetch();
 
-  echo 'Your group is ranked<button type="button" disabled class="btn btn-lg" style="margin:0 0 15px 15px"><b> ' .$rank. '</b></button>';
+  echo 'Your group is ranked<button type="button" disabled class="btn btn-lg" style="margin:0 0 15px 15px"><b> ' .$rank. '</b>
+</button> with average score of <button type="button" disabled class="btn btn-lg" style="margin:0 0 15px 15px"><b> ' .$AverageScore. '</b></button><br>';
 
 } else {
   echo 'You group has not been assessed yet, therefore there is no rank available.';
 }
-$stmt -> close();
+
+$stmt->close();
 $conn -> close();
+?>
+
+<!-- Show marks from groups that assess the group report -->
+<?php
+//report any error
+error_reporting(E_ALL); ini_set('display_errors', 1); mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+
+        //connect to database
+include 'db_connect.php';
+$queryAssessor = "SELECT `Assessor` FROM `assessment` WHERE `Group_to_Assess` = ?";
+
+$stmt3=$conn->prepare($queryAssessor);
+
+if ($GroupNo != 0) {
+  $stmt3->bind_param('i', $GroupNo);
+  $stmt3->execute();
+  $stmt3->store_result();
+  $stmt3->bind_result($Assessor);
+  
+  $queryOthers ="SELECT `AverageScore` FROM `group` WHERE `GroupNo` = ?"; 
+  //=(SELECT ROUND(((SUM(`Score`))/3)*2) AS AverageScore FROM `assessment` WHERE Group_to_Assess = ?)
+
+  echo 'The groups which have assessed you have marks of ';
+
+  while ($stmt3->fetch()) {
+    $stmt2 = $conn->prepare($queryOthers); 
+    $stmt2->bind_param('i', $Assessor);
+    $stmt2->execute();
+    $resultrow = $stmt2->get_result();
+    $stmt2->store_result();
+    $stmt2->bind_result($AverageScore);
+    
+    foreach ($resultrow as $row) {
+      echo '<button type="button" disabled class="btn btn-lg" style="margin:0 0 15px 15px"><b>' .$row['AverageScore']. '</b></button>, ';
+    }
+
+  }
+  echo 'respectively.';
+} else {
+  echo 'You group has not been assessed yet, therefore there is no rank available.';
+}
+
+$stmt3 -> close();
+$conn->close();
+
 ?>
 
 </div><!-- end of container -->

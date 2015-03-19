@@ -94,7 +94,7 @@
                     $stmt->bind_result($StudentNo, $FirstName, $LastName, $Email, $StudentId, $GroupNo);
 
 
-                    echo '<table class="table" id="student"><thead><tr class="filters">
+                    echo '<div class="table-responsive"><table class="table table-nonfluid" id="student"><thead><tr class="filters">
                     <th><input type="text" class="form-control" placeholder="Student Id" disabled></th>
                     <th><input type="text" class="form-control" placeholder="First Name" disabled></th>
                     <th><input type="text" class="form-control" placeholder="Last Name" disabled></th>
@@ -110,7 +110,7 @@
                     echo '<b>Group:</b> <a href="#" class="xeditable" id="GroupNo" data-type="text" data-pk="' .$StudentNo. '" data-url="update_student.php" data-title="Enter username">' .$GroupNo. '</a><br>';
                 }
 
-                echo '</table>';
+                echo '</table></div>';
             }
             $stmt->close();
             $conn->close();

@@ -88,7 +88,7 @@ if ($stmt = $conn->prepare($query)) {
 	while ($stmt->fetch()) {
 		echo '<tr>';
 		echo '<td>' .$rank. '</td>';
-		echo '<td>' .$GroupNo. '</td>';
+		echo '<td>Group ' .$GroupNo. '</td>';
 		echo '<td>' .$AverageScore. '</td></tr>';
 	}
 

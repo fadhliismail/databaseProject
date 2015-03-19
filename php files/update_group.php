@@ -8,9 +8,6 @@ include 'db_connect.php';
 
 $studentno = $_GET['id'];
 $groupno = $_GET['group'];
-var_dump($groupno);
-var_dump($studentno);
-
 
 $query = "UPDATE `student` SET `GroupNo` = ? WHERE StudentNo = ?";
 	//$result = 'update users set '.mysql_escape_string($name).'="'.mysql_escape_string($value).'" where user_id = "'.mysql_escape_string($pk).'"';
@@ -18,6 +15,9 @@ $query = "UPDATE `student` SET `GroupNo` = ? WHERE StudentNo = ?";
 $stmt = $conn->prepare($query);
 $stmt->bind_param('ii', $groupno, $studentno);
 $stmt->execute();
+
+$stmt->close();
+$conn->close();
 
 
 

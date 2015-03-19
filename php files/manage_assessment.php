@@ -59,7 +59,7 @@ $GroupNo=$_SESSION['GroupNo'];
 						<ul class="dropdown-menu" role="menu">
 							<li><a href="manage_group.php" class="active">Manage Group</a></li>
 							<li><a href="manage_student.php">Manage Student</a></li>
-
+							<li><a href="manage_assessment.php">Manage Assessment</a></li>
 						</ul>
 					</li>
 					<li><a href="student_assessment.php">Student Assessment</a></li>
@@ -73,53 +73,87 @@ $GroupNo=$_SESSION['GroupNo'];
 
 	<!-- content page -->
 	<div class="container">
-		<div class="page-header"><h1>Manage Student Group</h1></div>
-		<p>Below is a list of student names. You can key in the number of groups you wish to make. You can drag the student name into the the container group to assign the group to the student.</p>
-		<div class="page-title">Assign Students to Group</div>
-		<p>How many groups to generate?</p>
-		<form action="show_groups.php" method="post" onsubmit="location:grouping.php">
-			<div class="col-lg-3"><input type="text" class="form-control" name="counts"></div>
-			<input type="Submit" class="btn btn-default" name="Submit" value="Submit">
-		</form>
-		<br>
+		<div class="page-header"><h1>Manage Assessment</h1></div>
+		<p>This is where you assign groups to be assessed by each group.</p> 
+		<div id="err1" class="alert alert-info" role="alert" aria-label="Left Align">Before you do this, please make sure that you've assigned groups to the students.</div>
+		<div class="page-title">Assign Groups for Assessment</div>
 
-		<!-- Show list of students with no group assigned -->
+		<!-- Show existing groups for the course -->
 		<?php
 
-        //student any error
+        //show any error
 		error_reporting(E_ALL); ini_set('display_errors', 1); mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
         //connect to database
 		include 'db_connect.php';
+		$querygroup = "SELECT COUNT(DISTINCT GroupNo) AS `countgroup` FROM student WHERE `GroupNo` !=0";
 
-		$queryStudent = "SELECT `StudentNo`, `FirstName`, `LastName`, `GroupNo` FROM `student` WHERE `GroupNo` = 0 ORDER BY `FirstName`";
-
-		if($stmt=$conn->prepare($queryStudent)) {
+		if($stmt=$conn->prepare($querygroup)) {
 			$stmt->execute();
-			$stmt->bind_result($StudentNo, $FirstName, $LastName, $GroupNo);
+			$stmt->store_result();
+			$stmt->bind_result($countgroup);
+			$stmt->fetch();
 
-			echo '<div class="col-xs-6 col-sm-3">';
-			echo '<div class="layer tile_unsorted" data-force="30">';
-			echo '<div class="tile__unsorted_name"><b>List of Students (Not Sorted)</b></div>';
-			echo '<div id="tile__list">';
-			echo '<ul id="0" class="connectedSortable" style="padding: 2px;"}>';
+			echo 'The course currently has <b>' .$countgroup. ' </b>groups.<br>';
+			
+		}
 
-			while ($stmt->fetch()){
-				echo '<li id="' .$StudentNo. '">' .$FirstName. ' ' .$LastName. '</li>';	
+		$stmt->close();
+		$conn->close();
+
+		?>
+		
+		<!-- alert if input is empty -->
+		<script>
+			function validateForm() {
+				var x = document.forms["assessmentform"]["assessmentcount"].value;
+				if (x == null || x == "" || x==0) {
+					alert("Enter the number of groups each group should assess.");
+					return false;
+				}
 			}
+		</script>
 
-			echo '</ul></div></div></div></div>';
+		<form name="assessmentform" class="form-inline" action="show_assessment.php" method="post" onsubmit="return validateForm()">
+			<div class="form-group">
+				<label for="datainput">Enter the number of groups each group should assess</label>
+				<input type="text" class="form-control" id ="datainput" name="assessmentcount" placeholder="e.g 2">
+			</div>
+			<input type="Submit" class="btn btn-default" name="Submit" value="Submit">
+		</form>
+		<br>
+		<p>OR</p>
+		View the assessments that have been assigned
+		<!-- Show assessments that have been arranged -->
+		<?php
+
+        //show any error
+		error_reporting(E_ALL); ini_set('display_errors', 1); mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+
+        //connect to database
+		include 'db_connect.php';
+		$querygroup = "SELECT COUNT(DISTINCT GroupNo) AS `countgroup` FROM student WHERE `GroupNo` !=0";
+
+		if($stmt=$conn->prepare($querygroup)) {
+			$stmt->execute();
+			$stmt->store_result();
+			$stmt->bind_result($countgroup);
+			$stmt->fetch();
+
+			echo '<a href ="show_assessment.php?countgroup=' .$countgroup. '" class="btn btn-info btn-default" aria-label="Left Align" onclick="return alertFunction()">
+			<span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span> Show me</a>';
+
 		}
 
 		$stmt->close();
 		$conn->close();
 
 		?>	
-		
+
 	</div>
-	
+
 	<!-- footer -->
 	<?php include 'footer.php'; ?>
-	
+
 </body>
 </html>
