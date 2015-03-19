@@ -1,27 +1,10 @@
 <?php
-/* setting */
-// DSN(Data Source Name)
-define('DB_DSN', 'mysql:dbname=virtual_learning;host=127.0.0.1;charset=utf8');
-define('DB_USER', 'root');               // username 
-define('DB_PASS', '');                   // password
+//connect to database
+include 'db_connect.php';
 define('SESSION_NAME', 'MiniBoard');     // Sessuion Name
-define('DISP_MAX',  10);                 // Max cases of display
-define('LIMIT_SEC', 5);                  // Time period of interval
-define('TOKEN_MAX', 10);                 // Max number of token   
 
 function h($str) {
     return htmlspecialchars($str, ENT_QUOTES, 'UTF-8');
-}
-
-function e($msg, Exception &$previous = null) {
-    return new RuntimeException($msg, 0, $previous);
-}
-
-function exception_to_array(Exception $e) {
-    do {
-        $msgs[] = $e->getMessage();
-    } while ($e = $e->getPrevious());
-    return array_reverse($msgs);
 }
 
 //initialize variables
@@ -34,18 +17,14 @@ session_name(SESSION_NAME);
 if (!$_SESSION) {
     $_SESSION = array(
         'id'    => '',
-        'title' => '',
         'name'  => '',
         'text'  => '',
         'assessmentID'=> '',
-        'token' => array(),
         'prev'  => null,
     );
 }
 
 try {
-    $pdo = new PDO(DB_DSN, DB_USER, DB_PASS);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     // code of pushing submission button
     if ($submit) {
         //$id is assessmentNo
@@ -53,33 +32,80 @@ try {
         try {
             $_SESSION['name'] = $name;
             $_SESSION['text'] = $text;
-            $_SESSION['title'] = $title;
             $_SESSION['assessmentID'] = $id;
-                 
-            if (!empty($e)) {
-                throw $e;
-            }      
-            // when the submission finished, the message will be shown
-            throw e('submission finished', $e);
-        } catch (Exception $e) { }
+            
+            // name check
+            if (!$len = mb_strlen($name) or $len > 30) {
+                echo '<script type="text/javascript">';
+                echo 'alert( "put your name under 30 character length" )';
+                echo '</script>';
+                throw new Exception;
+            }
+            // text chec
+            if (!$len = mb_strlen($text) or $len > 140) {
+                echo '<script type="text/javascript">';
+                echo 'alert( "put your text under 1 to 140 character length" )';
+                echo '</script>';
+                throw new Exception;
+            }
+            
+            $stmt = $conn->prepare(implode(' ', array(
+                'INSERT',
+                'INTO mini_board(`name`,`text`,`assessmentID`,`time`)',
+                'VALUES(?, ?, ?, ?)',
+            )));
+            $date =  date('Y-m-d H:i:s', $_SERVER['REQUEST_TIME']);
+            $stmt->bind_param('ssis', $name,$text,$id,$date);
+            $stmt->execute();  
+              echo '<script type="text/javascript">';
+              echo 'alert( "Your message is submitted" )';
+              echo '</script>';
+            $_SESSION['prev'] = $_SERVER['REQUEST_TIME'];
+            $_SESSION['text'] = '';
+        } catch (Exception $e) { echo'error'; }
     }
     $id = $_GET['id'];
 
-    $stmt = $pdo->prepare(implode(' ', array(
+    $stmt = $conn->prepare(implode(' ', array(
         'SELECT',
-        'SQL_CALC_FOUND_ROWS `id`,`name`,`text`, `time`,`AssessmentID`, `title`',
+        '`id`,`name`,`text`, `time`,`AssessmentID`',
         'FROM mini_board',
         'WHERE AssessmentID =',
         $id,
     )));
-    $stmt->bindValue(1, ($page - 1) * DISP_MAX, PDO::PARAM_INT);
-    $stmt->bindValue(2, DISP_MAX, PDO::PARAM_INT);
+   
+    echo '<div class="container">';
     $stmt->execute();
-    $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    $current_count = count($articles);
-    $whole_count = (int)$pdo->query('SELECT FOUND_ROWS()')->fetchColumn();
-    $page_count = ceil($whole_count / DISP_MAX);
+    $stmt->store_result();
+    $stmt->bind_result($id,$name,$text,$time,$AssessmentID);
+    echo '<h1>discussion board#'.$id.'</h1>';
+    echo '<div id="textarea">';
+    echo ' <form action="" method="post">';
+    echo ' <label>name: <input name="name" type="text" value="'.$name.'" /></label><br>';
+    echo ' <label>text<p><textarea name="text" rows="4"cols="40">'.$text.'</textarea></p></label><br>';
+    echo '           <label style="text-align:left;"><input type="submit" name="submit" value="submission" /></label>';
+    echo '      </form>';
+    echo '      </div>';
 
+    echo '<div class="table-responsive">';
+            echo '<table class ="table table-nonfluid">';
+            echo '	<tr>';
+            echo '		<th>Name</th>';
+            echo '		<th>Text</th>';
+            echo '		<th>Time</th>';
+            echo '	</tr>';
+    while($stmt->fetch()){
+
+            echo '	<tr>';
+            echo '              <td>'.$name.'</td> ';
+            echo '              <td>'.$text.'</td> ';
+            echo '              <td>'.$time.'</td>';
+            echo '	</tr>';         
+    }
+            echo '</table>';
+    echo '</div>';
+    echo '<div class="container">';
+    
 } catch (Exception $e) { }
 ?>
 <!DOCTYPE html>
@@ -88,14 +114,12 @@ try {
     <title>discussion board</title>
         <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 	<!-- Custom CSS -->
 	<link rel ="stylesheet" type="text/css" href="css/mystyle.css">
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="css/bootstrap.css">
 	<!-- Custom styles for this template -->
 	<link href="sticky-footer-navbar.css" rel="stylesheet">
-
   </head>
   <body>
       	<nav class="navbar navbar-default navbar-fixed-top">
@@ -127,45 +151,6 @@ try {
 			</div>
 		</div>
 	</nav>
-    <div >
-      <div >
-        <?php //$id is assessmentNo
-        $id = $_GET['id'];
-        echo '<h1>discussion board#'.$id.'</h1>' ?>
-      </div>
-      <div>
-      
-<?php if (!empty($e)): ?>
-        <div id="messages">
-<?php foreach (exception_to_array($e) as $msg): ?>
-          <div><?php=h($msg)?></div>
-<?php endforeach; ?>
-        </div>
-<?php endif; ?>
-<?php if (!empty($articles)): ?>
-<?php foreach ($articles as $article): ?>
-           <div class="table-responsive">
-		<table class ="table table-nonfluid">
-                        <tr>
-				<th>Discussion Title</th>
-				<th>started by</th>
-				<th>last post</th>
-			</tr>
-                        <tr>
-                                
-                                <?php  $Address=h($article['AssessmentID']); 
-                                       $TitleName=h($article['title']); 
-                                echo '<td><a href="discussion.php?id='.$Address.'">'.$TitleName.'</a></td>';
-                                ?>                              
-                                <td><?=h($article['name'])?> </td>                                                              
-                                <td></td>
-                        </tr>  
-            	</table>
-            </div>
-<?php endforeach; ?>
-        </div>
-<?php endif; ?>
-      </div>
     </div>
   </body>
     <?php include 'footer.php'?>

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 18, 2015 at 11:46 AM
+-- Generation Time: Mar 19, 2015 at 01:19 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -19,6 +19,57 @@ SET time_zone = "+00:00";
 --
 -- Database: `virtual_learning`
 --
+
+DELIMITER $$
+--
+-- Procedures
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_name`()
+BEGIN
+DECLARE c int;
+SET c = 6;
+WHILE c<60 DO
+UPDATE `assessment` 
+SET `Score`= (SELECT SUM(Score_Criteria) as OverallScore FROM score WHERE AssessmentNo = c) WHERE AssessmentNo = c;
+
+  SET c = c + 1;
+END WHILE;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `test`()
+BEGIN
+DECLARE count INT DEFAULT 0 ;
+WHILE count < 600 DO
+UPDATE `assessment` SET `Score`= (SELECT SUM(Score_Criteria) as OverallScore FROM score WHERE AssessmentNo = count) WHERE AssessmentNo = count ;
+SET count = count + 1 ;
+END WHILE ;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `test2`()
+BEGIN
+DECLARE c INT DEFAULT 0;
+SET c = 6;
+WHILE c<60 DO
+UPDATE `assessment` 
+SET `Score`= (SELECT SUM(Score_Criteria) as OverallScore FROM score WHERE AssessmentNo = c) WHERE AssessmentNo = c;
+
+  SET c = c + 1;
+END WHILE;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `test4`()
+BEGIN
+DECLARE c INT DEFAULT 0;
+SET c = 6;
+WHILE c<60 DO
+UPDATE `assessment` 
+SET `Score`= (SELECT SUM(Score_Criteria) as OverallScore FROM score WHERE AssessmentNo = c) WHERE AssessmentNo = c;
+
+  SET c = c + 1;
+END WHILE;
+END$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -38,66 +89,66 @@ CREATE TABLE IF NOT EXISTS `assessment` (
 --
 
 INSERT INTO `assessment` (`AssessmentNo`, `Assessor`, `Group_to_Assess`, `Score`) VALUES
-(1, 4, 14, 24),
-(2, 8, 1, 33),
+(1, 4, 14, 29),
+(2, 8, 1, 30),
 (3, 7, 2, 33),
-(4, 11, 13, 47),
-(5, 6, 8, 40),
-(6, 15, 6, 22),
-(7, 2, 10, 40),
-(8, 12, 4, 28),
-(9, 16, 5, 46),
-(10, 10, 19, 44),
-(11, 9, 15, 38),
-(12, 9, 19, 31),
-(13, 13, 3, 48),
-(14, 6, 2, 45),
-(15, 16, 5, 22),
-(16, 3, 16, 25),
-(17, 5, 5, 23),
-(18, 8, 4, 34),
-(19, 5, 10, 32),
-(20, 15, 10, 25),
-(21, 13, 17, 23),
-(22, 14, 9, 45),
-(23, 1, 16, 30),
-(24, 6, 1, 48),
-(25, 9, 9, 38),
-(26, 3, 18, 38),
-(27, 20, 11, 31),
-(28, 1, 7, 46),
-(29, 11, 17, 46),
-(30, 13, 4, 36),
-(31, 17, 2, 41),
-(32, 19, 20, 48),
-(33, 11, 19, 27),
-(34, 4, 18, 34),
-(35, 10, 9, 49),
-(36, 5, 17, 20),
-(37, 10, 20, 44),
-(38, 15, 15, 37),
-(39, 4, 12, 33),
-(40, 2, 3, 20),
-(41, 12, 13, 24),
-(42, 14, 11, 44),
-(43, 1, 8, 25),
-(44, 12, 12, 38),
-(45, 17, 1, 25),
-(46, 14, 6, 33),
-(47, 19, 11, 36),
-(48, 3, 12, 50),
-(49, 20, 3, 40),
-(50, 7, 7, 39),
-(51, 17, 14, 35),
-(52, 18, 15, 46),
-(53, 16, 7, 23),
-(54, 8, 6, 49),
-(55, 19, 14, 26),
-(56, 7, 16, 36),
-(57, 18, 8, 29),
-(58, 18, 13, 39),
-(59, 2, 20, 88),
-(60, 20, 18, 23);
+(4, 11, 13, 30),
+(5, 6, 8, 26),
+(6, 15, 6, 38),
+(7, 2, 10, 23),
+(8, 12, 4, 38),
+(9, 16, 5, 27),
+(10, 10, 19, 34),
+(11, 9, 15, 23),
+(12, 9, 19, 32),
+(13, 13, 3, 22),
+(14, 6, 2, 28),
+(15, 16, 5, 16),
+(16, 3, 16, 24),
+(17, 5, 5, 20),
+(18, 8, 4, 37),
+(19, 5, 10, 17),
+(20, 15, 10, 14),
+(21, 13, 17, 313),
+(22, 14, 9, 313),
+(23, 1, 16, 313),
+(24, 6, 1, 25),
+(25, 9, 9, 313),
+(26, 3, 18, 313),
+(27, 20, 11, 313),
+(28, 1, 7, 313),
+(29, 11, 17, 313),
+(30, 13, 4, 313),
+(31, 17, 2, 313),
+(32, 19, 20, 313),
+(33, 11, 19, 313),
+(34, 4, 18, 313),
+(35, 10, 9, 313),
+(36, 5, 17, 313),
+(37, 10, 20, 313),
+(38, 15, 15, 313),
+(39, 4, 12, 313),
+(40, 2, 3, 313),
+(41, 12, 13, 313),
+(42, 14, 11, 313),
+(43, 1, 8, 313),
+(44, 12, 12, 313),
+(45, 17, 1, 26),
+(46, 14, 6, 313),
+(47, 19, 11, 313),
+(48, 3, 12, 313),
+(49, 20, 3, 313),
+(50, 7, 7, 313),
+(51, 17, 14, 313),
+(52, 18, 15, 313),
+(53, 16, 7, 313),
+(54, 8, 6, 313),
+(55, 19, 14, 313),
+(56, 7, 16, 313),
+(57, 18, 8, 313),
+(58, 18, 13, 52),
+(59, 2, 20, 60),
+(60, 20, 18, 58);
 
 -- --------------------------------------------------------
 
@@ -108,34 +159,35 @@ INSERT INTO `assessment` (`AssessmentNo`, `Assessor`, `Group_to_Assess`, `Score`
 CREATE TABLE IF NOT EXISTS `group` (
 `GroupNo` int(11) NOT NULL,
   `ReportNo` int(11) DEFAULT NULL,
-  `AverageScore` int(11) DEFAULT NULL
+  `AverageScore` int(11) DEFAULT NULL,
+  `AssessmentNo` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `group`
 --
 
-INSERT INTO `group` (`GroupNo`, `ReportNo`, `AverageScore`) VALUES
-(1, 1, 33),
-(2, 2, 34),
-(3, 3, 37),
-(4, 4, 4),
-(5, 5, 11),
-(6, 6, 29),
-(7, 7, 36),
-(8, 8, 15),
-(9, 9, 17),
-(10, 10, 8),
-(11, 11, 33),
-(12, 12, 33),
-(13, 13, 27),
-(14, 14, 25),
-(15, 15, 14),
-(16, 16, 50),
-(17, 17, 50),
-(18, 18, 21),
-(19, 19, 10),
-(20, 20, 7);
+INSERT INTO `group` (`GroupNo`, `ReportNo`, `AverageScore`, `AssessmentNo`) VALUES
+(1, 1, 54, 0),
+(2, 2, 79, 0),
+(3, 3, 37, 0),
+(4, 4, 4, 0),
+(5, 5, 11, 0),
+(6, 6, 29, 0),
+(7, 7, 36, 0),
+(8, 8, 15, 0),
+(9, 9, 17, 0),
+(10, 10, 8, 0),
+(11, 11, 33, 0),
+(12, 12, 33, 0),
+(13, 13, 27, 0),
+(14, 14, 25, 0),
+(15, 15, 14, 0),
+(16, 16, 50, 0),
+(17, 17, 50, 0),
+(18, 18, 21, 0),
+(19, 19, 10, 0),
+(20, 20, 7, 0);
 
 -- --------------------------------------------------------
 
@@ -162,7 +214,7 @@ CREATE TABLE IF NOT EXISTS `report` (
 --
 
 INSERT INTO `report` (`ReportNo`, `GroupNo`, `File_Link`, `File_Name`, `File_Size`, `File_Type`, `Intro`, `Main`, `Conclusion`, `Submission_Timestamp`, `Submission_Updated`) VALUES
-(1, 1, 'http://localhost/virtual_learning/uploads/report10.xml', 'report10.xml', '2386', 'text/xml', 'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth. Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.', 'A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at the present moment; and yet I feel that I never was a greater artist than now. When, while the lovely valley teems with vapour around me, and the meridian sun strikes the upper surface of the impenetrable foliage of my trees, and but a few stray gleams steal into the inner sanctuary, I throw myself down among the tall grass by the trickling stream; and, as I lie close to the earth, a thousand unknown plants are noticed by me: when I hear the buzz of the little world among the stalks, and grow familiar with the countless indescribable forms of the insects and flies, then I feel t', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. ', '2015-03-18 00:17:51', '2015-03-18 00:17:51'),
+(1, 1, 'http://localhost/virtual_learning/uploads/report10.xml', 'report10.xml', '2386', 'text/xml', 'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth. Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.', 'A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at the present moment; and yet I feel that I never was a greater artist than now. When, while the lovely valley teems with vapour around me, and the meridian sun strikes the upper surface of the impenetrable foliage of my trees, and but a few stray gleams steal into the inner sanctuary, I throw myself down among the tall grass by the trickling stream; and, as I lie close to the earth, a thousand unknown plants are noticed by me: when I hear the buzz of the little world among the stalks, and grow familiar with the countless indescribable forms of the insects and flies, then I feel t', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. ', '2015-03-19 00:34:16', '2015-03-19 00:34:16'),
 (2, 2, 'http://localhost/virtual_learning/uploads/report10.xml', 'report10.xml', '2386', 'text/xml', 'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth. Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.', 'A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at the present moment; and yet I feel that I never was a greater artist than now. When, while the lovely valley teems with vapour around me, and the meridian sun strikes the upper surface of the impenetrable foliage of my trees, and but a few stray gleams steal into the inner sanctuary, I throw myself down among the tall grass by the trickling stream; and, as I lie close to the earth, a thousand unknown plants are noticed by me: when I hear the buzz of the little world among the stalks, and grow familiar with the countless indescribable forms of the insects and flies, then I feel t', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. ', '2015-03-17 22:23:17', '0000-00-00 00:00:00'),
 (3, 3, 'http://localhost/virtual_learning/uploads/report10.xml', 'report10.xml', '2386', 'text/xml', 'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth. Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.', 'A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at the present moment; and yet I feel that I never was a greater artist than now. When, while the lovely valley teems with vapour around me, and the meridian sun strikes the upper surface of the impenetrable foliage of my trees, and but a few stray gleams steal into the inner sanctuary, I throw myself down among the tall grass by the trickling stream; and, as I lie close to the earth, a thousand unknown plants are noticed by me: when I hear the buzz of the little world among the stalks, and grow familiar with the countless indescribable forms of the insects and flies, then I feel t', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. ', '2015-03-17 22:23:27', '0000-00-00 00:00:00'),
 (4, 4, 'http://localhost/virtual_learning/uploads/report10.xml', 'report10.xml', '2386', 'text/xml', 'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth. Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.', 'A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at the present moment; and yet I feel that I never was a greater artist than now. When, while the lovely valley teems with vapour around me, and the meridian sun strikes the upper surface of the impenetrable foliage of my trees, and but a few stray gleams steal into the inner sanctuary, I throw myself down among the tall grass by the trickling stream; and, as I lie close to the earth, a thousand unknown plants are noticed by me: when I hear the buzz of the little world among the stalks, and grow familiar with the countless indescribable forms of the insects and flies, then I feel t', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. ', '2015-03-17 22:23:45', '0000-00-00 00:00:00'),
@@ -312,11 +364,11 @@ INSERT INTO `score` (`ScoreNo`, `AssessmentNo`, `CriteriaNo`, `Comment`, `Score_
 (108, 22, '3', 'risus. Donec nibh enim, gravida sit amet, dapibus id, blandit at, nisi. Cum sociis natoque penatibus et magnis dis parturient', 2),
 (109, 22, '4', 'dis parturient montes, nascetur ridiculus mus. Proin vel nisl. Quisque fringilla euismod enim. Etiam gravida molestie arcu. Sed eu nibh', 8),
 (110, 22, '5', 'nec ante blandit viverra. Donec tempus, lorem fringilla ornare placerat, orci lacus vestibulum lorem, sit amet ultricies sem magna nec', 4),
-(111, 23, '1', 'vitae aliquam eros turpis non enim. Mauris quis turpis vitae purus gravida sagittis. Duis gravida. Praesent eu nulla at sem', 9),
-(112, 23, '2', 'rutrum magna. Cras convallis convallis dolor. Quisque tincidunt pede ac urna. Ut tincidunt vehicula risus. Nulla eget metus eu erat', 2),
-(113, 23, '3', 'malesuada vel, convallis in, cursus et, eros. Proin ultrices. Duis volutpat nunc sit amet metus. Aliquam erat volutpat. Nulla facilisis.', 4),
-(114, 23, '4', 'Sed eu nibh vulputate mauris sagittis placerat. Cras dictum ultricies ligula. Nullam enim. Sed nulla ante, iaculis nec, eleifend non,', 5),
-(115, 23, '5', 'arcu. Sed eu nibh vulputate mauris sagittis placerat. Cras dictum ultricies ligula. Nullam enim. Sed nulla ante, iaculis nec, eleifend', 1),
+(111, 23, '1', 'vitae aliquam eros turpis non enim. Mauris quis turpis vitae purus gravida sagittis. Duis gravida. Praesent eu nulla at sem', 10),
+(112, 23, '2', 'rutrum magna. Cras convallis convallis dolor. Quisque tincidunt pede ac urna. Ut tincidunt vehicula risus. Nulla eget metus eu erat', 10),
+(113, 23, '3', 'malesuada vel, convallis in, cursus et, eros. Proin ultrices. Duis volutpat nunc sit amet metus. Aliquam erat volutpat. Nulla facilisis.', 10),
+(114, 23, '4', 'Sed eu nibh vulputate mauris sagittis placerat. Cras dictum ultricies ligula. Nullam enim. Sed nulla ante, iaculis nec, eleifend non,', 10),
+(115, 23, '5', 'arcu. Sed eu nibh vulputate mauris sagittis placerat. Cras dictum ultricies ligula. Nullam enim. Sed nulla ante, iaculis nec, eleifend', 10),
 (116, 24, '1', 'aliquam eros turpis non enim. Mauris quis turpis vitae purus gravida sagittis. Duis gravida. Praesent eu nulla at sem molestie', 6),
 (117, 24, '2', 'vitae sodales nisi magna sed dui. Fusce aliquam, enim nec tempus scelerisque, lorem ipsum sodales purus, in molestie tortor nibh', 9),
 (118, 24, '3', 'Cras interdum. Nunc sollicitudin commodo ipsum. Suspendisse non leo. Vivamus nibh dolor, nonummy ac, feugiat non, lobortis quis, pede. Suspendisse', 3),
@@ -337,11 +389,11 @@ INSERT INTO `score` (`ScoreNo`, `AssessmentNo`, `CriteriaNo`, `Comment`, `Score_
 (133, 27, '3', 'porttitor eros nec tellus. Nunc lectus pede, ultrices a, auctor non, feugiat nec, diam. Duis mi enim, condimentum eget, volutpat', 6),
 (134, 27, '4', 'nulla magna, malesuada vel, convallis in, cursus et, eros. Proin ultrices. Duis volutpat nunc sit amet metus. Aliquam erat volutpat.', 8),
 (135, 27, '5', 'blandit at, nisi. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Proin vel nisl. Quisque fringilla', 10),
-(136, 28, '1', 'ipsum ac mi eleifend egestas. Sed pharetra, felis eget varius ultrices, mauris ipsum porta elit, a feugiat tellus lorem eu', 7),
-(137, 28, '2', 'malesuada fringilla est. Mauris eu turpis. Nulla aliquet. Proin velit. Sed malesuada augue ut lacus. Nulla tincidunt, neque vitae semper', 3),
-(138, 28, '3', 'Nulla aliquet. Proin velit. Sed malesuada augue ut lacus. Nulla tincidunt, neque vitae semper egestas, urna justo faucibus lectus, a', 9),
-(139, 28, '4', 'in, hendrerit consectetuer, cursus et, magna. Praesent interdum ligula eu enim. Etiam imperdiet dictum magna. Ut tincidunt orci quis lectus.', 7),
-(140, 28, '5', 'In faucibus. Morbi vehicula. Pellentesque tincidunt tempus risus. Donec egestas. Duis ac arcu. Nunc mauris. Morbi non sapien molestie orci', 1),
+(136, 28, '1', 'ipsum ac mi eleifend egestas. Sed pharetra, felis eget varius ultrices, mauris ipsum porta elit, a feugiat tellus lorem eu', 5),
+(137, 28, '2', 'malesuada fringilla est. Mauris eu turpis. Nulla aliquet. Proin velit. Sed malesuada augue ut lacus. Nulla tincidunt, neque vitae semper', 5),
+(138, 28, '3', 'Nulla aliquet. Proin velit. Sed malesuada augue ut lacus. Nulla tincidunt, neque vitae semper egestas, urna justo faucibus lectus, a', 5),
+(139, 28, '4', 'in, hendrerit consectetuer, cursus et, magna. Praesent interdum ligula eu enim. Etiam imperdiet dictum magna. Ut tincidunt orci quis lectus.', 5),
+(140, 28, '5', 'In faucibus. Morbi vehicula. Pellentesque tincidunt tempus risus. Donec egestas. Duis ac arcu. Nunc mauris. Morbi non sapien molestie orci', 5),
 (141, 29, '1', 'in consequat enim diam vel arcu. Curabitur ut odio vel est tempor bibendum. Donec felis orci, adipiscing non, luctus sit', 6),
 (142, 29, '2', 'turpis nec mauris blandit mattis. Cras eget nisi dictum augue malesuada malesuada. Integer id magna et ipsum cursus vestibulum. Mauris', 7),
 (143, 29, '3', 'faucibus leo, in lobortis tellus justo sit amet nulla. Donec non justo. Proin non massa non ante bibendum ullamcorper. Duis', 7),
@@ -412,11 +464,11 @@ INSERT INTO `score` (`ScoreNo`, `AssessmentNo`, `CriteriaNo`, `Comment`, `Score_
 (208, 42, '3', 'ante. Maecenas mi felis, adipiscing fringilla, porttitor vulputate, posuere vulputate, lacus. Cras interdum. Nunc sollicitudin commodo ipsum. Suspendisse non leo.', 10),
 (209, 42, '4', 'eleifend vitae, erat. Vivamus nisi. Mauris nulla. Integer urna. Vivamus molestie dapibus ligula. Aliquam erat volutpat. Nulla dignissim. Maecenas ornare', 7),
 (210, 42, '5', 'justo faucibus lectus, a sollicitudin orci sem eget massa. Suspendisse eleifend. Cras sed leo. Cras vehicula aliquet libero. Integer in', 2),
-(211, 43, '1', 'risus. Donec nibh enim, gravida sit amet, dapibus id, blandit at, nisi. Cum sociis natoque penatibus et magnis dis parturient', 2),
-(212, 43, '2', 'enim. Sed nulla ante, iaculis nec, eleifend non, dapibus rutrum, justo. Praesent luctus. Curabitur egestas nunc sed libero. Proin sed', 2),
-(213, 43, '3', 'Nullam enim. Sed nulla ante, iaculis nec, eleifend non, dapibus rutrum, justo. Praesent luctus. Curabitur egestas nunc sed libero. Proin', 9),
-(214, 43, '4', 'tristique pharetra. Quisque ac libero nec ligula consectetuer rhoncus. Nullam velit dui, semper et, lacinia vitae, sodales at, velit. Pellentesque', 1),
-(215, 43, '5', 'vulputate, posuere vulputate, lacus. Cras interdum. Nunc sollicitudin commodo ipsum. Suspendisse non leo. Vivamus nibh dolor, nonummy ac, feugiat non,', 2),
+(211, 43, '1', 'risus. Donec nibh enim, gravida sit amet, dapibus id, blandit at, nisi. Cum sociis natoque penatibus et magnis dis parturient', 10),
+(212, 43, '2', 'enim. Sed nulla ante, iaculis nec, eleifend non, dapibus rutrum, justo. Praesent luctus. Curabitur egestas nunc sed libero. Proin sed', 10),
+(213, 43, '3', 'Nullam enim. Sed nulla ante, iaculis nec, eleifend non, dapibus rutrum, justo. Praesent luctus. Curabitur egestas nunc sed libero. Proin', 10),
+(214, 43, '4', 'tristique pharetra. Quisque ac libero nec ligula consectetuer rhoncus. Nullam velit dui, semper et, lacinia vitae, sodales at, velit. Pellentesque', 10),
+(215, 43, '5', 'vulputate, posuere vulputate, lacus. Cras interdum. Nunc sollicitudin commodo ipsum. Suspendisse non leo. Vivamus nibh dolor, nonummy ac, feugiat non,', 10),
 (216, 44, '1', 'purus mauris a nunc. In at pede. Cras vulputate velit eu sem. Pellentesque ut ipsum ac mi eleifend egestas. Sed', 3),
 (217, 44, '2', 'dapibus ligula. Aliquam erat volutpat. Nulla dignissim. Maecenas ornare egestas ligula. Nullam feugiat placerat velit. Quisque varius. Nam porttitor scelerisque', 7),
 (218, 44, '3', 'sed dolor. Fusce mi lorem, vehicula et, rutrum eu, ultrices sit amet, risus. Donec nibh enim, gravida sit amet, dapibus', 2),
@@ -562,6 +614,7 @@ INSERT INTO `score` (`ScoreNo`, `AssessmentNo`, `CriteriaNo`, `Comment`, `Score_
 
 CREATE TABLE IF NOT EXISTS `student` (
 `StudentNo` int(11) NOT NULL,
+  `User_Level` varchar(50) NOT NULL,
   `FirstName` varchar(20) NOT NULL,
   `LastName` varchar(23) NOT NULL,
   `Email` varchar(100) NOT NULL,
@@ -574,69 +627,69 @@ CREATE TABLE IF NOT EXISTS `student` (
 -- Dumping data for table `student`
 --
 
-INSERT INTO `student` (`StudentNo`, `FirstName`, `LastName`, `Email`, `User_pass`, `StudentId`, `GroupNo`) VALUES
-(1, 'Brooke', 'Pickering', 'BrookePickering@ucl.ac.uk', 'test', 14073182, 0),
-(2, 'Lucy', 'Giles', 'LucyGiles@ucl.ac.uk', 'ees4liey1eY', 66526786, 1),
-(3, 'Benjamin', 'Dawson', 'BenjaminDawson@ucl.ac.uk', 'ic9zueGhi', 55728934, 1),
-(4, 'Adam2', 'Bruce', 'AdamBruce@ucl.ac.uk', 'xier6Jie6', 65753208, 2),
-(5, 'Thomas', 'Holden', 'ThomasHolden@ucl.ac.uk', 'ooXi6eeT8iw', 77096758, 2),
-(6, 'Amy', 'Kerr', 'AmyKerr@ucl.ac.uk', 'aiChooh8jeh', 45867151, 2),
-(7, 'Mollie', 'Davies', 'MollieDavies@ucl.ac.uk', 'Ohxohzoh6', 86259696, 3),
-(8, 'Zachary', 'Wright', 'ZacharyWright@ucl.ac.uk', 'uo6chaeTeiz', 99221457, 3),
-(9, 'Jonathan', 'Sharpe', 'JonathanSharpe@ucl.ac.uk', 'aisoh2mieT2', 48971384, 3),
-(10, 'Rachel', 'Howard', 'RachelHoward@ucl.ac.uk', 'raquae5Eesh', 45401486, 4),
-(11, 'Logan', 'Browne', 'LoganBrowne@ucl.ac.uk', 'aiH5eech8c', 8907706, 4),
-(12, 'Lara', 'Short', 'LaraShort@ucl.ac.uk', 'Ophe8kee7ee', 99760077, 4),
-(13, 'Louie', 'Wong', 'LouieWong@ucl.ac.uk', 'Oorie3oo0', 46530846, 5),
-(14, 'Daniel', 'Palmer', 'DanielPalmer@ucl.ac.uk', 'Ogahch9goo1', 18312339, 5),
-(15, 'Finlay', 'Donnelly', 'FinlayDonnelly@ucl.ac.uk', 'ohL9shuf1', 30847594, 5),
-(16, 'Maya', 'Burns', 'MayaBurns@ucl.ac.uk', 'youva2ahYai', 58915436, 6),
-(17, 'Keira', 'Summers', 'KeiraSummers@ucl.ac.uk', 'Eish3ooge', 2610763, 6),
-(18, 'Mohammad', 'Dunn', 'MohammadDunn@ucl.ac.uk', 'gahcuS0iegh', 78038779, 6),
-(19, 'Katherine', 'Evans', 'KatherineEvans@ucl.ac.uk', 'jae4Kohraez', 57783440, 7),
-(20, 'Anna', 'Howard', 'AnnaHoward@ucl.ac.uk', 'Ta1authixe', 48126048, 7),
-(21, 'Charlie', 'Armstrong', 'CharlieArmstrong@ucl.ac.uk', 'Dood9Kaiy8Uo', 90859207, 7),
-(22, 'Cameron', 'Simmons', 'CameronSimmons@ucl.ac.uk', 'Mei9aipi2', 47092387, 8),
-(23, 'Eloise', 'Burke', 'EloiseBurke@ucl.ac.uk', 'Ii0eef6ahth', 37628132, 8),
-(24, 'Thomas', 'Watkins', 'ThomasWatkins@ucl.ac.uk', 'IeDeek8hahf', 7366556, 8),
-(25, 'Rosie', 'Clayton', 'RosieClayton@ucl.ac.uk', 'shaeg6Ahgie', 40973246, 9),
-(26, 'Sofia', 'Holt', 'SofiaHolt@ucl.ac.uk', 'wiMoufaek4', 15319401, 9),
-(27, 'Katie', 'Blackburn', 'KatieBlackburn@ucl.ac.uk', 'phuThop5', 65612643, 9),
-(28, 'Hayden', 'Hurst', 'HaydenHurst@ucl.ac.uk', 'zaht1Weitir', 71115234, 10),
-(29, 'Laura', 'Hutchinson', 'LauraHutchinson@ucl.ac.uk', 'woh3nim6Tu', 87167062, 10),
-(30, 'Elliot', 'Randall', 'ElliotRandall@ucl.ac.uk', 'meeZ8mahwei', 31224430, 10),
-(31, 'Scarlett', 'Sharpe', 'ScarlettSharpe@ucl.ac.uk', 'Oht1Ahh7', 46737342, 11),
-(32, 'Daniel', 'Schofield', 'DanielSchofield@ucl.ac.uk', 'Iezi1yibeng', 5936602, 11),
-(33, 'Katherine', 'Williams', 'KatherineWilliams@ucl.ac.uk', 'oe5ahshahJae', 89427060, 11),
-(34, 'Charlotte', 'Stephenson', 'CharlotteStephenson@ucl.ac.uk', 've3ShoTu9vai', 43760249, 12),
-(35, 'Katie', 'Craig', 'KatieCraig@ucl.ac.uk', 'WiivahK9ahj', 13489010, 12),
-(36, 'Sofia', 'Wall', 'SofiaWall@ucl.ac.uk', 'Luoqu8jee1n', 88403651, 12),
-(37, 'Molly', 'Metcalfe', 'MollyMetcalfe@ucl.ac.uk', 'Xae9Fat8us4', 21406700, 13),
-(38, 'Finley', 'Anderson', 'FinleyAnderson@ucl.ac.uk', 'Io6ain2am', 37160157, 13),
-(39, 'Naomi', 'Cooke', 'NaomiCooke@ucl.ac.uk', 'iek5IeWoh', 68999268, 13),
-(40, 'Isabel', 'Connor', 'IsabelConnor@ucl.ac.uk', 'rap3Aigee', 61750462, 14),
-(41, 'Joseph', 'Chan', 'JosephChan@ucl.ac.uk', 'luDe2chai', 23367155, 14),
-(42, 'Harley', 'Rahman', 'HarleyRahman@ucl.ac.uk', 'ihaiSar0hoh', 53006197, 14),
-(43, 'Jay', 'Hobbs', 'JayHobbs@ucl.ac.uk', 'zaeK0yezas', 4777646, 15),
-(44, 'Erin', 'Walsh', 'ErinWalsh@ucl.ac.uk', 'aeMi1aiQu', 10840872, 15),
-(45, 'Molly', 'Russell', 'MollyRussell@ucl.ac.uk', 'auGei5za3ah', 11068064, 15),
-(46, 'Gabriel', 'Stevens', 'GabrielStevens@ucl.ac.uk', 'aimah7Eev5V', 88630093, 16),
-(47, 'Muhammad', 'Brady', 'MuhammadBrady@ucl.ac.uk', 'thohCiehae6X', 68935366, 16),
-(48, 'Jasmine', 'Kirby', 'JasmineKirby@ucl.ac.uk', 'Uu9Aecaich', 82292589, 16),
-(49, 'Tilly', 'Sinclair', 'TillySinclair@ucl.ac.uk', 'Niez2ahquix6vu', 25631273, 17),
-(50, 'Mohammad', 'Wheeler', 'MohammadWheeler@ucl.ac.uk', 'oM5Zifoezei', 21893050, 17),
-(51, 'Zachary', 'Kelly', 'ZacharyKelly@ucl.ac.uk', 'evo9IezaiN', 97462147, 17),
-(52, 'Tom', 'Flynn', 'TomFlynn@ucl.ac.uk', 'aif1Osaej', 14138172, 18),
-(53, 'Callum', 'Rowley', 'CallumRowley@ucl.ac.uk', 'Ahr3Wah7ee', 86319898, 18),
-(54, 'Oscar', 'Burns', 'OscarBurns@ucl.ac.uk', 'nied2Jeojoo', 4785616, 18),
-(55, 'Gabriel', 'Williams', 'GabrielWilliams@ucl.ac.uk', 'Iec3luak0i', 70527508, 19),
-(56, 'Ewan', 'Atkins', 'EwanAtkins@ucl.ac.uk', 'egohh9aeH', 80487745, 19),
-(57, 'Isabella', 'Miles', 'IsabellaMiles@ucl.ac.uk', 'Aiqu0xeey', 19025721, 19),
-(58, 'Sienna', 'Dunn', 'SiennaDunn@ucl.ac.uk', 'Kikoneiso0', 40393336, 20),
-(59, 'Noah', 'Harvey', 'NoahHarvey@ucl.ac.uk', 'uy9shahF', 14330840, 20),
-(60, 'Reece', 'Hobbs', 'ReeceHobbs@ucl.ac.uk', 'yahng5See', 68423387, 20),
-(91, 'izzatul', 'Samsudin', 'izzatul.samsudin@gmail.com', 'a94a8fe5ccb19ba61c4c0873d391e987982fbbd3', 14078569, 0),
-(94, 'Aaron', 'Livesy', 'hello@test.com', '$2y$10$tmlhhL0djkcxd6MWn1yw9uQzkKpLv8d1Rj39E2UrPscc5HjwtEdPu', 12345678, 1);
+INSERT INTO `student` (`StudentNo`, `User_Level`, `FirstName`, `LastName`, `Email`, `User_pass`, `StudentId`, `GroupNo`) VALUES
+(1, 'student', 'Brooke', 'Pickering', 'BrookePickering@ucl.ac.uk', 'test', 14073182, 1),
+(2, 'student', 'Lucy', 'Giles', 'LucyGiles@ucl.ac.uk', 'ees4liey1eY', 66526786, 1),
+(3, 'student', 'Benjamin', 'Dawson', 'BenjaminDawson@ucl.ac.uk', 'ic9zueGhi', 55728934, 1),
+(4, 'student', 'Adam', 'Bruce', 'AdamBruce@ucl.ac.uk', 'xier6Jie6', 65753208, 2),
+(5, 'student', 'Thomas', 'Holden', 'ThomasHolden@ucl.ac.uk', 'ooXi6eeT8iw', 77096758, 2),
+(6, 'student', 'Amy', 'Kerr', 'AmyKerr@ucl.ac.uk', 'aiChooh8jeh', 45867151, 2),
+(7, 'student', 'Mollie', 'Davies', 'MollieDavies@ucl.ac.uk', 'Ohxohzoh6', 86259696, 3),
+(8, 'student', 'Zachary', 'Wright', 'ZacharyWright@ucl.ac.uk', 'uo6chaeTeiz', 99221457, 3),
+(9, 'student', 'Jonathan', 'Sharpe', 'JonathanSharpe@ucl.ac.uk', 'aisoh2mieT2', 48971384, 3),
+(10, 'student', 'Rachel', 'Howard', 'RachelHoward@ucl.ac.uk', 'raquae5Eesh', 45401486, 4),
+(11, 'student', 'Logan', 'Browne', 'LoganBrowne@ucl.ac.uk', 'aiH5eech8c', 8907706, 4),
+(12, 'student', 'Lara', 'Short', 'LaraShort@ucl.ac.uk', 'Ophe8kee7ee', 99760077, 4),
+(13, 'student', 'Louie', 'Wong', 'LouieWong@ucl.ac.uk', 'Oorie3oo0', 46530846, 5),
+(14, 'student', 'Daniel', 'Palmer', 'DanielPalmer@ucl.ac.uk', 'Ogahch9goo1', 18312339, 5),
+(15, 'student', 'Finlay', 'Donnelly', 'FinlayDonnelly@ucl.ac.uk', 'ohL9shuf1', 30847594, 5),
+(16, 'student', 'Maya', 'Burns', 'MayaBurns@ucl.ac.uk', 'youva2ahYai', 58915436, 6),
+(17, 'student', 'Keira', 'Summers', 'KeiraSummers@ucl.ac.uk', 'Eish3ooge', 2610763, 6),
+(18, 'student', 'Mohammad', 'Dunn', 'MohammadDunn@ucl.ac.uk', 'gahcuS0iegh', 78038779, 6),
+(19, 'student', 'Katherine', 'Evans', 'KatherineEvans@ucl.ac.uk', 'jae4Kohraez', 57783440, 7),
+(20, 'student', 'Anna', 'Howard', 'AnnaHoward@ucl.ac.uk', 'Ta1authixe', 48126048, 7),
+(21, 'student', 'Charlie', 'Armstrong', 'CharlieArmstrong@ucl.ac.uk', 'Dood9Kaiy8Uo', 90859207, 7),
+(22, 'student', 'Cameron', 'Simmons', 'CameronSimmons@ucl.ac.uk', 'Mei9aipi2', 47092387, 8),
+(23, 'student', 'Eloise', 'Burke', 'EloiseBurke@ucl.ac.uk', 'Ii0eef6ahth', 37628132, 8),
+(24, 'student', 'Thomas', 'Watkins', 'ThomasWatkins@ucl.ac.uk', 'IeDeek8hahf', 7366556, 8),
+(25, 'student', 'Rosie', 'Clayton', 'RosieClayton@ucl.ac.uk', 'shaeg6Ahgie', 40973246, 9),
+(26, 'student', 'Sofia', 'Holt', 'SofiaHolt@ucl.ac.uk', 'wiMoufaek4', 15319401, 9),
+(27, 'student', 'Katie', 'Blackburn', 'KatieBlackburn@ucl.ac.uk', 'phuThop5', 65612643, 9),
+(28, 'student', 'Hayden', 'Hurst', 'HaydenHurst@ucl.ac.uk', 'zaht1Weitir', 71115234, 10),
+(29, 'student', 'Laura', 'Hutchinson', 'LauraHutchinson@ucl.ac.uk', 'woh3nim6Tu', 87167062, 10),
+(30, 'student', 'Elliot', 'Randall', 'ElliotRandall@ucl.ac.uk', 'meeZ8mahwei', 31224430, 10),
+(31, 'student', 'Scarlett', 'Sharpe', 'ScarlettSharpe@ucl.ac.uk', 'Oht1Ahh7', 46737342, 11),
+(32, 'student', 'Daniel', 'Schofield', 'DanielSchofield@ucl.ac.uk', 'Iezi1yibeng', 5936602, 11),
+(33, 'student', 'Katherine', 'Williams', 'KatherineWilliams@ucl.ac.uk', 'oe5ahshahJae', 89427060, 11),
+(34, 'student', 'Charlotte', 'Stephenson', 'CharlotteStephenson@ucl.ac.uk', 've3ShoTu9vai', 43760249, 12),
+(35, 'student', 'Katie', 'Craig', 'KatieCraig@ucl.ac.uk', 'WiivahK9ahj', 13489010, 12),
+(36, 'student', 'Sofia', 'Wall', 'SofiaWall@ucl.ac.uk', 'Luoqu8jee1n', 88403651, 12),
+(37, 'student', 'Molly', 'Metcalfe', 'MollyMetcalfe@ucl.ac.uk', 'Xae9Fat8us4', 21406700, 13),
+(38, 'student', 'Finley', 'Anderson', 'FinleyAnderson@ucl.ac.uk', 'Io6ain2am', 37160157, 13),
+(39, 'student', 'Naomi', 'Cooke', 'NaomiCooke@ucl.ac.uk', 'iek5IeWoh', 68999268, 13),
+(40, 'student', 'Isabel', 'Connor', 'IsabelConnor@ucl.ac.uk', 'rap3Aigee', 61750462, 14),
+(41, 'student', 'Joseph', 'Chan', 'JosephChan@ucl.ac.uk', 'luDe2chai', 23367155, 14),
+(42, 'student', 'Harley', 'Rahman', 'HarleyRahman@ucl.ac.uk', 'ihaiSar0hoh', 53006197, 14),
+(43, 'student', 'Jay', 'Hobbs', 'JayHobbs@ucl.ac.uk', 'zaeK0yezas', 4777646, 15),
+(44, 'student', 'Erin', 'Walsh', 'ErinWalsh@ucl.ac.uk', 'aeMi1aiQu', 10840872, 15),
+(45, 'student', 'Molly', 'Russell', 'MollyRussell@ucl.ac.uk', 'auGei5za3ah', 11068064, 15),
+(46, 'student', 'Gabriel', 'Stevens', 'GabrielStevens@ucl.ac.uk', 'aimah7Eev5V', 88630093, 16),
+(47, 'student', 'Muhammad', 'Brady', 'MuhammadBrady@ucl.ac.uk', 'thohCiehae6X', 68935366, 16),
+(48, 'student', 'Jasmine', 'Kirby', 'JasmineKirby@ucl.ac.uk', 'Uu9Aecaich', 82292589, 16),
+(49, 'student', 'Tilly', 'Sinclair', 'TillySinclair@ucl.ac.uk', 'Niez2ahquix6vu', 25631273, 17),
+(50, 'student', 'Mohammad', 'Wheeler', 'MohammadWheeler@ucl.ac.uk', 'oM5Zifoezei', 21893050, 17),
+(51, 'student', 'Zachary', 'Kelly', 'ZacharyKelly@ucl.ac.uk', 'evo9IezaiN', 97462147, 17),
+(52, 'student', 'Tom', 'Flynn', 'TomFlynn@ucl.ac.uk', 'aif1Osaej', 14138172, 18),
+(53, 'student', 'Callum', 'Rowley', 'CallumRowley@ucl.ac.uk', 'Ahr3Wah7ee', 86319898, 18),
+(54, 'student', 'Oscar', 'Burns', 'OscarBurns@ucl.ac.uk', 'nied2Jeojoo', 4785616, 18),
+(55, 'student', 'Gabriel', 'Williams', 'GabrielWilliams@ucl.ac.uk', 'Iec3luak0i', 70527508, 19),
+(56, 'student', 'Ewan', 'Atkins', 'EwanAtkins@ucl.ac.uk', 'egohh9aeH', 80487745, 19),
+(57, 'student', 'Isabella', 'Miles', 'IsabellaMiles@ucl.ac.uk', 'Aiqu0xeey', 19025721, 19),
+(58, 'student', 'Sienna', 'Dunn', 'SiennaDunn@ucl.ac.uk', 'Kikoneiso0', 40393336, 20),
+(59, 'student', 'Noah', 'Harvey', 'NoahHarvey@ucl.ac.uk', 'uy9shahF', 14330840, 20),
+(60, 'student', 'Reece', 'Hobbs', 'ReeceHobbs@ucl.ac.uk', 'yahng5See', 68423387, 20),
+(91, 'student', 'izzatul', 'Samsudin', 'izzatul.samsudin@gmail.com', 'a94a8fe5ccb19ba61c4c0873d391e987982fbbd3', 14078569, 0),
+(94, 'admin', 'Aaron', 'Livesy', 'hello@test.com', '$2y$10$tmlhhL0djkcxd6MWn1yw9uQzkKpLv8d1Rj39E2UrPscc5HjwtEdPu', 12345678, 0);
 
 --
 -- Indexes for dumped tables

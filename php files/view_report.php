@@ -44,6 +44,7 @@ $GroupNo=$_SESSION['GroupNo'];
 
 <body>   
 
+<<<<<<< HEAD
  <!-- navigation bar -->
  <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
@@ -65,6 +66,31 @@ $GroupNo=$_SESSION['GroupNo'];
     <li role="presentation" class="active"><a href="review.php">Review</a></li>
     <li role="presentation"><a href="discussion.php">Discussion</a></li>
     <li role="presentation"><a href="help.php">Help</a></li>
+=======
+                              <body>   
+                          
+                               <!-- navigation bar -->
+                               <nav class="navbar navbar-default navbar-fixed-top">
+                                  <div class="container">
+                                     <div class="navbar-header">
+                                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                                           <span class="sr-only">Toggle navigation</span>
+                                           <span class="icon-bar"></span>
+                                           <span class="icon-bar"></span>
+                                           <span class="icon-bar"></span>
+                                       </button>
+                                       <a class="navbar-brand" href="#">Virtual Learning</a>
+                                   </div>
+                                   <div id="navbar" class="navbar-collapse collapse">
+                                    <ul class="nav navbar-nav">
+                                       <li role="presentation"><a href="index.php">Home</a></li>
+                                       <li role="presentation"><a href="profile.php">Profile</a></li>
+                                       <li role="presentation"><a href="submission.php">Submission</a></li>
+                                       <li role="presentation"><a href="mygroup_assessment.php">My Assessment</a></li>
+                                       <li role="presentation" class="active"><a href="   review.php">Review</a></li>
+                                       <li role="presentation"><a href="discussion.php">Discussion</a></li>
+                                       <li role="presentation"><a href="help.php">Help</a></li>
+>>>>>>> 9c14c28badd66602601297a0c9cc0d29f2e45ea3
 
   </ul>
   <ul class="nav navbar-nav navbar-right">
@@ -82,6 +108,7 @@ $GroupNo=$_SESSION['GroupNo'];
   $id = $_GET['id'];
   /* echo '<div class="page-header"><h1>Report_assessmentNo.'.$id.'<h1/></div>';*/
 
+<<<<<<< HEAD
   //report any error
   error_reporting(E_ALL); ini_set('display_errors', 1); mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
@@ -115,6 +142,45 @@ $GroupNo=$_SESSION['GroupNo'];
   };
 
   ?>
+=======
+        //connect to database
+        include 'db_connect.php';
+        //to query File_Name WHERE ReportNo or you can use WHERE GroupNo
+        //Bind param to ReportNo or GroupNo whichever you choose
+        $queryGroupNo = "SELECT `GroupNo` FROM `assessment` WHERE `AssessmentNo`= $id";
+        
+        if ($stmtGroupNo = $conn->prepare($queryGroupNo))
+                        {        
+                                $stmtGroupNo->execute();
+                                $stmtGroupNo->store_result();
+                                $stmtGroupNo->bind_result($GroupNo);
+                                $stmtGroupNo->fetch();
+                        }
+        $queryFileName = "SELECT `File_Name` FROM `report` WHERE `GroupNo`= $GroupNo"; 
+        if ($stmtFileName = $conn->prepare($queryFileName))
+                        {        
+                                $stmtFileName->execute();
+                                $stmtFileName->store_result();
+                                $stmtFileName->bind_result($FileName);
+                                $stmtFileName->fetch();
+                        }  
+    //Execute below script
+        if(isset($FileName)){
+                if (file_exists('./uploads/' .$FileName)) { //fetch file from "uploads" folder
+                    $xml = simplexml_load_file('./uploads/' .$FileName);
+                    $mygroup = $xml->Group;
+                    echo $mygroup. '</br></br>';
+                    echo $xml -> Intro. '</br></br>';
+                    echo $xml -> Main. '</br></br>';
+                    echo $xml -> Conclusion. '</br></br>';
+                } else {
+                    exit('Failed to open xml file.');
+                }
+            }else{
+                //when DB doesn't contain filename.
+                echo "FileName is empty";
+        };
+>>>>>>> 9c14c28badd66602601297a0c9cc0d29f2e45ea3
 
   <!-- Give group assessment -->
   <div class="page-title">Assessment</div>

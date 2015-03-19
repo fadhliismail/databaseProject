@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 /* setting */
 // DSN(Data Source Name)
 define('DB_DSN', 'mysql:dbname=virtual_learning;host=127.0.0.1;charset=utf8');
@@ -8,11 +9,17 @@ define('SESSION_NAME', 'MiniBoard');     // Session Name
 define('DISP_MAX',  10);                 // Max cases of display
 define('LIMIT_SEC', 5);                  // Time period of interval
 define('TOKEN_MAX', 10);                 // Max number of token   
+=======
+//connect to database
+include 'db_connect.php';
+define('SESSION_NAME', 'MiniBoard');     // Sessuion Name
+>>>>>>> 9c14c28badd66602601297a0c9cc0d29f2e45ea3
 
 function h($str) {
   return htmlspecialchars($str, ENT_QUOTES, 'UTF-8');
 }
 
+<<<<<<< HEAD
 function e($msg, Exception &$previous = null) {
   return new RuntimeException($msg, 0, $previous);
 }
@@ -24,12 +31,12 @@ function exception_to_array(Exception $e) {
   return array_reverse($msgs);
 }
 
+=======
+>>>>>>> 9c14c28badd66602601297a0c9cc0d29f2e45ea3
 //initialize variables
 foreach (array('title','name', 'text','assessmentID', 'token', 'page', 'submit') as $v) {
   $$v = isset($_POST[$v]) && is_string($_POST[$v]) ? trim($_POST[$v]) : '';
 }
-// page number must be over 1 page
-$page = max(1, (int)$page);
 
 //initialize session
 session_name(SESSION_NAME); 
@@ -46,6 +53,7 @@ if (!$_SESSION) {
 }
 
 try {
+<<<<<<< HEAD
   $pdo = new PDO(DB_DSN, DB_USER, DB_PASS);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     // code of pushing submission button
@@ -119,8 +127,44 @@ try {
   $current_count = count($articles);
   $whole_count = (int)$pdo->query('SELECT FOUND_ROWS()')->fetchColumn();
   $page_count = ceil($whole_count / DISP_MAX);
+=======
+    $stmt = $conn->prepare(implode(' ', array(
+        'SELECT',
+        '`name`, `text`, `time`,`AssessmentID`',
+        'FROM mini_board',
+        'ORDER BY `time` DESC',
+    )));
+    
+    echo '<div class="container">';
+    echo '<div>';
+    echo '<h1>discussion summary</h1>';
+    echo '</div>';
+    
+    $stmt->execute();
+    $stmt->store_result();
+    $stmt->bind_result($name,$text,$time,$AssessmentID);
+    
+    echo '<div class="table-responsive">';
+            echo '<table class ="table table-nonfluid">';
+            echo '	<tr>';
+            echo '		<th>Name</th>';
+            echo '		<th>Text</th>';
+            echo '		<th>Time</th>';
+            echo '	</tr>';
+    while($stmt->fetch()){
+>>>>>>> 9c14c28badd66602601297a0c9cc0d29f2e45ea3
 
+            echo '	<tr>';
+            echo '              <td>'.$name.'</td> ';
+            echo '              <td>'.$text.'</td> ';
+            echo '              <td>'.$time.'</td>';
+            echo '	</tr>';         
+    }
+            echo '</table>';
+    echo '</div>';
+    echo '<div class="container">';
 } catch (Exception $e) { }
+<<<<<<< HEAD
 
 $_SESSION['token'] = array_slice(
   array($token = sha1(mt_rand()) => 1) + $_SESSION['token'],
@@ -140,6 +184,21 @@ $_SESSION['token'] = array_slice(
     <link rel ="stylesheet" type="text/css" href="css/mystyle.css">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="css/bootstrap.css">
+=======
+?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>discussion board</title>
+        <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Custom CSS -->
+	<link rel ="stylesheet" type="text/css" href="css/mystyle.css">
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<!-- Custom styles for this template -->
+	<link href="sticky-footer-navbar.css" rel="stylesheet">
+>>>>>>> 9c14c28badd66602601297a0c9cc0d29f2e45ea3
 
   </head>
   <body>
@@ -164,6 +223,7 @@ $_SESSION['token'] = array_slice(
      <li role="presentation" class="active"><a href="discussion.php">Discussion</a></li>
      <li role="presentation"><a href="help.php">Help</a></li>
 
+<<<<<<< HEAD
    </ul>
    <ul class="nav navbar-nav navbar-right">
      <li><a href="logout.php">Log Out</a></li>
@@ -229,6 +289,18 @@ $_SESSION['token'] = array_slice(
         </div>
       </div>
     </div>
+=======
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="registerPage.php">Register</a></li>
+					<li><a href="loginPage.php">Log In</a></li>
+					<li><a href="logout.php">Log Out</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+    <div>
+>>>>>>> 9c14c28badd66602601297a0c9cc0d29f2e45ea3
   </body>
   <?php include 'footer.php'?>
   </html>
