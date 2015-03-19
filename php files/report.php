@@ -43,7 +43,7 @@ $GroupNo=$_SESSION['GroupNo'];
 					<li role="presentation"><a href="submission.php">Submission</a></li>
 					<li role="presentation"><a href="mygroup_assessment.php">My Assessment</a></li>
 					<li role="presentation" class="active"><a href="review.php">Review</a></li>
-					<li role="presentation"><a href="discussion.php">Discussion</a></li>
+					<li role="presentation"><a href="#discussion.php">Discussion</a></li>
 					<li role="presentation"><a href="help.php">Help</a></li>
 
 				</ul>
@@ -58,13 +58,16 @@ $GroupNo=$_SESSION['GroupNo'];
 
 	<!-- content page -->
 	<div class="container">
+		
 		<?php
-//report any error
+		
+		//report any error
 		error_reporting(E_ALL); ini_set('display_errors', 1); mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+		
 		include 'db_connect.php';
+		
 		$response = array();
-// $id is assessmentNo
-<<<<<<< HEAD
+		// $id is assessmentNo
 		$AssessmentNo = $_GET['id']; /*this cannot be a fixed number. it has to get data from session.*/
 
 		for($j = 1; $j<6 ; $j++){
@@ -88,13 +91,13 @@ $GroupNo=$_SESSION['GroupNo'];
 			$stmtTimeUpdate->execute();
 			$stmtTimeUpdate->store_result();
 		}
+
         // Show what this script did
 		if ($stmtScore = $conn->prepare($queryScore)) {
 			$stmtScore->bind_param('i', $AssessmentNo);
 			$stmtScore->execute();
 			$stmtScore->store_result();
 			$stmtScore->bind_result($CriteriaNo, $Comment,$Score_Criteria);
-
 			
 			echo '<div class="table-responsive"><table class ="table table-nonfluid"><tr><th>CriteriaNo</th><th>Comment</th><th>Score_Criteria</th></tr>';
 			echo '<div class="page-header"><h1>You are assessing Assessment No. '.$AssessmentNo.'</h1></div>';
@@ -107,54 +110,35 @@ $GroupNo=$_SESSION['GroupNo'];
 			}
 			echo '</table></div>';
 		}
+
+		/*Calculate score received for each assessment*/
+		$calc_score  = "UPDATE `assessment` SET `Score`= (SELECT SUM(Score_Criteria) as OverallScore FROM score WHERE AssessmentNo = ?) WHERE AssessmentNo = ?";
+		if ($stmtCalc = $conn->prepare($calc_score)) {
+			$stmtCalc->bind_param('ii', $AssessmentNo,$AssessmentNo);
+			$stmtCalc->execute();
+			$stmtCalc->store_result();
+		}
+
+		/*Find group according to assessmentno*/
+		$find_group  = "SELECT `GroupNo` FROM `assessment` WHERE `AssessmentNo` = ?";
+		if ($stmtFind = $conn->prepare($find_group)) {
+			$stmtFind->bind_param('i', $AssessmentNo);
+			$stmtFind->execute();
+			$stmtFind->store_result();
+		}
+
+		/*Calculate average score received by each group*/
+		$calc_average  = "UPDATE `group` SET `AverageScore`=(SELECT ROUND(((SUM(`Score`))/3)*2) AS AverageScore FROM assessment WHERE Group_to_Assess = ?) WHERE `GroupNo` = ?";
+		if ($stmtAve = $conn->prepare($calc_average)) {
+			$stmtAve->bind_param('ii', $GroupNo,$GroupNo);
+			$stmtAve->execute();
+			$stmtAve->store_result();
+		}
+
+		$stmtAve->close();
+		$conn->close();
+
 		?>
-=======
-$AssessmentNo = $_GET['id']; 
-
-for($j = 1; $j<6 ; $j++){
-    $comment = 'comment'.$j;
-    $$comment = filter_input(INPUT_POST, $comment);
-    $criteria = 'c'.$j;
-    $$criteria = filter_input(INPUT_POST, $criteria);
-    
-    $queryUpdate = "UPDATE `score` SET `Comment`= '".$$comment."',`Score_Criteria`= '".$$criteria."' WHERE `AssessmentNo` = '".$AssessmentNo."' AND `CriteriaNo`=$j";
-        if ($stmtUpdate = $conn->prepare($queryUpdate)) {
-            $stmtUpdate->execute();
-            $stmtUpdate->store_result();
-        }
-}
-        //query statement
-        $queryTime = "UPDATE `report` SET `Submission_Timestamp`= NOW(),`Submission_Updated`= NOW() WHERE `GroupNo`=?";
-        $queryScore = "SELECT `CriteriaNo`, `Comment`,`Score_Criteria`FROM `score` WHERE `AssessmentNo` = ?";
-    
-        // Update timestamp 
-        if ($stmtTimeUpdate = $conn->prepare($queryTime)) {
-            $stmtTimeUpdate->bind_param('i', $GroupNo);
-            $stmtTimeUpdate->execute();
-            $stmtTimeUpdate->store_result();
-        }
-        // Show what this script did
-        if ($stmtScore = $conn->prepare($queryScore)) {
-            $stmtScore->bind_param('i', $AssessmentNo);
-            $stmtScore->execute();
-            $stmtScore->store_result();
-            $stmtScore->bind_result($CriteriaNo, $Comment,$Score_Criteria);
-
-            
-            echo '<div class="table-responsive"><table class ="table table-nonfluid"><tr><th>CriteriaNo</th><th>Comment</th><th>Score_Criteria</th></tr>';
-            echo '<div class="page-header"><h1>Group '.$GroupNo.'</h1></div>';
-            echo '<p><b>database value:</b></p>';
-           
-            while ($stmtScore->fetch()) {
-            echo '<tr>';
-            echo '<th>'.$CriteriaNo.'</th><th>'.$Comment.'</th><th>'.$Score_Criteria.'</th>';
-            echo '</tr>';
-            }
-            echo '</table></div>';
-            
-        }
-?>
->>>>>>> 9c14c28badd66602601297a0c9cc0d29f2e45ea3
 
 	</div>
 	<!-- footer -->
