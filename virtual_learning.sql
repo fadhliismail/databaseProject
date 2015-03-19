@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 19, 2015 at 01:19 PM
+-- Generation Time: Mar 19, 2015 at 02:50 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -188,6 +188,66 @@ INSERT INTO `group` (`GroupNo`, `ReportNo`, `AverageScore`, `AssessmentNo`) VALU
 (18, 18, 21, 0),
 (19, 19, 10, 0),
 (20, 20, 7, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `mini_board`
+--
+
+CREATE TABLE IF NOT EXISTS `mini_board` (
+`id` int(10) unsigned NOT NULL,
+  `name` varchar(30) NOT NULL,
+  `text` varchar(140) NOT NULL,
+  `time` datetime NOT NULL,
+  `AssessmentID` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `mini_board`
+--
+
+INSERT INTO `mini_board` (`id`, `name`, `text`, `time`, `AssessmentID`) VALUES
+(1, '#', ',', '2015-03-15 05:03:37', 1),
+(2, '#', 'test', '2015-03-15 05:09:12', 1),
+(3, '#', 'test8', '2015-03-15 05:10:07', 1),
+(4, '#', 'how many messages can I write?', '2015-03-15 05:10:30', 1),
+(5, 'Yusuke', 'feagea', '2015-03-15 05:11:19', 18),
+(6, '#', 'des', '2015-03-15 05:11:25', 54),
+(7, '#', 'afeafea', '2015-03-15 05:11:30', 0),
+(8, 'Yusuke', 'test', '2015-03-15 05:11:47', 0),
+(9, '434q', 'esgeaa', '2015-03-15 05:11:56', 0),
+(10, '434q', 'geaaeege', '2015-03-15 05:12:02', 0),
+(11, '434q', 'eleven', '2015-03-15 05:19:55', 0),
+(12, '434q', 'fea', '2015-03-14 21:21:02', 0),
+(13, '434q', 'efage', '2015-03-14 22:24:14', 0),
+(14, '434q', 'rhrsrhs', '2015-03-14 22:25:12', 0),
+(15, 'abc', 'geage', '2015-03-16 14:52:21', 0),
+(16, 'abc', 'test\r\ntest\r\ntest\r\ntest 111111', '2015-03-16 15:04:05', 0),
+(17, 'Yusuke', 'eee', '2015-03-16 23:11:16', 18),
+(18, 'Yusuke', 'this is a test pattern 2', '2015-03-17 18:23:36', 54),
+(19, 'Natsu', 'testdesu', '2015-03-18 01:49:27', 18),
+(20, 'Natsu', 'teateate', '2015-03-18 01:51:59', 54),
+(21, 'Natsu', 'teateatae', '2015-03-18 01:52:14', 89),
+(22, 'Natsu', '', '2015-03-18 01:53:50', 18),
+(23, 'Natsu', '', '2015-03-18 01:53:54', 18),
+(24, 'Natsu', 'gagea', '2015-03-18 01:53:57', 18),
+(25, 'Natsu', 'fafafea', '2015-03-18 02:00:41', 18),
+(26, 'Natsu', '', '2015-03-18 02:02:37', 18),
+(27, 'Natsu', '', '2015-03-18 02:02:41', 18),
+(28, 'Natsu', '', '2015-03-18 02:05:56', 18),
+(29, 'Natsu', '', '2015-03-18 02:05:58', 18),
+(30, 'Natsu', '', '2015-03-18 02:14:47', 18),
+(31, 'Natsu', '', '2015-03-18 02:14:52', 18),
+(32, 'Natsu', '', '2015-03-18 02:15:10', 54),
+(33, 'Nat', 'sgsgsrr', '2015-03-18 02:26:43', 54),
+(34, 'TETY', 'ZYEYSEZ', '2015-03-18 11:26:44', 89),
+(35, 'Yusuke', 'fea', '2015-03-18 18:38:50', 18),
+(36, 'nanana', 'fe', '2015-03-18 18:56:06', 18),
+(37, 'afage', 'efafgea', '2015-03-18 19:05:25', 18),
+(38, 'yusuea', 'aefaf', '2015-03-18 19:05:44', 54),
+(39, 'afafa', 'hiiji', '2015-03-18 19:05:58', 89),
+(40, 'yusuke', 'agea', '2015-03-18 19:07:40', 18);
 
 -- --------------------------------------------------------
 
@@ -630,10 +690,10 @@ CREATE TABLE IF NOT EXISTS `student` (
 INSERT INTO `student` (`StudentNo`, `User_Level`, `FirstName`, `LastName`, `Email`, `User_pass`, `StudentId`, `GroupNo`) VALUES
 (1, 'student', 'Brooke', 'Pickering', 'BrookePickering@ucl.ac.uk', 'test', 14073182, 1),
 (2, 'student', 'Lucy', 'Giles', 'LucyGiles@ucl.ac.uk', 'ees4liey1eY', 66526786, 1),
-(3, 'student', 'Benjamin', 'Dawson', 'BenjaminDawson@ucl.ac.uk', 'ic9zueGhi', 55728934, 1),
+(3, 'student', 'Benjamin', 'Dawson', 'BenjaminDawson@ucl.ac.uk', 'ic9zueGhi', 55728934, 0),
 (4, 'student', 'Adam', 'Bruce', 'AdamBruce@ucl.ac.uk', 'xier6Jie6', 65753208, 2),
 (5, 'student', 'Thomas', 'Holden', 'ThomasHolden@ucl.ac.uk', 'ooXi6eeT8iw', 77096758, 2),
-(6, 'student', 'Amy', 'Kerr', 'AmyKerr@ucl.ac.uk', 'aiChooh8jeh', 45867151, 2),
+(6, 'student', 'Amy', 'Kerrr', 'AmyKerr@ucl.ac.uk', 'aiChooh8jeh', 45867151, 2),
 (7, 'student', 'Mollie', 'Davies', 'MollieDavies@ucl.ac.uk', 'Ohxohzoh6', 86259696, 3),
 (8, 'student', 'Zachary', 'Wright', 'ZacharyWright@ucl.ac.uk', 'uo6chaeTeiz', 99221457, 3),
 (9, 'student', 'Jonathan', 'Sharpe', 'JonathanSharpe@ucl.ac.uk', 'aisoh2mieT2', 48971384, 3),
@@ -689,7 +749,7 @@ INSERT INTO `student` (`StudentNo`, `User_Level`, `FirstName`, `LastName`, `Emai
 (59, 'student', 'Noah', 'Harvey', 'NoahHarvey@ucl.ac.uk', 'uy9shahF', 14330840, 20),
 (60, 'student', 'Reece', 'Hobbs', 'ReeceHobbs@ucl.ac.uk', 'yahng5See', 68423387, 20),
 (91, 'student', 'izzatul', 'Samsudin', 'izzatul.samsudin@gmail.com', 'a94a8fe5ccb19ba61c4c0873d391e987982fbbd3', 14078569, 0),
-(94, 'admin', 'Aaron', 'Livesy', 'hello@test.com', '$2y$10$tmlhhL0djkcxd6MWn1yw9uQzkKpLv8d1Rj39E2UrPscc5HjwtEdPu', 12345678, 0);
+(94, 'admin', 'Aaron', 'Livesy', 'hello@test.com', '$2y$10$tmlhhL0djkcxd6MWn1yw9uQzkKpLv8d1Rj39E2UrPscc5HjwtEdPu', 12345678, 1);
 
 --
 -- Indexes for dumped tables
@@ -706,6 +766,12 @@ ALTER TABLE `assessment`
 --
 ALTER TABLE `group`
  ADD PRIMARY KEY (`GroupNo`);
+
+--
+-- Indexes for table `mini_board`
+--
+ALTER TABLE `mini_board`
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `report`
@@ -739,6 +805,11 @@ MODIFY `AssessmentNo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=61;
 --
 ALTER TABLE `group`
 MODIFY `GroupNo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
+--
+-- AUTO_INCREMENT for table `mini_board`
+--
+ALTER TABLE `mini_board`
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=41;
 --
 -- AUTO_INCREMENT for table `report`
 --
