@@ -83,11 +83,12 @@ $GroupNo=$_SESSION['GroupNo'];
 			}
 		}
         //query statement
-		$queryTime = "UPDATE `report` SET `Submission_Timestamp`= NOW(),`Submission_Updated`= NOW() WHERE `ReportNo`=1";
+		$queryTime = "UPDATE `report` SET `Submission_Timestamp`= NOW(),`Submission_Updated`= NOW() WHERE `GroupNo`=?";
 		$queryScore = "SELECT `CriteriaNo`, `Comment`,`Score_Criteria`FROM `score` WHERE `AssessmentNo` = ?";
 		
         // Update timestamp 
 		if ($stmtTimeUpdate = $conn->prepare($queryTime)) {
+                        $stmtTimeUpdate->bind_param('i', $GroupNo);
 			$stmtTimeUpdate->execute();
 			$stmtTimeUpdate->store_result();
 		}
