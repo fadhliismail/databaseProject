@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 19, 2015 at 02:50 PM
+-- Generation Time: Mar 19, 2015 at 10:10 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -109,43 +109,43 @@ INSERT INTO `assessment` (`AssessmentNo`, `Assessor`, `Group_to_Assess`, `Score`
 (18, 8, 4, 37),
 (19, 5, 10, 17),
 (20, 15, 10, 14),
-(21, 13, 17, 313),
-(22, 14, 9, 313),
-(23, 1, 16, 313),
+(21, 13, 17, 28),
+(22, 14, 9, 19),
+(23, 1, 16, 50),
 (24, 6, 1, 25),
-(25, 9, 9, 313),
-(26, 3, 18, 313),
-(27, 20, 11, 313),
-(28, 1, 7, 313),
-(29, 11, 17, 313),
-(30, 13, 4, 313),
-(31, 17, 2, 313),
-(32, 19, 20, 313),
-(33, 11, 19, 313),
-(34, 4, 18, 313),
-(35, 10, 9, 313),
-(36, 5, 17, 313),
-(37, 10, 20, 313),
-(38, 15, 15, 313),
-(39, 4, 12, 313),
-(40, 2, 3, 313),
-(41, 12, 13, 313),
-(42, 14, 11, 313),
-(43, 1, 8, 313),
-(44, 12, 12, 313),
+(25, 9, 9, 32),
+(26, 3, 18, 25),
+(27, 20, 11, 35),
+(28, 1, 7, 25),
+(29, 11, 17, 28),
+(30, 13, 4, 20),
+(31, 17, 2, 26),
+(32, 19, 20, 24),
+(33, 11, 19, 34),
+(34, 4, 18, 22),
+(35, 10, 9, 28),
+(36, 5, 17, 24),
+(37, 10, 20, 30),
+(38, 15, 15, 19),
+(39, 4, 12, 34),
+(40, 2, 3, 26),
+(41, 12, 13, 20),
+(42, 14, 11, 27),
+(43, 1, 8, 50),
+(44, 12, 12, 26),
 (45, 17, 1, 26),
-(46, 14, 6, 313),
-(47, 19, 11, 313),
-(48, 3, 12, 313),
-(49, 20, 3, 313),
-(50, 7, 7, 313),
-(51, 17, 14, 313),
-(52, 18, 15, 313),
-(53, 16, 7, 313),
-(54, 8, 6, 313),
-(55, 19, 14, 313),
-(56, 7, 16, 313),
-(57, 18, 8, 313),
+(46, 14, 6, 32),
+(47, 19, 11, 17),
+(48, 3, 12, 43),
+(49, 20, 3, 25),
+(50, 7, 7, 30),
+(51, 17, 14, 60),
+(52, 18, 15, 73),
+(53, 16, 7, 49),
+(54, 8, 6, 43),
+(55, 19, 14, 41),
+(56, 7, 16, 58),
+(57, 18, 8, 44),
 (58, 18, 13, 52),
 (59, 2, 20, 60),
 (60, 20, 18, 58);
@@ -159,35 +159,34 @@ INSERT INTO `assessment` (`AssessmentNo`, `Assessor`, `Group_to_Assess`, `Score`
 CREATE TABLE IF NOT EXISTS `group` (
 `GroupNo` int(11) NOT NULL,
   `ReportNo` int(11) DEFAULT NULL,
-  `AverageScore` int(11) DEFAULT NULL,
-  `AssessmentNo` int(11) NOT NULL
+  `AverageScore` int(11) DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `group`
 --
 
-INSERT INTO `group` (`GroupNo`, `ReportNo`, `AverageScore`, `AssessmentNo`) VALUES
-(1, 1, 54, 0),
-(2, 2, 79, 0),
-(3, 3, 37, 0),
-(4, 4, 4, 0),
-(5, 5, 11, 0),
-(6, 6, 29, 0),
-(7, 7, 36, 0),
-(8, 8, 15, 0),
-(9, 9, 17, 0),
-(10, 10, 8, 0),
-(11, 11, 33, 0),
-(12, 12, 33, 0),
-(13, 13, 27, 0),
-(14, 14, 25, 0),
-(15, 15, 14, 0),
-(16, 16, 50, 0),
-(17, 17, 50, 0),
-(18, 18, 21, 0),
-(19, 19, 10, 0),
-(20, 20, 7, 0);
+INSERT INTO `group` (`GroupNo`, `ReportNo`, `AverageScore`) VALUES
+(1, 1, 54),
+(2, 2, 58),
+(3, 3, 49),
+(4, 4, 63),
+(5, 5, 42),
+(6, 6, 75),
+(7, 7, 69),
+(8, 8, 80),
+(9, 9, 53),
+(10, 10, 36),
+(11, 11, 53),
+(12, 12, 69),
+(13, 13, 68),
+(14, 14, 87),
+(15, 15, 77),
+(16, 16, 88),
+(17, 17, 53),
+(18, 18, 70),
+(19, 19, 67),
+(20, 20, 76);
 
 -- --------------------------------------------------------
 
@@ -209,45 +208,45 @@ CREATE TABLE IF NOT EXISTS `mini_board` (
 
 INSERT INTO `mini_board` (`id`, `name`, `text`, `time`, `AssessmentID`) VALUES
 (1, '#', ',', '2015-03-15 05:03:37', 1),
-(2, '#', 'test', '2015-03-15 05:09:12', 1),
-(3, '#', 'test8', '2015-03-15 05:10:07', 1),
-(4, '#', 'how many messages can I write?', '2015-03-15 05:10:30', 1),
-(5, 'Yusuke', 'feagea', '2015-03-15 05:11:19', 18),
-(6, '#', 'des', '2015-03-15 05:11:25', 54),
-(7, '#', 'afeafea', '2015-03-15 05:11:30', 0),
-(8, 'Yusuke', 'test', '2015-03-15 05:11:47', 0),
-(9, '434q', 'esgeaa', '2015-03-15 05:11:56', 0),
-(10, '434q', 'geaaeege', '2015-03-15 05:12:02', 0),
-(11, '434q', 'eleven', '2015-03-15 05:19:55', 0),
-(12, '434q', 'fea', '2015-03-14 21:21:02', 0),
-(13, '434q', 'efage', '2015-03-14 22:24:14', 0),
-(14, '434q', 'rhrsrhs', '2015-03-14 22:25:12', 0),
-(15, 'abc', 'geage', '2015-03-16 14:52:21', 0),
-(16, 'abc', 'test\r\ntest\r\ntest\r\ntest 111111', '2015-03-16 15:04:05', 0),
-(17, 'Yusuke', 'eee', '2015-03-16 23:11:16', 18),
-(18, 'Yusuke', 'this is a test pattern 2', '2015-03-17 18:23:36', 54),
-(19, 'Natsu', 'testdesu', '2015-03-18 01:49:27', 18),
-(20, 'Natsu', 'teateate', '2015-03-18 01:51:59', 54),
-(21, 'Natsu', 'teateatae', '2015-03-18 01:52:14', 89),
-(22, 'Natsu', '', '2015-03-18 01:53:50', 18),
-(23, 'Natsu', '', '2015-03-18 01:53:54', 18),
-(24, 'Natsu', 'gagea', '2015-03-18 01:53:57', 18),
-(25, 'Natsu', 'fafafea', '2015-03-18 02:00:41', 18),
-(26, 'Natsu', '', '2015-03-18 02:02:37', 18),
-(27, 'Natsu', '', '2015-03-18 02:02:41', 18),
-(28, 'Natsu', '', '2015-03-18 02:05:56', 18),
-(29, 'Natsu', '', '2015-03-18 02:05:58', 18),
-(30, 'Natsu', '', '2015-03-18 02:14:47', 18),
-(31, 'Natsu', '', '2015-03-18 02:14:52', 18),
-(32, 'Natsu', '', '2015-03-18 02:15:10', 54),
-(33, 'Nat', 'sgsgsrr', '2015-03-18 02:26:43', 54),
-(34, 'TETY', 'ZYEYSEZ', '2015-03-18 11:26:44', 89),
-(35, 'Yusuke', 'fea', '2015-03-18 18:38:50', 18),
-(36, 'nanana', 'fe', '2015-03-18 18:56:06', 18),
-(37, 'afage', 'efafgea', '2015-03-18 19:05:25', 18),
-(38, 'yusuea', 'aefaf', '2015-03-18 19:05:44', 54),
-(39, 'afafa', 'hiiji', '2015-03-18 19:05:58', 89),
-(40, 'yusuke', 'agea', '2015-03-18 19:07:40', 18);
+(2, '#', 'test', '2015-03-15 05:09:12', 2),
+(3, '#', 'test8', '2015-03-15 05:10:07', 3),
+(4, '#', 'how many messages can I write?', '2015-03-15 05:10:30', 4),
+(5, 'Yusuke', 'feagea', '2015-03-15 05:11:19', 5),
+(6, '#', 'des', '2015-03-15 05:11:25', 6),
+(7, '#', 'afeafea', '2015-03-15 05:11:30', 7),
+(8, 'Yusuke', 'test', '2015-03-15 05:11:47', 8),
+(9, '434q', 'esgeaa', '2015-03-15 05:11:56', 9),
+(10, '434q', 'geaaeege', '2015-03-15 05:12:02', 10),
+(11, '434q', 'eleven', '2015-03-15 05:19:55', 11),
+(12, '434q', 'fea', '2015-03-14 21:21:02', 12),
+(13, '434q', 'efage', '2015-03-14 22:24:14', 13),
+(14, '434q', 'rhrsrhs', '2015-03-14 22:25:12', 14),
+(15, 'abc', 'geage', '2015-03-16 14:52:21', 15),
+(16, 'abc', 'test\r\ntest\r\ntest\r\ntest 111111', '2015-03-16 15:04:05', 16),
+(17, 'Yusuke', 'eee', '2015-03-16 23:11:16', 17),
+(18, 'Yusuke', 'this is a test pattern 2', '2015-03-17 18:23:36', 18),
+(19, 'Natsu', 'testdesu', '2015-03-18 01:49:27', 19),
+(20, 'Natsu', 'teateate', '2015-03-18 01:51:59', 20),
+(21, 'Natsu', 'teateatae', '2015-03-18 01:52:14', 21),
+(22, 'Natsu', '', '2015-03-18 01:53:50', 22),
+(23, 'Natsu', '', '2015-03-18 01:53:54', 23),
+(24, 'Natsu', 'gagea', '2015-03-18 01:53:57', 24),
+(25, 'Natsu', 'fafafea', '2015-03-18 02:00:41', 25),
+(26, 'Natsu', '', '2015-03-18 02:02:37', 26),
+(27, 'Natsu', '', '2015-03-18 02:02:41', 27),
+(28, 'Natsu', '', '2015-03-18 02:05:56', 28),
+(29, 'Natsu', '', '2015-03-18 02:05:58', 29),
+(30, 'Natsu', '', '2015-03-18 02:14:47', 30),
+(31, 'Natsu', '', '2015-03-18 02:14:52', 31),
+(32, 'Natsu', '', '2015-03-18 02:15:10', 32),
+(33, 'Nat', 'sgsgsrr', '2015-03-18 02:26:43', 33),
+(34, 'TETY', 'ZYEYSEZ', '2015-03-18 11:26:44', 34),
+(35, 'Yusuke', 'fea', '2015-03-18 18:38:50', 35),
+(36, 'nanana', 'fe', '2015-03-18 18:56:06', 36),
+(37, 'afage', 'efafgea', '2015-03-18 19:05:25', 37),
+(38, 'yusuea', 'aefaf', '2015-03-18 19:05:44', 38),
+(39, 'afafa', 'hiiji', '2015-03-18 19:05:58', 39),
+(40, 'yusuke', 'agea', '2015-03-18 19:07:40', 40);
 
 -- --------------------------------------------------------
 
@@ -669,28 +668,28 @@ INSERT INTO `score` (`ScoreNo`, `AssessmentNo`, `CriteriaNo`, `Comment`, `Score_
 -- --------------------------------------------------------
 
 --
--- Table structure for table `student`
+-- Table structure for table `users`
 --
 
-CREATE TABLE IF NOT EXISTS `student` (
-`StudentNo` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `users` (
+`UserId` int(11) NOT NULL,
   `User_Level` varchar(50) NOT NULL,
   `FirstName` varchar(20) NOT NULL,
   `LastName` varchar(23) NOT NULL,
   `Email` varchar(100) NOT NULL,
   `User_pass` varchar(255) NOT NULL,
-  `StudentId` int(11) NOT NULL,
+  `Login_Id` int(11) NOT NULL,
   `GroupNo` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=95 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=98 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `student`
+-- Dumping data for table `users`
 --
 
-INSERT INTO `student` (`StudentNo`, `User_Level`, `FirstName`, `LastName`, `Email`, `User_pass`, `StudentId`, `GroupNo`) VALUES
+INSERT INTO `users` (`UserId`, `User_Level`, `FirstName`, `LastName`, `Email`, `User_pass`, `Login_Id`, `GroupNo`) VALUES
 (1, 'student', 'Brooke', 'Pickering', 'BrookePickering@ucl.ac.uk', 'test', 14073182, 1),
 (2, 'student', 'Lucy', 'Giles', 'LucyGiles@ucl.ac.uk', 'ees4liey1eY', 66526786, 1),
-(3, 'student', 'Benjamin', 'Dawson', 'BenjaminDawson@ucl.ac.uk', 'ic9zueGhi', 55728934, 0),
+(3, 'student', 'Benjamin', 'Dawson', 'BenjaminDawson@ucl.ac.uk', 'ic9zueGhi', 55728934, 1),
 (4, 'student', 'Adam', 'Bruce', 'AdamBruce@ucl.ac.uk', 'xier6Jie6', 65753208, 2),
 (5, 'student', 'Thomas', 'Holden', 'ThomasHolden@ucl.ac.uk', 'ooXi6eeT8iw', 77096758, 2),
 (6, 'student', 'Amy', 'Kerrr', 'AmyKerr@ucl.ac.uk', 'aiChooh8jeh', 45867151, 2),
@@ -748,8 +747,9 @@ INSERT INTO `student` (`StudentNo`, `User_Level`, `FirstName`, `LastName`, `Emai
 (58, 'student', 'Sienna', 'Dunn', 'SiennaDunn@ucl.ac.uk', 'Kikoneiso0', 40393336, 20),
 (59, 'student', 'Noah', 'Harvey', 'NoahHarvey@ucl.ac.uk', 'uy9shahF', 14330840, 20),
 (60, 'student', 'Reece', 'Hobbs', 'ReeceHobbs@ucl.ac.uk', 'yahng5See', 68423387, 20),
-(91, 'student', 'izzatul', 'Samsudin', 'izzatul.samsudin@gmail.com', 'a94a8fe5ccb19ba61c4c0873d391e987982fbbd3', 14078569, 0),
-(94, 'admin', 'Aaron', 'Livesy', 'hello@test.com', '$2y$10$tmlhhL0djkcxd6MWn1yw9uQzkKpLv8d1Rj39E2UrPscc5HjwtEdPu', 12345678, 1);
+(95, 'admin', 'Robert', 'Sugden', 'robertsugden@emmerdale.com', '$2y$10$/i1ZrcsZgJwlKJGs4ON2FOMrechgV9NYoHks59YvMZeyTnxZXDij6', 12345670, 0),
+(96, 'student', 'Aaron', 'Livesy', 'aaronlivesy@emmerdale.com', '$2y$10$c5n94gE4H.Dh3nbY8MZXb.msEkMYB9ZH8eOtcBkMXMjAH2tvAJOQG', 12345600, 0),
+(97, 'student', 'Izzatul', 'Samsudin', 'izzatul.samsudin@gmail.com', '$2y$10$BFA5/BaokfTW1EbXHvPlwOXFumdLn7n3QRvC9cPwhGRFlmbzCvZHS', 98765432, 2);
 
 --
 -- Indexes for dumped tables
@@ -786,10 +786,10 @@ ALTER TABLE `score`
  ADD PRIMARY KEY (`ScoreNo`), ADD KEY `fk_score` (`AssessmentNo`);
 
 --
--- Indexes for table `student`
+-- Indexes for table `users`
 --
-ALTER TABLE `student`
- ADD PRIMARY KEY (`StudentNo`);
+ALTER TABLE `users`
+ ADD PRIMARY KEY (`UserId`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -821,10 +821,10 @@ MODIFY `ReportNo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
 ALTER TABLE `score`
 MODIFY `ScoreNo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=351;
 --
--- AUTO_INCREMENT for table `student`
+-- AUTO_INCREMENT for table `users`
 --
-ALTER TABLE `student`
-MODIFY `StudentNo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=95;
+ALTER TABLE `users`
+MODIFY `UserId` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=98;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
