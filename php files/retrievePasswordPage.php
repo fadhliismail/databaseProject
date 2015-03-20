@@ -46,7 +46,6 @@
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="registerPage.php">Register</a></li>
 						<li><a href="loginPage.php">Log In</a></li>
-						<li><a href="logout.php">Log Out</a></li>
 					</ul>
 				</div><!--/.nav-collapse -->
 			</div>
@@ -65,13 +64,13 @@
 				<!-- for retrieving password for student -->
 				<form class="col-md-12" action="retrievePassword.php" method="POST">
 					<div class="form-group">
-						<input title="Enter your first name" type="text" name ="firstName" class="form-control input-lg" placeholder="First Name" required pattern="\w+">
+						<input title="Please enter your first name." type="text" name ="firstName" class="form-control input-lg" placeholder="First Name" required pattern="\w+">
 					</div>
 					<div class="form-group">
-						<input title="Enter your last name" type="text" name ="lastName" class="form-control input-lg" placeholder="Last Name" required pattern="\w+">
+						<input title="Please enter your last name." type="text" name ="lastName" class="form-control input-lg" placeholder="Last Name" required pattern="\w+">
 					</div>
 					<div class="form-group">
-						<input title="Enter your 8 Student ID" type="text" name ="StudentId" class="form-control input-lg" placeholder="Student ID" required pattern="^[A-Za-z0-9_]{8,8}$">
+						<input title="Please enter your 8 numbers Student ID." type="text" name ="StudentId" class="form-control input-lg" placeholder="Student ID" required pattern="^[A-Za-z0-9_]{8,8}$">
 					</div>
 					<input type="Submit" class="btn btn-lg" name="Submit" value="Submit">
 					
