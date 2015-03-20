@@ -70,12 +70,13 @@ $GroupNo=$_SESSION['GroupNo'];
 		
 		<!-- function to show/hide alert -->
 		<script type="text/javascript">
-			function hideAlert(id){
-				var text = $('#'+id+' .showerror').text();
-				console.log(text.length);
-				if(text.length <= 0)
-					$('#'+id).hide();
-			}
+			$(function() {
+				Dropzone.options.uiDZResume = {
+					success: function(file, response){
+						alert(response);
+					}
+				};
+			});
 		</script>
 
 		<!-- Drop n Drag javascript -->

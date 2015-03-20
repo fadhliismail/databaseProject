@@ -125,12 +125,14 @@
     $GroupNo = $_POST['GroupNo'];
   }
 
-  $query2 = "SELECT GroupNo, rank, AverageScore FROM (
-    SELECT @rownum := @rownum + 1 AS rank, AverageScore, GroupNo
-    FROM `group` 
-    CROSS JOIN (SELECT @rownum := 0) c
-    ORDER BY AverageScore DESC
-    ) AS result WHERE GroupNo = ?";
+  $query2 = "SELECT GroupNo, AverageScore, Rank FROM
+      (SELECT GroupNo, AverageScore,
+        @curr_rank := IF(@prev_score = AverageScore, @curr_rank, @incr_rank) AS Rank, 
+        @incr_rank := @incr_rank + 1, 
+        @prev_score := AverageScore
+        FROM `group` AS g, 
+        (SELECT @curr_rank :=0, @prev_score := NULL, @incr_rank := 1) AS r 
+        ORDER BY AverageScore DESC) AS s WHERE GroupNo = ?";
 
 $stmt = $conn->prepare($query2);
 
@@ -138,11 +140,11 @@ if ($GroupNo != 0) {
   $stmt->bind_param('i', $GroupNo);
   $stmt->execute();
   $stmt->store_result();
-  $stmt->bind_result($GroupNo, $rank, $AverageScore);
+  $stmt->bind_result($GroupNo, $AverageScore, $rank);
   $stmt->fetch();
 
   echo 'Your group is ranked<button type="button" disabled class="btn btn-lg" style="margin:0 0 15px 15px"><b> ' .$rank. '</b>
-</button> with average score of <button type="button" disabled class="btn btn-lg" style="margin:0 0 15px 15px"><b> ' .$AverageScore. '</b></button><br>';
+</button> with average score of <button type="button" disabled class="btn btn-lg" style="margin:0 0 15px 15px"><b> ' .$AverageScore. '/100</b></button><br>';
 
 } else {
   echo 'You group has not been assessed yet, therefore there is no rank available.';
@@ -170,7 +172,6 @@ if ($GroupNo != 0) {
   $stmt3->bind_result($Assessor);
   
   $queryOthers ="SELECT `AverageScore` FROM `group` WHERE `GroupNo` = ?"; 
-  //=(SELECT ROUND(((SUM(`Score`))/3)*2) AS AverageScore FROM `assessment` WHERE Group_to_Assess = ?)
 
   echo 'The groups which have assessed you have marks of ';
 
@@ -183,7 +184,7 @@ if ($GroupNo != 0) {
     $stmt2->bind_result($AverageScore);
     
     foreach ($resultrow as $row) {
-      echo '<button type="button" disabled class="btn btn-lg" style="margin:0 0 15px 15px"><b>' .$row['AverageScore']. '</b></button>, ';
+      echo '<button type="button" disabled class="btn btn-lg" style="margin:0 0 15px 15px"><b>' .$row['AverageScore']. '/100</b></button>, ';
     }
 
   }

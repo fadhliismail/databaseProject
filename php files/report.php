@@ -1,11 +1,13 @@
-<?php
-session_start();
-if(!isset($_SESSION['login_user'])){
-	header("location: loginPage.php");
-}
-$login_user=$_SESSION['login_user'];
-$GroupNo=$_SESSION['GroupNo'];
-?>
+  <?php
+  session_start();
+  if(!isset($_SESSION['login_user'])){
+    header("location: loginPage.php");
+  }
+  $login_user=$_SESSION['login_user'];
+  $GroupNo=$_SESSION['GroupNo'];
+  $firstName=$_SESSION['firstName'];
+  $lastName=$_SESSION['lastName'];
+  ?>
 
 <!DOCTYPE html>
 <html>
@@ -34,11 +36,11 @@ $GroupNo=$_SESSION['GroupNo'];
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Virtual Learning</a>
+				<a class="navbar-brand" href="home.php">Virtual Learning</a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li role="presentation"><a href="index.php">Home</a></li>
+					<li role="presentation"><a href="home.php">Home</a></li>
 					<li role="presentation"><a href="profile.php">Profile</a></li>
 					<li role="presentation"><a href="submission.php">Submission</a></li>
 					<li role="presentation"><a href="mygroup_assessment.php">My Assessment</a></li>
@@ -48,8 +50,6 @@ $GroupNo=$_SESSION['GroupNo'];
 
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="registerPage.php">Register</a></li>
-					<li><a href="loginPage.php">Log In</a></li>
 					<li><a href="logout.php">Log Out</a></li>
 				</ul>
 			</div><!--/.nav-collapse -->
@@ -121,7 +121,7 @@ $GroupNo=$_SESSION['GroupNo'];
 		}
 
 		/*Find group according to assessmentno*/
-		$find_group  = "SELECT `GroupNo` FROM `assessment` WHERE `AssessmentNo` = ?";
+		$find_group  = "SELECT `Group_to_Assess` FROM `assessment` WHERE `AssessmentNo` = ?";
 		if ($stmtFind = $conn->prepare($find_group)) {
 			$stmtFind->bind_param('i', $AssessmentNo);
 			$stmtFind->execute();

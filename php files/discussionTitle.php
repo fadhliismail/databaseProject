@@ -8,6 +8,7 @@ $login_user=$_SESSION['login_user'];
 $GroupNo=$_SESSION['GroupNo'];
 $firstName=$_SESSION['firstName'];
 $lastName=$_SESSION['lastName'];
+$fullname = $firstName . ' ' . $lastName;
 
 //connect to database
 include 'db_connect.php';
@@ -40,21 +41,13 @@ try {
         //$id is assessmentNo
         $id = $_GET['id'];
         try {
-            $_SESSION['name'] = $name;
             $_SESSION['text'] = $text;
             $_SESSION['assessmentID'] = $id;
             
-            // name check
-            if (!$len = mb_strlen($name) or $len > 30) {
-                echo '<script type="text/javascript">';
-                echo 'alert( "put your name under 30 character length" )';
-                echo '</script>';
-                throw new Exception;
-            }
             // text chec
-            if (!$len = mb_strlen($text) or $len > 140) {
+            if (!$len = mb_strlen($text) or $len > 250) {
                 echo '<script type="text/javascript">';
-                echo 'alert( "put your text under 1 to 140 character length" )';
+                echo 'alert( "put your text under 1 to 250 character length" )';
                 echo '</script>';
                 throw new Exception;
             }
@@ -65,7 +58,7 @@ try {
                 'VALUES(?, ?, ?, ?)',
                 )));
             $date =  date('Y-m-d H:i:s', $_SERVER['REQUEST_TIME']);
-            $stmt->bind_param('ssis', $name,$text,$id,$date);
+            $stmt->bind_param('ssis', $fullname,$text,$id,$date);
             $stmt->execute();  
             echo '<script type="text/javascript">';
             echo 'alert( "Your message is submitted" )';
@@ -88,29 +81,30 @@ try {
     $stmt->execute();
     $stmt->store_result();
     $stmt->bind_result($id,$name,$text,$time,$AssessmentID);
-    echo '<h1>discussion board#'.$id.'</h1>';
+
+    echo '<div class="page-header"><h1>Discussion Board #'.$id.'</h1></div>';
     echo '<div id="textarea">';
     echo ' <form action="" method="post">';
-    echo ' <label>name: <input name="name" type="text" value="'.$name.'" /></label><br>';
-    echo ' <label>text<p><textarea name="text" rows="4"cols="40">'.$text.'</textarea></p></label><br>';
-    echo '           <label style="text-align:left;"><input type="submit" name="submit" value="submission" /></label>';
+    /*    echo ' <label>name: <input name="name" type="text" value="'.$name.'" /></label><br>';*/
+    echo ' <label><p>Post comment as ' .$fullname. '</p><textarea name="text" class="form-control" rows="5" cols="70">'.$text.'</textarea></p></label><br>';
+    echo '           <label style="text-align:left;"><input type="submit" class="btn btn-default" name="submit" value="submission" /></label>';
     echo '      </form>';
     echo '      </div>';
 
     echo '<div class="table-responsive">';
     echo '<table class ="table table-nonfluid">';
-    echo '	<tr>';
-    echo '		<th>Name</th>';
-    echo '		<th>Text</th>';
-    echo '		<th>Time</th>';
-    echo '	</tr>';
+    echo '  <tr>';
+    echo '      <th>Name</th>';
+    echo '      <th>Comment</th>';
+    echo '      <th>Time</th>';
+    echo '  </tr>';
     while($stmt->fetch()){
 
-        echo '	<tr>';
+        echo '  <tr>';
         echo '              <td>'.$name.'</td> ';
         echo '              <td>'.$text.'</td> ';
         echo '              <td>'.$time.'</td>';
-        echo '	</tr>';         
+        echo '  </tr>';         
     }
     echo '</table>';
     echo '</div>';
@@ -145,7 +139,7 @@ try {
    </div>
    <div id="navbar" class="navbar-collapse collapse">
     <ul class="nav navbar-nav">
-       <li role="presentation"><a href="index.php">Home</a></li>
+       <li role="presentation"><a href="home.php">Home</a></li>
        <li role="presentation"><a href="profile.php">Profile</a></li>
        <li role="presentation"><a href="submission.php">Submission</a></li>
        <li role="presentation"><a href="mygroup_assessment.php">My Assessment</a></li>
@@ -154,8 +148,6 @@ try {
        <li role="presentation"><a href="help.php">Help</a></li>
    </ul>
    <ul class="nav navbar-nav navbar-right">
-       <li><a href="registerPage.php">Register</a></li>
-       <li><a href="loginPage.php">Log In</a></li>
        <li><a href="logout.php">Log Out</a></li>
    </ul>
 </div>

@@ -96,7 +96,7 @@ try {
    </div>
    <div id="navbar" class="navbar-collapse collapse">
     <ul class="nav navbar-nav">
-       <li role="presentation"><a href="index.php">Home</a></li>
+       <li role="presentation"><a href="home.php">Home</a></li>
        <li role="presentation"><a href="profile.php">Profile</a></li>
        <li role="presentation"><a href="submission.php">Submission</a></li>
        <li role="presentation"><a href="mygroup_assessment.php">My Assessment</a></li>
@@ -106,8 +106,6 @@ try {
 
    </ul>
    <ul class="nav navbar-nav navbar-right">
-       <li><a href="registerPage.php">Register</a></li>
-       <li><a href="loginPage.php">Log In</a></li>
        <li><a href="logout.php">Log Out</a></li>
    </ul>
 </div>

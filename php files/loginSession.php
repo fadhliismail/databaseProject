@@ -20,7 +20,7 @@ if(isset($_POST['Submit'])){
 		$User_password = mysqli_real_escape_string($conn, $User_pass);
 			
 		//query for getting GroupNo and User_pass from database
-		$query = "SELECT GroupNo, User_pass, user_level, FirstName, LastName
+		$query = "SELECT GroupNo, User_pass, User_Level, FirstName, LastName
 					FROM users
 						WHERE Login_Id = ?";
 		
@@ -34,21 +34,21 @@ if(isset($_POST['Submit'])){
 			$statement->store_result();
 			
 			//bind result
-			$statement->bind_result($GroupNo, $User_pass_hash, $user_level, $firstName, $lastName);
+			$statement->bind_result($GroupNo, $User_pass_hash, $User_Level, $FirstName, $LastName);
 			$statement->fetch();
 			
 			//check if query return any result, if yes proceed
 			if ($statement->num_rows){
 					
 				if (password_verify($User_password, $User_pass_hash)){
-					if ($user_level === 'student'){
+					if ($User_Level === 'student'){
 						session_start();
 			
 						$_SESSION['login_user']=$Login_Id;
-						$_SESSION['user_level']=$user_level;
+						$_SESSION['user_level']=$User_Level;
 						$_SESSION['GroupNo']=$GroupNo;
-						$_SESSION['firstName']=$firstName;
-						$_SESSION['lastName']=$lastName;
+						$_SESSION['firstName']=$FirstName;
+						$_SESSION['lastName']=$LastName;
 						
 						echo "student";
 						header("Refresh: 1; url= home.php");
@@ -58,9 +58,9 @@ if(isset($_POST['Submit'])){
 						session_start();
 			
 						$_SESSION['login_user']=$Login_Id;
-						$_SESSION['user_level']=$user_level;
-						$_SESSION['firstName']=$firstName;
-						$_SESSION['lastName']=$lastName;
+						$_SESSION['user_level']=$User_Level;
+						$_SESSION['firstName']=$FirstName;
+						$_SESSION['lastName']=$LastName;
 						
 						echo "Admin";
 						header("Refresh: 1; url= admin.php");

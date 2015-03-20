@@ -43,7 +43,7 @@ if (isset($_POST['Submit'])) {
 				echo "<script type='text/javascript'>";
 				echo "alert('The password is not in the database.');";
 				echo "</script>";
-				if ($User_Level === "users") {
+				if ($User_Level === "student") {
 					header("Refresh: 1; url=profile.php");	
 				} else {
 					header("Refresh: 1; url=admin.php");
@@ -56,7 +56,7 @@ if (isset($_POST['Submit'])) {
 				echo "<script type='text/javascript'>";
 				echo "alert('The new password does not match.');";
 				echo "</script>";
-				if ($User_Level === "users") {
+				if ($User_Level === "student") {
 					header("Refresh: 1; url=profile.php");	
 				} else {
 					header("Refresh: 1; url=admin.php");
@@ -76,7 +76,7 @@ if (isset($_POST['Submit'])) {
 					echo "<script type='text/javascript'>";
 					echo "alert('The password has been successfully changed.');";
 					echo "</script>";
-					if ($User_Level === "users") {
+					if ($User_Level === "student") {
 						header("Refresh: 1; url=profile.php");	
 					} else {
 						header("Refresh: 1; url=admin.php");
@@ -87,7 +87,7 @@ if (isset($_POST['Submit'])) {
 					echo "<script type='text/javascript'>";
 					echo "alert('The password change is unsuccessful. Please try again.');";
 					echo "</script>";
-					if ($User_Level === "users") {
+					if ($User_Level === "student") {
 						header("Refresh: 1; url=profile.php");	
 					} else {
 						header("Refresh: 1; url=admin.php");
@@ -101,7 +101,7 @@ if (isset($_POST['Submit'])) {
 			echo "<script type='text/javascript'>";
 			echo "alert('There is a problem retrieving the database. Please try again.');";
 			echo "</script>";
-			if ($User_Level === "users") {
+			if ($User_Level === "student") {
 				header("Refresh: 1; url=profile.php");	
 			} else {
 				header("Refresh: 1; url=admin.php");
