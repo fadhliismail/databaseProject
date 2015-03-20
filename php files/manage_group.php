@@ -129,7 +129,7 @@
 
         //connect to database
 		include 'db_connect.php';
-		$querygroup = "SELECT COUNT(DISTINCT GroupNo) AS `countgroup` FROM users WHERE `GroupNo` !=0";
+		$querygroup = "SELECT COUNT(DISTINCT GroupNo) AS `countgroup` FROM users";
 
 		
 		$stmt=$conn->prepare($querygroup);

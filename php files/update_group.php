@@ -9,12 +9,20 @@ include 'db_connect.php';
 $studentno = $_GET['id'];
 $groupno = $_GET['group'];
 
-$query = "UPDATE `users` SET `GroupNo` = ? WHERE UserId = ?";
-	//$result = 'update users set '.mysql_escape_string($name).'="'.mysql_escape_string($value).'" where user_id = "'.mysql_escape_string($pk).'"';
 
-$stmt = $conn->prepare($query);
-$stmt->bind_param('ii', $groupno, $studentno);
-$stmt->execute();
+if($groupno == "0") {	
+	$query = "UPDATE `users` SET `GroupNo` = NULL WHERE UserId = ?";
+	$stmt = $conn->prepare($query);
+	$stmt->bind_param('i', $studentno);
+	$stmt->execute();
+} else {
+	$query = "UPDATE `users` SET `GroupNo` = ? WHERE UserId = ?";
+	$stmt = $conn->prepare($query);
+	$stmt->bind_param('ii', $groupno, $studentno);
+	$stmt->execute();
+}
+
+
 
 $stmt->close();
 $conn->close();

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 20, 2015 at 09:43 PM
+-- Generation Time: Mar 20, 2015 at 11:44 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -194,7 +194,7 @@ INSERT INTO `group` (`GroupNo`, `AverageScore`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `mini_board` (
-`id` int(11) unsigned NOT NULL,
+`id` int(11) NOT NULL,
   `name` varchar(30) NOT NULL,
   `text` varchar(140) NOT NULL,
   `time` datetime NOT NULL,
@@ -813,7 +813,7 @@ MODIFY `GroupNo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
 -- AUTO_INCREMENT for table `mini_board`
 --
 ALTER TABLE `mini_board`
-MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=47;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=47;
 --
 -- AUTO_INCREMENT for table `report`
 --

@@ -88,7 +88,7 @@
   		//connect to database
 		include 'db_connect.php';
 
-		$queryStudent = "SELECT `UserId`, `FirstName`, `LastName`, `GroupNo` FROM `users` WHERE `GroupNo` = 0 AND `User_Level` = 'student' ORDER BY `FirstName`";
+		$queryStudent = "SELECT `UserId`, `FirstName`, `LastName`, `GroupNo` FROM `users` WHERE `GroupNo` IS NULL AND `User_Level` = 'student' ORDER BY `FirstName`";
 
 		if($stmt=$conn->prepare($queryStudent)) {
 			$stmt->execute();

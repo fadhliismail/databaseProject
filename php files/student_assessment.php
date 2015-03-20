@@ -71,14 +71,14 @@
 		//connect to database
 			include 'db_connect.php';
 
-			$query = "SELECT GroupNo, AverageScore, Rank FROM
-			(SELECT GroupNo, AverageScore,
-				@curr_rank := IF(@prev_score = AverageScore, @curr_rank, @incr_rank) AS Rank, 
-				@incr_rank := @incr_rank + 1, 
-				@prev_score := AverageScore
-				FROM `group` AS g, 
-				(SELECT @curr_rank :=0, @prev_score := NULL, @incr_rank := 1) AS r 
-				ORDER BY AverageScore DESC) AS s";
+				$query = "SELECT GroupNo, AverageScore, Rank FROM
+				(SELECT GroupNo, AverageScore,
+					@curr_rank := IF(@prev_score = AverageScore, @curr_rank, @incr_rank) AS Rank, 
+					@incr_rank := @incr_rank + 1, 
+					@prev_score := AverageScore
+					FROM `group` AS g, 
+					(SELECT @curr_rank :=0, @prev_score := NULL, @incr_rank := 1) AS r 
+					ORDER BY AverageScore DESC) AS s";
 
 	if ($stmt = $conn->prepare($query)) {
 		$stmt->execute();

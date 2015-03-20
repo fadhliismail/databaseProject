@@ -104,14 +104,14 @@
 								//echo 'Message could not be sent.';
 								//echo 'Mailer Error: ' . $mail->ErrorInfo;
 								echo "<script type='text/javascript'>";
-								echo "alert('Email cannot be sent. Please try again.');";
+								echo "alert('Message cannot be sent. Please try again.');";
 								echo "</script>";
 								header("Refresh: 1; url= retrievePasswordPage.php");
 							}
 							else {
 								//echo 'Message has been sent';
 								echo "<script type='text/javascript'>";
-								echo "alert('An email containing the temporary password for your account has been sent to your email.');";
+								echo "alert('Message has been sent.');";
 								echo "</script>";
 								header("Refresh: 1; url= retrievePasswordPage.php");
 							}
