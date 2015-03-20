@@ -3,7 +3,7 @@
 	if(isset($_SESSION['login_user'])){
 		$message = "You are already logged in!";
 		echo "<script type='text/javascript'>alert('$message');</script>";
-		header("location: home.php");
+		header("location: profile.php");
 	}
 ?>
 
@@ -64,15 +64,15 @@
 				<!-- for login for student -->
 				<form class="col-md-12" action="loginSession.php" method="POST">
 					<div class="form-group">
-						<input title="Enter your 8 Student ID" type="text" name ="Login_Id" class="form-control input-lg" placeholder="User ID" required pattern="^[A-Za-z0-9_]{8,8}$">
+						<input title="Please enter your 8 numbers Student ID." type="text" name ="StudentId" class="form-control input-lg" placeholder="Student ID" required pattern="^[A-Za-z0-9_]{8,8}$">
 					</div>
 					<div class="form-group">
-						<input title="Password contain at least 8 characters" type="password" name="User_pass" class="form-control input-lg" placeholder="Password" required pattern=".{8,}">
+						<input title="Password contain at least 8 characters." type="password" name="User_pass" class="form-control input-lg" placeholder="Password" required pattern=".{8,}">
 					</div>
 					<input type="Submit" class="btn btn-lg" name="Submit" value="Submit">
 					
 				</form>
-				<p>Forgot your password? Retrieve it <a href=retrievePasswordPage.php>here</a></p>
+				<p>Forgot your password? Retrieve it <a href=retrievePasswordPage.php>here</a>.</p>
 			</div>
 		</div>
 
